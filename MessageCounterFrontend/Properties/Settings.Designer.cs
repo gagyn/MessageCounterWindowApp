@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MessageCounterInterface.Properties
+namespace MessageCounterFrontend.Properties
 {
 
 

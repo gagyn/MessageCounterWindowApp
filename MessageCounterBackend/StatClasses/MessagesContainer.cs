@@ -8,6 +8,9 @@ namespace MessageCounterBackend.StatClasses
     {
         private readonly List<Message> messages;
 
+
+        public int NumberOfMessages { get => messages.Count; }
+
         public MessagesContainer(JsonStructureClass jsonObject)
         {
             this.messages = (List<Message>)jsonObject.messages;

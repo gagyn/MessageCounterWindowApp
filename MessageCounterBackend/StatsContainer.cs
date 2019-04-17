@@ -5,43 +5,20 @@ using MessageCounterBackend.StatClasses;
 
 namespace MessageCounterBackend
 {
+    /// <summary>
+    /// The class contains all statistics about messages in the file. Throws exception in constructor if file is incorrect.
+    /// </summary>
     public class StatsContainer
     {
-        private JsonStructureClass jsonObject;
+        private readonly JsonStructureClass jsonObject;
+        private readonly MessagesContainer messages;
 
-        private MessagesContainer messages;
+        public int NumberOfMessages { get => messages.NumberOfMessages; }
 
-
-        public StatsContainer(string path)
+        public StatsContainer(string fileContent)
         {
-            LoadJsonFile(path);
-            messages = new MessagesContainer(jsonObject);
-        }
-
-        void LoadJsonFile(string path)
-        {
-            string fileContent;
-            try
-            {
-                var streamReader = new StreamReader(path);
-                fileContent = streamReader.ReadToEnd();
-            }
-            catch (Exception e)
-            {
-                if (e is FileNotFoundException || e is IOException)
-                    throw new Exception("FileException");
-                else
-                    throw e;
-            }
-
-            try
-            {
-                jsonObject = JsonConvert.DeserializeObject<JsonStructureClass>(fileContent);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("JsonException", e);
-            }
+            this.jsonObject = JsonConvert.DeserializeObject<JsonStructureClass>(fileContent);
+            this.messages = new MessagesContainer(jsonObject);
         }
     }
 }
