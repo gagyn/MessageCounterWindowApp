@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MessageCounterFrontend.InterfaceBackend;
+using System.Threading;
 
 namespace MessageCounterFrontend
 {
@@ -27,7 +28,6 @@ namespace MessageCounterFrontend
         public MainWindow()
         {
             InitializeComponent();
-            
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -42,11 +42,18 @@ namespace MessageCounterFrontend
 
         private void SingleFile_Click(object sender, RoutedEventArgs e)
         {
+            wrapPanel.Children.Clear();
+
+            TextBlockMaker.IncludePeople = TextBlockMaker.IncludeDays 
+                = TextBlockMaker.IncludeMessages = false;
+
+            checkBoxPeople.IsChecked = checkBoxDays.IsChecked
+                = checkBoxWords.IsChecked = false;
+
             string fileContent;
             try
             {
-                var readFile = new ReadFile();
-                fileContent = readFile.Read();
+                fileContent = (new ReadFile()).Read();
             }
             catch
             {
@@ -63,8 +70,10 @@ namespace MessageCounterFrontend
                 return;
             }
 
-            wrapPanel.Children.Add(new TextBlockMaker(statsContainer).GetTextBlock());
-            ChangeStatesOfCheckBoxes();
+            wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
+
+            if (false == checkBoxPeople.IsEnabled)
+                ChangeStatesOfCheckBoxes();
         }
 
         private void CheckBoxPeople_Checked(object sender, RoutedEventArgs e)
@@ -72,6 +81,10 @@ namespace MessageCounterFrontend
             ChangeStatesOfCheckBoxes();
             if (statsContainer.peopleContainer == null)
                 statsContainer.MakePeopleContainer();
+
+            TextBlockMaker.IncludePeople = true;
+            wrapPanel.Children.Clear();
+            wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
             ChangeStatesOfCheckBoxes();
         }
 
@@ -80,6 +93,10 @@ namespace MessageCounterFrontend
             ChangeStatesOfCheckBoxes();
             if (statsContainer.daysContainer == null)
                 statsContainer.MakeDaysContainer();
+
+            TextBlockMaker.IncludeDays = true;
+            wrapPanel.Children.Clear();
+            wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
             ChangeStatesOfCheckBoxes();
         }
 
@@ -88,6 +105,10 @@ namespace MessageCounterFrontend
             ChangeStatesOfCheckBoxes();
             if (statsContainer.messagesContainer == null)
                 statsContainer.MakeMessagesContainer();
+
+            TextBlockMaker.IncludeMessages = true;
+            wrapPanel.Children.Clear();
+            wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
             ChangeStatesOfCheckBoxes();
         }
 
@@ -96,6 +117,27 @@ namespace MessageCounterFrontend
             checkBoxPeople.IsEnabled = !checkBoxPeople.IsEnabled;
             checkBoxDays.IsEnabled = !checkBoxDays.IsEnabled;
             checkBoxWords.IsEnabled = !checkBoxWords.IsEnabled;
+        }
+
+        private void CheckBoxPeople_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TextBlockMaker.IncludePeople = false;
+            wrapPanel.Children.Clear();
+            wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
+        }
+
+        private void CheckBoxDays_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TextBlockMaker.IncludeDays = false;
+            wrapPanel.Children.Clear();
+            wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
+        }
+
+        private void CheckBoxWords_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TextBlockMaker.IncludeMessages = false;
+            wrapPanel.Children.Clear();
+            wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
         }
     }
 }

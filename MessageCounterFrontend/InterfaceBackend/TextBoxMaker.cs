@@ -12,11 +12,18 @@ namespace MessageCounterFrontend.InterfaceBackend
 
         public static TextBlock PrepareStatsToString(StatsContainer statsContainer)
         {
+            if (statsContainer == null)
+                return new TextBlock();
+
             string content;
             content = "Number of all message in this conversation: " + statsContainer.NumberOfMessages.ToString();
 
+            if (IncludePeople)
+                content += "\n" + MakePeopleString(statsContainer.peopleContainer);
             if (IncludeDays)
-                content += MakeDaysStatsString(statsContainer.daysContainer);
+                content += "\n" + MakeDaysStatsString(statsContainer.daysContainer);
+            if (IncludeMessages)
+                content += "\n" + MakeMessagesStatsString(statsContainer.messagesContainer);
 
             var textBlock = new TextBlock()
             {
@@ -27,7 +34,7 @@ namespace MessageCounterFrontend.InterfaceBackend
 
         private static string MakePeopleString(PeopleContainer people)
         {
-            string content;
+            string content = null;
 
 
             return content;
@@ -44,7 +51,7 @@ namespace MessageCounterFrontend.InterfaceBackend
 
         private static string MakeMessagesStatsString(MessagesContainer messages)
         {
-            string content;
+            string content = null;
 
 
             return content;

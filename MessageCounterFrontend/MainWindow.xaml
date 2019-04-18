@@ -23,8 +23,15 @@
         </DockPanel>
         <WrapPanel Name="wrapPanel" HorizontalAlignment="Left" Height="320" Margin="20,80,0,0" VerticalAlignment="Top" Width="750"/>
         <TextBlock Text="Show statistics for: " HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top" />
-        <CheckBox x:Name="checkBoxPeople" Content="People" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top" Checked="CheckBoxPeople_Checked" IsEnabled="False"/>
-        <CheckBox x:Name="checkBoxDays" Content="Days" HorizontalAlignment="Left" Margin="200,40,0,0" VerticalAlignment="Top" Checked="CheckBoxDays_Checked" IsEnabled="False"/>
-        <CheckBox x:Name="checkBoxWords" Content="Words" HorizontalAlignment="Left" Margin="260,40,0,0" VerticalAlignment="Top" Checked="CheckBoxWords_Checked" IsEnabled="False"/>
+        
+        <CheckBox x:Name="checkBoxPeople" Content="People" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top"
+                  Checked="CheckBoxPeople_Checked" Unchecked="CheckBoxPeople_Unchecked" IsEnabled="False"/>
+        
+        <CheckBox x:Name="checkBoxDays" Content="Days" HorizontalAlignment="Left" Margin="200,40,0,0" VerticalAlignment="Top" 
+                  Checked="CheckBoxDays_Checked" Unchecked="CheckBoxDays_Unchecked" IsEnabled="False"/>
+        
+        <CheckBox x:Name="checkBoxWords" Content="Words" HorizontalAlignment="Left" Margin="260,40,0,0" VerticalAlignment="Top"
+                  Checked="CheckBoxWords_Checked" Unchecked="CheckBoxWords_Unchecked" IsEnabled="False"/>
+        
     </Grid>
 </Window>
