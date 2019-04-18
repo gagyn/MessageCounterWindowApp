@@ -28,6 +28,19 @@ namespace MessageCounterFrontend
         public MainWindow()
         {
             InitializeComponent();
+
+            var args = Environment.GetCommandLineArgs();
+
+            if (args.Length > 1)
+            {
+                string fileContent = new ReadFile(args[1]).Read();
+
+                if (false == CreateStatsContainer(fileContent))
+                    return;
+
+                wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
+                ChangeStatesOfCheckBoxes();
+            }
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -44,28 +57,21 @@ namespace MessageCounterFrontend
         {
             wrapPanel.Children.Clear();
 
-            TextBlockMaker.IncludePeople = TextBlockMaker.IncludeDays 
+            TextBlockMaker.IncludePeople = TextBlockMaker.IncludeDays
                 = TextBlockMaker.IncludeMessages = false;
 
             string fileContent;
             try
             {
-                fileContent = (new ReadFile()).Read();
+                fileContent = new ReadFile().Read();
             }
             catch
             {
                 return;
             }
 
-            try
-            {
-                statsContainer = new MessageCounterBackend.StatsContainer(fileContent);
-            }
-            catch
-            {
-                MessageBox.Show("The file is incorrect!");
+            if (false == CreateStatsContainer(fileContent))
                 return;
-            }
             
             wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
 
@@ -73,6 +79,20 @@ namespace MessageCounterFrontend
 
             if (false == checkBoxPeople.IsEnabled)
                 ChangeStatesOfCheckBoxes();
+        }
+
+        private bool CreateStatsContainer(string fileContent) // returns false, when file is incorrect
+        {
+            try
+            {
+                statsContainer = new MessageCounterBackend.StatsContainer(fileContent);
+            }
+            catch
+            {
+                MessageBox.Show("The file is incorrect!");
+                return false;
+            }
+            return true;
         }
 
         private void CheckBoxPeople_Checked(object sender, RoutedEventArgs e)

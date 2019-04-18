@@ -18,6 +18,7 @@ namespace MessageCounterFrontend.InterfaceBackend
             else
                 throw new Exception("CanceledByUser");
         }
+        public ReadFile(string fileName) => this.fileName = fileName;
 
         public string Read() => new StreamReader(fileName).ReadToEnd();
     }
