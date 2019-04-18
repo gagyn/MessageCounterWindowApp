@@ -47,9 +47,6 @@ namespace MessageCounterFrontend
             TextBlockMaker.IncludePeople = TextBlockMaker.IncludeDays 
                 = TextBlockMaker.IncludeMessages = false;
 
-            checkBoxPeople.IsChecked = checkBoxDays.IsChecked
-                = checkBoxWords.IsChecked = false;
-
             string fileContent;
             try
             {
@@ -69,8 +66,10 @@ namespace MessageCounterFrontend
                 MessageBox.Show("The file is incorrect!");
                 return;
             }
-
+            
             wrapPanel.Children.Add(TextBlockMaker.PrepareStatsToString(statsContainer));
+
+            checkBoxPeople.IsChecked = checkBoxDays.IsChecked = checkBoxWords.IsChecked = false;
 
             if (false == checkBoxPeople.IsEnabled)
                 ChangeStatesOfCheckBoxes();
