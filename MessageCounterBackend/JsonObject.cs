@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace MessageCounterBackend
+namespace MessageCounterBackend.JsonStructure
 {
-    class Participant
+    public class Participant
     {
         public string name { get; set; }
     }
 
-    class Message
+    public class Message
     {
         public string sender_name { get; set; }
         public ulong timestamp_ms { get; set; }
@@ -18,24 +18,24 @@ namespace MessageCounterBackend
         public string type { get; set; }
     }
 
-    class Photo
+    public class Photo
     {
         public string uri { get; set; }
         public ulong creation_timestamp { get; set; }
     }
 
-    class AudioFile
+    public class AudioFile
     {
         public string uri { get; set; }
         public ulong creation_timestamp { get; set; }
     }
 
-    class Sticker
+    public class Sticker
     {
         public string uri { get; set; }
     }
 
-    class JsonStructureClass
+    public class JsonStructureClass
     {
         public IEnumerable<Participant> participants { get; set; }
         public IEnumerable<Message> messages { get; set; }

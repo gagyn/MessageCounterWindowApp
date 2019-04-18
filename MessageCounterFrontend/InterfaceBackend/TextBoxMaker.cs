@@ -9,9 +9,12 @@ namespace MessageCounterFrontend.InterfaceBackend
 {
     internal class TextBlockMaker
     {
-        private readonly TextBlock textBox;
+        public bool IncludePeople { get; set; }
+        public bool IncludeDays { get; set; }
+        public bool IncludeMessages { get; set; }
         public TextBlock GetTextBlock() => textBox;
 
+        private readonly TextBlock textBox;
         public TextBlockMaker(MessageCounterBackend.StatsContainer statsContainer)
         {
             this.textBox = new TextBlock()

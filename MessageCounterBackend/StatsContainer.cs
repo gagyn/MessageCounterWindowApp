@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
-using MessageCounterBackend.StatClasses;
+using MessageCounterBackend.StatContainers;
+using MessageCounterBackend.JsonStructure;
+using System.Collections.Generic;
 
 namespace MessageCounterBackend
 {
@@ -10,15 +12,20 @@ namespace MessageCounterBackend
     /// </summary>
     public class StatsContainer
     {
-        private readonly JsonStructureClass jsonObject;
-        private readonly MessagesContainer messages;
+        public MessagesContainer messagesContainer;
+        public DaysContainer daysContainer;
+        public PeopleContainer peopleContainer;
+        public int NumberOfMessages { get => new List<Message>(jsonObject.messages).Count; }
 
-        public int NumberOfMessages { get => messages.NumberOfMessages; }
+        private readonly JsonStructureClass jsonObject;
 
         public StatsContainer(string fileContent)
         {
             this.jsonObject = JsonConvert.DeserializeObject<JsonStructureClass>(fileContent);
-            this.messages = new MessagesContainer(jsonObject);
         }
+
+        public void MakeMessagesContainer() => this.messagesContainer = new MessagesContainer(jsonObject);
+        public void MakeDaysContainer() => this.daysContainer = new DaysContainer(jsonObject);
+        public void MakePeopleContainer() => this.peopleContainer = new PeopleContainer(jsonObject);
     }
 }

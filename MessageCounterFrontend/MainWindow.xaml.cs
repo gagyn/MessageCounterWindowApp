@@ -64,21 +64,38 @@ namespace MessageCounterFrontend
             }
 
             wrapPanel.Children.Add(new TextBlockMaker(statsContainer).GetTextBlock());
+            ChangeStatesOfCheckBoxes();
         }
 
         private void CheckBoxPeople_Checked(object sender, RoutedEventArgs e)
         {
-
+            ChangeStatesOfCheckBoxes();
+            if (statsContainer.peopleContainer == null)
+                statsContainer.MakePeopleContainer();
+            ChangeStatesOfCheckBoxes();
         }
 
         private void CheckBoxDays_Checked(object sender, RoutedEventArgs e)
         {
-
+            ChangeStatesOfCheckBoxes();
+            if (statsContainer.daysContainer == null)
+                statsContainer.MakeDaysContainer();
+            ChangeStatesOfCheckBoxes();
         }
 
         private void CheckBoxWords_Checked(object sender, RoutedEventArgs e)
         {
+            ChangeStatesOfCheckBoxes();
+            if (statsContainer.messagesContainer == null)
+                statsContainer.MakeMessagesContainer();
+            ChangeStatesOfCheckBoxes();
+        }
 
+        private void ChangeStatesOfCheckBoxes()
+        {
+            checkBoxPeople.IsEnabled = !checkBoxPeople.IsEnabled;
+            checkBoxDays.IsEnabled = !checkBoxDays.IsEnabled;
+            checkBoxWords.IsEnabled = !checkBoxWords.IsEnabled;
         }
     }
 }

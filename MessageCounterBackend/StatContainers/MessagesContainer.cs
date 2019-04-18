@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MessageCounterBackend.JsonStructure;
 
-namespace MessageCounterBackend.StatClasses
+namespace MessageCounterBackend.StatContainers
 {
-    internal class MessagesContainer
+    public class MessagesContainer
     {
         private readonly List<Message> messages;
-
 
         public int NumberOfMessages { get => messages.Count; }
 

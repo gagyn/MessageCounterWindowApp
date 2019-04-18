@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MessageCounterBackend.JsonStructure;
+using MessageCounterBackend.StatContainers.ListTypesClasses;
 
-namespace MessageCounterBackend.StatClasses
+namespace MessageCounterBackend.StatContainers
 {
-    class PeopleContainer
+    public class PeopleContainer
     {
+        private List<Person> people;
+
+        public PeopleContainer(JsonStructureClass jsonObject)
+        {
+            people = new List<Person>();
+        }
     }
 }
