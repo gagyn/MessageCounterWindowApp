@@ -20,7 +20,8 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
 
         public Person(string fullName, List<Message> allMessages)
         {
-            this.FullName = fullName;
+            this.FullName = DecodeString(fullName);
+            Messages = new List<Message>();
 
             foreach (var m in allMessages)
                 if (fullName.Equals(DecodeString(m.sender_name)))

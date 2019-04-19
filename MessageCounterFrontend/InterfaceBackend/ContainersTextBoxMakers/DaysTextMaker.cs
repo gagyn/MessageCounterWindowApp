@@ -13,8 +13,8 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
     {
         public static TextBlock MakeTextBlock(DaysContainer container)
         {
-            string content = "\n" + "\n";
-            content += "The larger number of messages in single day: "
+            string content;
+            content = "The larger number of messages in single day: "
                 + container.DayWithMaxNumberOfMessages.NumberOfMessages;
             content += " on " 
                 + container.DayWithMaxNumberOfMessages.thisDateTime.ToShortDateString()
