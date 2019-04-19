@@ -19,7 +19,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
             return new TextBlock()
             {
-                Text = content
+                Text = content + "\n"
             };
         }
     }

@@ -21,9 +21,9 @@ namespace MessageCounterFrontend.InterfaceBackend
             TextBlock toReturn = new TextBlock()
             {
                 Text = "Number of all message in this conversation: "
-                + statsContainer.NumberOfMessages.ToString()
-                //+ "Number of participants: "
-                //+ statsContainer.peopleContainer.people.Count.ToString()
+                + statsContainer.NumberOfMessages.ToString() + "\n"
+                + "Number of participants: "
+                + statsContainer.NumberOfParticipants.ToString() + "\n"
             };
 
             panel.Children.Add(toReturn);
@@ -54,8 +54,8 @@ namespace MessageCounterFrontend.InterfaceBackend
         private static string MakeDaysStatsString(DaysContainer days)
         {
             string content;
-            content = "The larger number of messages in single day: " + days.dayWithMaxNumberOfMessages.NumberOfMessages;
-            content += " on " + days.dayWithMaxNumberOfMessages.thisDateTime.ToShortDateString() + "\n";
+            content = "The larger number of messages in single day: " + days.DayWithMaxNumberOfMessages.NumberOfMessages;
+            content += " on " + days.DayWithMaxNumberOfMessages.thisDateTime.ToShortDateString() + "\n";
             content += "Days:";
             return content;
         }

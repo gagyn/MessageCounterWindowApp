@@ -16,18 +16,18 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             string content = "People:\n";
 
             List<Person> sortedPeople = new List<Person>(container.people);
-            sortedPeople.OrderBy(x => x.messages.Count);
+            sortedPeople.OrderBy(x => x.NumberOfMessages);
 
             for (int i = 0; i < container.people.Count; i++)
             {
                 Person person = container.people[i];
-                content += person.fullName + " ==> ";
-                content += person.messages.Count + "\n";
+                content += person.FullName + " ==> ";
+                content += person.NumberOfMessages;
             }
 
             return new TextBlock()
             {
-                Text = content
+                Text = content + "\n"
             };
         }
     }

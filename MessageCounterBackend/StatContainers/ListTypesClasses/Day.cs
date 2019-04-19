@@ -16,14 +16,15 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
         public Day() => messages = new List<Message>();
         public Day(List<Message> messages, ref int currentIndex)
         {
-            this.thisDateTime = BeginOfDay(MiliSecToDate(messages[currentIndex].timestamp_ms));
+            this.thisDateTime = BeginOfDay(MiliSecToDate(messages[currentIndex].timestamp_ms)); // setting date of this.day
             this.messages = new List<Message>();
 
             DateTime currentDate = MiliSecToDate(messages[currentIndex].timestamp_ms);
-            ulong lastMiliSec = LastMiliSecAtThisDate(currentDate);
-            
-            for (; currentIndex < messages.Count && messages[currentIndex].timestamp_ms < lastMiliSec; currentIndex++)
-                this.messages.Add(messages[currentIndex]);
+            ulong lastMiliSec = LastMiliSecAtThisDate(currentDate); // after this milisecond there is a next day
+
+            // while message was sent on this day
+            for (; currentIndex < messages.Count && messages[currentIndex].timestamp_ms < lastMiliSec; currentIndex++) 
+                this.messages.Add(messages[currentIndex]);  // adding to this.messages all messages for this day
         }
         
         private DateTime MiliSecToDate(ulong mili)

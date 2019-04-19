@@ -15,7 +15,8 @@ namespace MessageCounterBackend
         public MessagesContainer messagesContainer;
         public DaysContainer daysContainer;
         public PeopleContainer peopleContainer;
-        public int NumberOfMessages { get => new List<Message>(jsonObject.messages).Count; }
+        public int NumberOfMessages { get => ((List<Message>)jsonObject.messages).Count; }
+        public int NumberOfParticipants { get => ((List<Participant>)jsonObject.participants).Count; }
 
         private readonly JsonStructureClass jsonObject;
 

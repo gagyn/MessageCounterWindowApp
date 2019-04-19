@@ -6,24 +6,25 @@ namespace MessageCounterBackend.StatContainers
 {
     public class DaysContainer
     {
-        public readonly List<Day> days;
-        public readonly Day dayWithMaxNumberOfMessages;
+        public List<Day> Days { get; private set; }
+        public Day DayWithMaxNumberOfMessages { get; private set; }
 
-        public DaysContainer(JsonStructureClass jsonObject)
+        public DaysContainer(JsonStructureClass jsonObject) => InitObject((List<Message>)jsonObject.messages);
+        public DaysContainer(List<Message> messages) => InitObject(messages);
+        private void InitObject(List<Message> messages)
         {
-            days = new List<Day>();
-            dayWithMaxNumberOfMessages = new Day();
+            Days = new List<Day>();
+            DayWithMaxNumberOfMessages = new Day();
 
-            List<Message> messages = new List<Message>(jsonObject.messages);
             messages.Reverse();
 
             for (int i = 0; i < messages.Count; i++)
             {
                 Day day = new Day(messages, ref i);
-                days.Add(day);
-                
-                if (day.NumberOfMessages > dayWithMaxNumberOfMessages.NumberOfMessages)
-                    dayWithMaxNumberOfMessages = day;
+                Days.Add(day);
+
+                if (day.NumberOfMessages > DayWithMaxNumberOfMessages.NumberOfMessages)
+                    DayWithMaxNumberOfMessages = day;
             }
         }
     }

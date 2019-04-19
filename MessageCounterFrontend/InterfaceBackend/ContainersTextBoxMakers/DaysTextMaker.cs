@@ -13,30 +13,29 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
     {
         public static TextBlock MakeTextBlock(DaysContainer container)
         {
-            string content;
-            content = "The larger number of messages in single day: "
-                + container.dayWithMaxNumberOfMessages.NumberOfMessages;
+            string content = "\n" + "\n";
+            content += "The larger number of messages in single day: "
+                + container.DayWithMaxNumberOfMessages.NumberOfMessages;
             content += " on " 
-                + container.dayWithMaxNumberOfMessages.thisDateTime.ToShortDateString()
+                + container.DayWithMaxNumberOfMessages.thisDateTime.ToShortDateString()
                 + "\n";
             content += "Days:\n";
 
-            List<Day> sortedDays = new List<Day>(container.days);
+            List<Day> sortedDays = new List<Day>(container.Days);
             sortedDays.OrderBy(x => x.NumberOfMessages);
 
-            for (int i = 0; i < container.days.Count; i++)
+            for (int i = 0; i < container.Days.Count; i++)
             {
-                Day day = container.days[i];
+                Day day = container.Days[i];
                 content += day.thisDateTime.ToShortDateString();
-                content += " ==> " + day.NumberOfMessages + "\t\t\t";
+                content += " ==> " + day.NumberOfMessages + "\t\t";
                 content += sortedDays[i].thisDateTime.ToShortDateString();
-                content += " ==> " + sortedDays[i].NumberOfMessages;
-                content += "\n";
+                content += " ==> " + sortedDays[i].NumberOfMessages + "\n";
             }
 
             return new TextBlock()
             {
-                Text = content
+                Text = content + "\n"
             };
         }
     }
