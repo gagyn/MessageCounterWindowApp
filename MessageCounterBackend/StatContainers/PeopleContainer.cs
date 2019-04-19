@@ -8,7 +8,7 @@ namespace MessageCounterBackend.StatContainers
 {
     public class PeopleContainer
     {
-        private List<Person> people;
+        public List<Person> people;
 
         public PeopleContainer(JsonStructureClass jsonObject)
         {

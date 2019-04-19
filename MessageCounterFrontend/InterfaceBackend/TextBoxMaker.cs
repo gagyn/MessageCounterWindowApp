@@ -1,5 +1,7 @@
 ﻿using MessageCounterBackend;
 using MessageCounterBackend.StatContainers;
+using MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers;
+using System;
 using System.Windows.Controls;
 
 namespace MessageCounterFrontend.InterfaceBackend
@@ -10,26 +12,35 @@ namespace MessageCounterFrontend.InterfaceBackend
         public static bool IncludeDays { get; set; }
         public static bool IncludeMessages { get; set; }
 
-        public static TextBlock PrepareStatsToString(StatsContainer statsContainer)
+        public static WrapPanel PrepareStatsToString(StatsContainer statsContainer)
         {
             if (statsContainer == null)
-                return new TextBlock();
+                return new WrapPanel();
 
-            string content;
-            content = "Number of all message in this conversation: " + statsContainer.NumberOfMessages.ToString();
+            WrapPanel panel = new WrapPanel();
+            TextBlock toReturn = new TextBlock()
+            {
+                Text = "Number of all message in this conversation: "
+                + statsContainer.NumberOfMessages.ToString()
+                //+ "Number of participants: "
+                //+ statsContainer.peopleContainer.people.Count.ToString()
+            };
+
+            panel.Children.Add(toReturn);
 
             if (IncludePeople)
-                content += "\n" + MakePeopleString(statsContainer.peopleContainer);
-            if (IncludeDays)
-                content += "\n" + MakeDaysStatsString(statsContainer.daysContainer);
-            if (IncludeMessages)
-                content += "\n" + MakeMessagesStatsString(statsContainer.messagesContainer);
+                panel.Children.Add(
+                    PeopleTextMaker.MakeTextBlock(statsContainer.peopleContainer));
 
-            var textBlock = new TextBlock()
-            {
-                Text = content
-            };
-            return textBlock;
+            if (IncludeDays)
+                panel.Children.Add(
+                    DaysTextMaker.MakeTextBlock(statsContainer.daysContainer));
+
+            if (IncludeMessages)
+                panel.Children.Add(
+                    MessagesTextMaker.MakeTextBlock(statsContainer.messagesContainer));
+
+            return panel;
         }
 
         private static string MakePeopleString(PeopleContainer people)
@@ -45,7 +56,7 @@ namespace MessageCounterFrontend.InterfaceBackend
             string content;
             content = "The larger number of messages in single day: " + days.dayWithMaxNumberOfMessages.NumberOfMessages;
             content += " on " + days.dayWithMaxNumberOfMessages.thisDateTime.ToShortDateString() + "\n";
-
+            content += "Days:";
             return content;
         }
 

@@ -1,10 +1,19 @@
-﻿using System;
+﻿using MessageCounterBackend.JsonStructure;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MessageCounterBackend.StatContainers.ListTypesClasses
 {
-    class Person
+    public class Person
     {
+        public readonly string fullName;
+        public readonly List<Message> messages;
+
+        public Person(string fullName, List<Message> messages)
+        {
+            this.fullName = fullName;
+            this.messages = messages;
+        }
     }
 }
