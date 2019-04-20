@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using MessageCounterBackend.JsonStructure;
@@ -14,7 +14,10 @@ namespace MessageCounterBackend.StatContainers
         {
             people = new List<Person>();
             foreach (var p in jsonObject.participants)
-                people.Add(new Person(p.name, (List<Message>)jsonObject.messages));
+            {
+                var person = new Person(p.name, (List<Message>)jsonObject.messages);
+                this.people.Add(person);
+            }
         }
     }
 }

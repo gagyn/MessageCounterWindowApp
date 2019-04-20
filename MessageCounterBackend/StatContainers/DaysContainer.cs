@@ -26,6 +26,8 @@ namespace MessageCounterBackend.StatContainers
                 if (day.NumberOfMessages > DayWithMaxNumberOfMessages.NumberOfMessages)
                     DayWithMaxNumberOfMessages = day;
             }
+
+            Days.Reverse();
         }
     }
 }

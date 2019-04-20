@@ -23,7 +23,8 @@ namespace MessageCounterFrontend.InterfaceBackend
                 Text = "Number of all message in this conversation: "
                 + statsContainer.NumberOfMessages.ToString() + "\n"
                 + "Number of participants: "
-                + statsContainer.NumberOfParticipants.ToString() + "\n"
+                + statsContainer.NumberOfParticipants.ToString(),
+                Margin = new System.Windows.Thickness(0, 0, 10, 8)
             };
 
             panel.Children.Add(toReturn);

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessageCounterFrontend"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Message Counter" Height="600" Width="800" MinHeight="300" MinWidth="400">
     <Grid>
-        <DockPanel HorizontalAlignment="Left" Height="20" LastChildFill="True" VerticalAlignment="Top" Width="797">
+        <DockPanel HorizontalAlignment="Left" Height="20" LastChildFill="True" VerticalAlignment="Top" Width="10000">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_Open single file" Name="singleFile" Click="SingleFile_Click" />
@@ -21,7 +21,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <WrapPanel Name="wrapPanel" HorizontalAlignment="Left" Height="320" Margin="20,80,0,0" VerticalAlignment="Top" Width="750"/>
+        <StackPanel Name="wrapPanel" HorizontalAlignment="Left" Margin="20,80,0,0" VerticalAlignment="Top" />
         <TextBlock Text="Show statistics for: " HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top" />
         
         <CheckBox x:Name="checkBoxPeople" Content="People" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top"

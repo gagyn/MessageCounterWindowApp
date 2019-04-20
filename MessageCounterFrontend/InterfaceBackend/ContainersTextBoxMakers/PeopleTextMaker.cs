@@ -28,7 +28,8 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
             return new TextBlock()
             {
-                Text = content + "\n"
+                Text = content,
+                Margin = new System.Windows.Thickness(0, 0, 10, 8)
             };
         }
     }
