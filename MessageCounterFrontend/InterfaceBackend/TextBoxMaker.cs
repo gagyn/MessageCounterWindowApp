@@ -24,7 +24,7 @@ namespace MessageCounterFrontend.InterfaceBackend
                 + statsContainer.NumberOfMessages.ToString() + "\n"
                 + "Number of participants: "
                 + statsContainer.NumberOfParticipants.ToString(),
-                Margin = new System.Windows.Thickness(0, 0, 4, 4)
+                Margin = new System.Windows.Thickness(0, 0, 10, 8)
             };
 
             panel.Children.Add(toReturn);
