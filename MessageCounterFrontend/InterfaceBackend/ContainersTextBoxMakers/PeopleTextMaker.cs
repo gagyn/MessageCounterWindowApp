@@ -16,13 +16,14 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             string content = "People:\n";
 
             List<Person> sortedPeople = new List<Person>(container.people);
-            sortedPeople.OrderBy(x => x.NumberOfMessages);
+            sortedPeople = sortedPeople.OrderBy(x => x.NumberOfMessages).ToList();
+            sortedPeople.Reverse();
 
-            for (int i = 0; i < sortedPeople.Count; i++)
+            foreach (var p in sortedPeople)
             {
-                Person person = sortedPeople[i];
-                content += person.FullName + " ==> ";
-                content += person.NumberOfMessages + "\n";
+                content += p.FullName + " ==> ";
+                content += p.NumberOfMessages + " which equals ";
+                content += p.SentMessagesRatio + "% of all messages\n";
             }
 
             return new TextBlock()

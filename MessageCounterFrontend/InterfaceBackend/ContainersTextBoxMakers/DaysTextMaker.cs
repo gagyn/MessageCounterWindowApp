@@ -22,7 +22,8 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             content += "Days:\n";
 
             List<Day> sortedDays = new List<Day>(container.Days);
-            sortedDays.OrderBy(x => x.NumberOfMessages);
+            sortedDays = sortedDays.OrderBy(x => x.NumberOfMessages).ToList();
+            sortedDays.Reverse();
 
             for (int i = 0; i < container.Days.Count; i++)
             {
