@@ -13,6 +13,8 @@ namespace MessageCounterBackend.StatContainers
         public PeopleContainer(JsonStructureClass jsonObject)
         {
             people = new List<Person>();
+            foreach (var p in jsonObject.participants)
+                people.Add(new Person(p.name, (List<Message>)jsonObject.messages));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
     {
         public string FullName { get; private set; }
         public int NumberOfMessages { get => Messages.Count; }
-        public float PercentageOfMessSentByThisPerson { get; private set; }
+        public float SentMessagesRatio { get; private set; }
         public DaysContainer DaysWhenUserWrittenSomething { get; private set; }
         /// <summary>
         /// MostActiveDate can be NULL if the person didn't send any text at all!
@@ -20,13 +20,14 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
 
         public Person(string fullName, List<Message> allMessages)
         {
-            this.FullName = fullName;
+            this.FullName = DecodeString(fullName);
+            Messages = new List<Message>();
 
             foreach (var m in allMessages)
                 if (fullName.Equals(DecodeString(m.sender_name)))
                     Messages.Add(m);
 
-            PercentageOfMessSentByThisPerson = NumberOfMessages / allMessages.Count * 100;
+            SentMessagesRatio = NumberOfMessages / allMessages.Count * 100;
             DaysWhenUserWrittenSomething = new DaysContainer(Messages);
             MostActiveDate = DaysWhenUserWrittenSomething.DayWithMaxNumberOfMessages.thisDateTime;
         }
