@@ -27,7 +27,8 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
                 if (fullName.Equals(DecodeString(m.sender_name)))
                     Messages.Add(m);
 
-            SentMessagesRatio = NumberOfMessages / allMessages.Count * 100;
+            SentMessagesRatio = NumberOfMessages / (float)allMessages.Count * 100;
+            SentMessagesRatio = (float)Math.Round(SentMessagesRatio, 2);
             DaysWhenUserWrittenSomething = new DaysContainer(Messages);
             MostActiveDate = DaysWhenUserWrittenSomething.DayWithMaxNumberOfMessages.thisDateTime;
         }

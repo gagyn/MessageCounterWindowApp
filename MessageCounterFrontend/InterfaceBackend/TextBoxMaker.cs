@@ -21,9 +21,9 @@ namespace MessageCounterFrontend.InterfaceBackend
             TextBlock toReturn = new TextBlock()
             {
                 Text = "Number of all message in this conversation: "
-                + statsContainer.NumberOfMessages.ToString() + "\n"
+                + statsContainer.NumberOfMessages + "\n"
                 + "Number of participants: "
-                + statsContainer.NumberOfParticipants.ToString(),
+                + statsContainer.NumberOfParticipants,
                 Margin = new System.Windows.Thickness(0, 0, 10, 8)
             };
 
