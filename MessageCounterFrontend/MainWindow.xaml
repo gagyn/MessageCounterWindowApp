@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Message Counter" Height="600" Width="800" MinHeight="300" MinWidth="400">
     <Grid>
-        <DockPanel HorizontalAlignment="Left" Height="20" LastChildFill="True" VerticalAlignment="Top" Width="10000">
+        <DockPanel HorizontalAlignment="Stretch" Height="20" LastChildFill="True" VerticalAlignment="Top" Width="" >
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_Open single file" Name="singleFile" Click="SingleFile_Click" />
@@ -23,13 +23,13 @@
         </DockPanel>
         <StackPanel Name="wrapPanel" HorizontalAlignment="Left" Margin="20,80,0,0" VerticalAlignment="Top" />
         <TextBlock Text="Show statistics for: " HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top" />
-        
+
         <CheckBox x:Name="checkBoxPeople" Content="People" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top"
                   Checked="CheckBoxPeople_Checked" Unchecked="CheckBoxPeople_Unchecked" IsEnabled="False"/>
-        
+
         <CheckBox x:Name="checkBoxDays" Content="Days" HorizontalAlignment="Left" Margin="200,40,0,0" VerticalAlignment="Top" 
                   Checked="CheckBoxDays_Checked" Unchecked="CheckBoxDays_Unchecked" IsEnabled="False"/>
-        
+
         <CheckBox x:Name="checkBoxWords" Content="Words" HorizontalAlignment="Left" Margin="260,40,0,0" VerticalAlignment="Top"
                   Checked="CheckBoxWords_Checked" Unchecked="CheckBoxWords_Unchecked" IsEnabled="False"/>
         

@@ -43,30 +43,5 @@ namespace MessageCounterFrontend.InterfaceBackend
 
             return panel;
         }
-
-        private static string MakePeopleString(PeopleContainer people)
-        {
-            string content = null;
-
-
-            return content;
-        }
-
-        private static string MakeDaysStatsString(DaysContainer days)
-        {
-            string content;
-            content = "The larger number of messages in single day: " + days.DayWithMaxNumberOfMessages.NumberOfMessages;
-            content += " on " + days.DayWithMaxNumberOfMessages.thisDateTime.ToShortDateString() + "\n";
-            content += "Days:";
-            return content;
-        }
-
-        private static string MakeMessagesStatsString(MessagesContainer messages)
-        {
-            string content = null;
-
-
-            return content;
-        }
     }
 }
