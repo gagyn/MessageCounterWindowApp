@@ -22,8 +22,8 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             foreach (var p in sortedPeople)
             {
                 content += p.FullName + " ==> ";
-                content += p.NumberOfMessages + " which equals ";
-                content += p.SentMessagesRatio + "% of all messages\n";
+                content += p.NumberOfMessages + " (";
+                content += p.SentMessagesRatio + "%) of all messages\n";
             }
 
             return new TextBlock()

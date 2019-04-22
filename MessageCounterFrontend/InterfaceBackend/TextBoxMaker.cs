@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace MessageCounterFrontend.InterfaceBackend
 {
-    internal static class TextBlockMaker
+    internal static class NewWrapPanelMaker
     {
         public static bool IncludePeople { get; set; }
         public static bool IncludeDays { get; set; }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Message Counter" Height="600" Width="800" MinHeight="300" MinWidth="400">
     <Grid>
-        <DockPanel HorizontalAlignment="Stretch" Height="20" LastChildFill="True" VerticalAlignment="Top" Width="" >
+        <DockPanel HorizontalAlignment="Stretch" Height="20" LastChildFill="True" VerticalAlignment="Top" >
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="_Open single file" Name="singleFile" Click="SingleFile_Click" />
@@ -21,7 +21,9 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <StackPanel Name="wrapPanel" HorizontalAlignment="Left" Margin="20,80,0,0" VerticalAlignment="Top" />
+
+        <ScrollViewer x:Name="scrollViewer" Margin="20,80,20,20" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
+
         <TextBlock Text="Show statistics for: " HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top" />
 
         <CheckBox x:Name="checkBoxPeople" Content="People" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top"
