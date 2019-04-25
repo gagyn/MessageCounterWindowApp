@@ -31,7 +31,7 @@ namespace MessageCounterFrontend.InterfaceBackend
 
             if (IncludePeople)
                 panel.Children.Add(
-                    PeopleTextMaker.MakeTextBlock(statsContainer.peopleContainer));
+                    PeopleGridMaker.MakeGrid(statsContainer.peopleContainer));
 
             if (IncludeDays)
                 panel.Children.Add(
