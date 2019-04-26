@@ -68,7 +68,7 @@
     </Compile>
     <Compile Include="InterfaceBackend\ContainersTextBoxMakers\DaysTextMaker.cs" />
     <Compile Include="InterfaceBackend\ContainersTextBoxMakers\MessagesTextMaker.cs" />
-    <Compile Include="InterfaceBackend\ContainersTextBoxMakers\PeopleTextMaker.cs" />
+    <Compile Include="InterfaceBackend\ContainersTextBoxMakers\PeopleGridMaker.cs" />
     <Compile Include="InterfaceBackend\ReadFile.cs" />
     <Compile Include="InterfaceBackend\TextBoxMaker.cs" />
     <Compile Include="MainWindow.xaml.cs">

@@ -14,7 +14,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
         {
             List<Person> sortedPeople = new List<Person>(container.people);
             sortedPeople = sortedPeople.OrderBy(x => x.NumberOfMessages).ToList();
-            sortedPeople.Reverse();
+            sortedPeople.Reverse(); // sortedPeople containes people sorted by number of messages (top - max number)
 
             Grid[] grids = {
                 MakeLeftSide(sortedPeople),
@@ -22,18 +22,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
                 MakeRightSide(sortedPeople)
             };
 
-            Grid bigGrid = new Grid()
-            {
-                Margin = new Thickness(0, 0, 10, 8),
-            };
-
-            for (int i = 0; i < grids.Length; i++)
-            {
-                bigGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                bigGrid.Children.Add(grids[i]);
-                Grid.SetColumn(bigGrid.Children[i], i);
-            }
-            return bigGrid;
+            return MakeBigGrid(grids);
         }
 
         private static Grid MakeLeftSide(List<Person> people)
@@ -43,7 +32,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             {
                 grid.Children.Add(new TextBlock()
                 {
-                    Text = i + ". " + people[i].FullName,
+                    Text = (i + 1) + ". " + people[i].FullName, // 1. Name Surname
                     HorizontalAlignment = HorizontalAlignment.Left
                 });
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -59,7 +48,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             {
                 grid.Children.Add(new TextBlock()
                 {
-                    Text = " ==> ",
+                    Text = " ==> ", // ==>
                     HorizontalAlignment = HorizontalAlignment.Left
                 });
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -81,7 +70,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
                 var block = new TextBlock()
                 {
-                    Text = $"{p.NumberOfMessages} ({ratioString}%) of this conversation",
+                    Text = $"{p.NumberOfMessages} ({ratioString}%) of this conversation",   // 56% of this conversation
                     HorizontalAlignment = HorizontalAlignment.Right
                 };
 
@@ -91,6 +80,22 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             }
 
             return grid;
+        }
+
+        private static Grid MakeBigGrid(Grid[] grids)
+        {
+            Grid bigGrid = new Grid()
+            {
+                Margin = new Thickness(0, 0, 10, 8),
+            };
+
+            for (int i = 0; i < grids.Length; i++) // adds every element from grids to big grid
+            {
+                bigGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                bigGrid.Children.Add(grids[i]);
+                Grid.SetColumn(bigGrid.Children[i], i);
+            }
+            return bigGrid;
         }
     }
 }
