@@ -3,42 +3,87 @@ using MessageCounterBackend.StatContainers.ListTypesClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 {
-    static class DaysTextMaker
+    class DaysGridMaker : GridMaker
     {
-        public static TextBlock MakeTextBlock(DaysContainer container)
+        public DaysGridMaker(Container container) : base(container)
         {
-            string content;
-            content = "The larger number of messages in single day: "
-                + container.DayWithMaxNumberOfMessages.NumberOfMessages;
-            content += " on " 
-                + container.DayWithMaxNumberOfMessages.thisDateTime.ToShortDateString()
-                + "\n";
-            content += "Days:\n";
+        }
 
-            List<Day> sortedDays = new List<Day>(container.Days);
+        protected override Grid[] MakeGrids(Container container)
+        {
+            if (!(container is DaysContainer daysContainer))
+                throw new ArgumentException();  // if container isn't for days
+
+            Grid[] grids =
+            {
+                MakeDaysGrid(daysContainer.Days),
+                MakeSortedDaysGrid(daysContainer.Days),
+                MakeInfoGrid(daysContainer) // the last Grid (InfoGrid) will be in first row
+                                            // the rest will be in second row
+            };
+
+            return grids;
+        }
+
+        protected override Grid MakeBigGrid(Grid[] grids)
+        {
+            Grid currentGrid = base.MakeBigGrid(grids);
+
+            currentGrid.RowDefinitions.Add(new RowDefinition()); // for info
+            currentGrid.RowDefinitions.Add(new RowDefinition()); // for the rest
+
+            int i;
+            for (i = 0; i < grids.Length - 1; i++)
+                Grid.SetRow(currentGrid.Children[i], 1);
+
+            Grid.SetRow(currentGrid.Children[i], 0);
+            Grid.SetColumn(currentGrid.Children[i], 0);
+            return currentGrid;
+        }
+        private Grid MakeInfoGrid(DaysContainer container)
+        {
+            string content = "The larger number of messages in single day: ";
+            content += container.DayWithMaxNumberOfMessages.NumberOfMessages;
+            content += " on ";
+            content += container.DayWithMaxNumberOfMessages.thisDateTime.ToShortDateString();
+
+            var grid = new Grid();
+            grid.Children.Add(new TextBlock() { Text = content });
+            return grid;
+        }
+
+        private Grid MakeDaysGrid(List<Day> days)
+        {
+            var grid = new Grid();
+
+            for (int i = 0; i < days.Count; i++)
+            {
+                TextBlock block = new TextBlock()
+                {
+                    Text = days[i].thisDateTime.ToShortDateString()
+                    + " ==> " + days[i].NumberOfMessages,
+                    Margin = new System.Windows.Thickness(0, 0, 5, 0)
+                };
+
+                grid.Children.Add(block);
+                grid.RowDefinitions.Add(new RowDefinition());
+                Grid.SetRow(grid.Children[i], i);
+            }
+
+            return grid;
+        }
+
+        private Grid MakeSortedDaysGrid(List<Day> days)
+        {
+            List<Day> sortedDays = new List<Day>(days);
             sortedDays = sortedDays.OrderBy(x => x.NumberOfMessages).ToList();
             sortedDays.Reverse();
 
-            for (int i = 0; i < container.Days.Count; i++)
-            {
-                Day day = container.Days[i];
-                content += day.thisDateTime.ToShortDateString();
-                content += " ==> " + day.NumberOfMessages + "\t\t";
-                content += sortedDays[i].thisDateTime.ToShortDateString();
-                content += " ==> " + sortedDays[i].NumberOfMessages + "\n";
-            }
-
-            return new TextBlock()
-            {
-                Text = content + "\n",
-                Margin = new System.Windows.Thickness(0, 0, 10, 8)
-            };
+            return MakeDaysGrid(sortedDays);
         }
     }
 }

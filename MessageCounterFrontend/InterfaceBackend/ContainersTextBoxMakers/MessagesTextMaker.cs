@@ -9,17 +9,20 @@ using MessageCounterBackend.StatContainers.ListTypesClasses;
 
 namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 {
-    static class MessagesTextMaker
+    class MessagesGridMaker : GridMaker
     {
-        public static TextBlock MakeTextBlock(MessagesContainer container)
+        public MessagesGridMaker(Container container) : base(container)
         {
-            string content = "";
+        }
 
+        protected override Grid[] MakeGrids(Container container)
+        {
+            if (!(container is MessagesContainer messagesContainer))
+                throw new ArgumentException();  // if container isn't for messages
 
-
-            return new TextBlock()
+            return new Grid[]
             {
-                Text = content + "\n"
+                null
             };
         }
     }

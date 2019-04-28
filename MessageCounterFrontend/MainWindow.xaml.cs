@@ -52,7 +52,7 @@ namespace MessageCounterFrontend
                     return;
 
                 
-                MainWrapPanel.Children.Add(NewWrapPanelMaker.PrepareStatsToString(statsContainer));
+                MainWrapPanel.Children.Add(WrapPanelMaker.PrepareStatsToString(statsContainer));
                 ChangeStatesOfCheckBoxes();
             }
         }
@@ -71,8 +71,8 @@ namespace MessageCounterFrontend
         {
             MainWrapPanel.Children.Clear();
 
-            NewWrapPanelMaker.IncludePeople = NewWrapPanelMaker.IncludeDays
-                = NewWrapPanelMaker.IncludeMessages = false;
+            WrapPanelMaker.IncludePeople = WrapPanelMaker.IncludeDays
+                = WrapPanelMaker.IncludeMessages = false;
 
             string fileContent;
             try
@@ -87,7 +87,7 @@ namespace MessageCounterFrontend
             if (false == CreateStatsContainer(fileContent))
                 return;
             
-            MainWrapPanel.Children.Add(NewWrapPanelMaker.PrepareStatsToString(statsContainer));
+            MainWrapPanel.Children.Add(WrapPanelMaker.PrepareStatsToString(statsContainer));
 
             checkBoxPeople.IsChecked = checkBoxDays.IsChecked = checkBoxWords.IsChecked = false;
 
@@ -115,7 +115,7 @@ namespace MessageCounterFrontend
             if (statsContainer.peopleContainer == null)
                 statsContainer.MakePeopleContainer();
 
-            NewWrapPanelMaker.IncludePeople = true;
+            WrapPanelMaker.IncludePeople = true;
             UpdateMainPanel();
             ChangeStatesOfCheckBoxes();
         }
@@ -126,7 +126,7 @@ namespace MessageCounterFrontend
             if (statsContainer.daysContainer == null)
                 statsContainer.MakeDaysContainer();
 
-            NewWrapPanelMaker.IncludeDays = true;
+            WrapPanelMaker.IncludeDays = true;
             UpdateMainPanel();
             ChangeStatesOfCheckBoxes();
         }
@@ -137,12 +137,12 @@ namespace MessageCounterFrontend
             if (statsContainer.messagesContainer == null)
                 statsContainer.MakeMessagesContainer();
 
-            NewWrapPanelMaker.IncludeMessages = true;
+            WrapPanelMaker.IncludeMessages = true;
             UpdateMainPanel();
             ChangeStatesOfCheckBoxes();
         }
 
-        private void UpdateMainPanel() => MainWrapPanel = NewWrapPanelMaker.PrepareStatsToString(statsContainer);
+        private void UpdateMainPanel() => MainWrapPanel = WrapPanelMaker.PrepareStatsToString(statsContainer);
 
         private void ChangeStatesOfCheckBoxes()
         {
@@ -153,19 +153,19 @@ namespace MessageCounterFrontend
 
         private void CheckBoxPeople_Unchecked(object sender, RoutedEventArgs e)
         {
-            NewWrapPanelMaker.IncludePeople = false;
+            WrapPanelMaker.IncludePeople = false;
             UpdateMainPanel();
         }
 
         private void CheckBoxDays_Unchecked(object sender, RoutedEventArgs e)
         {
-            NewWrapPanelMaker.IncludeDays = false;
+            WrapPanelMaker.IncludeDays = false;
             UpdateMainPanel();
         }
 
         private void CheckBoxWords_Unchecked(object sender, RoutedEventArgs e)
         {
-            NewWrapPanelMaker.IncludeMessages = false;
+            WrapPanelMaker.IncludeMessages = false;
             UpdateMainPanel();
         }
     }

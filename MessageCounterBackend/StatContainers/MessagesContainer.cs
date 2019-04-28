@@ -5,7 +5,7 @@ using MessageCounterBackend.JsonStructure;
 
 namespace MessageCounterBackend.StatContainers
 {
-    public class MessagesContainer
+    public class MessagesContainer : Container
     {
         private readonly List<Message> messages;
 

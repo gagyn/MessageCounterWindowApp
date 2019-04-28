@@ -67,6 +67,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="InterfaceBackend\ContainersTextBoxMakers\DaysTextMaker.cs" />
+    <Compile Include="InterfaceBackend\ContainersTextBoxMakers\GridMaker.cs" />
     <Compile Include="InterfaceBackend\ContainersTextBoxMakers\MessagesTextMaker.cs" />
     <Compile Include="InterfaceBackend\ContainersTextBoxMakers\PeopleGridMaker.cs" />
     <Compile Include="InterfaceBackend\ReadFile.cs" />

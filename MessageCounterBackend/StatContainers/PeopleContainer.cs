@@ -6,7 +6,7 @@ using MessageCounterBackend.StatContainers.ListTypesClasses;
 
 namespace MessageCounterBackend.StatContainers
 {
-    public class PeopleContainer
+    public class PeopleContainer : Container
     {
         public List<Person> people;
 

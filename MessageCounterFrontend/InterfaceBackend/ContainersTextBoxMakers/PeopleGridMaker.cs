@@ -8,24 +8,36 @@ using System.Windows.Controls;
 
 namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 {
-    static class PeopleGridMaker
+    class PeopleGridMaker : GridMaker
     {
-        public static Grid MakeGrid(PeopleContainer container)
+        public PeopleGridMaker(Container container) : base(container)
         {
-            List<Person> sortedPeople = new List<Person>(container.people);
-            sortedPeople = sortedPeople.OrderBy(x => x.NumberOfMessages).ToList();
-            sortedPeople.Reverse(); // sortedPeople containes people sorted by number of messages (top - max number)
-
-            Grid[] grids = {
-                MakeLeftSide(sortedPeople),
-                MakeCenter(sortedPeople.Count),
-                MakeRightSide(sortedPeople)
-            };
-
-            return MakeBigGrid(grids);
         }
 
-        private static Grid MakeLeftSide(List<Person> people)
+        protected override Grid[] MakeGrids(Container container)
+        {
+            if (!(container is PeopleContainer peopleContainer)) 
+                throw new ArgumentException();  // if container isn't for people
+
+            List<Person> people = new List<Person>(peopleContainer.people);
+            SortPeople(ref people);
+
+            return new Grid[]
+            {
+                MakeLeftSide(people),
+                MakeCenter(people.Count),
+                MakeRightSide(people)
+            };
+        }
+
+        private void SortPeople(ref List<Person> people)
+        {
+            people = people.OrderBy(x => x.NumberOfMessages).ToList();
+            people.Reverse(); // from now, sortedPeople containes people sorted
+                                    // by number of messages (top - max number)
+        }
+
+        private Grid MakeLeftSide(List<Person> people)
         {
             Grid grid = new Grid();
             for (int i = 0; i < people.Count; i++)
@@ -41,7 +53,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             return grid;
         }
 
-        private static Grid MakeCenter(int peopleCount)
+        private Grid MakeCenter(int peopleCount)
         {
             Grid grid = new Grid();
             while (peopleCount-- > 0)
@@ -58,7 +70,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             return grid;
         }
 
-        private static Grid MakeRightSide(List<Person> people)
+        private Grid MakeRightSide(List<Person> people)
         {
             Grid grid = new Grid();
             foreach (var _ in people)
@@ -80,22 +92,6 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             }
 
             return grid;
-        }
-
-        private static Grid MakeBigGrid(Grid[] grids)
-        {
-            Grid bigGrid = new Grid()
-            {
-                Margin = new Thickness(0, 0, 10, 8),
-            };
-
-            for (int i = 0; i < grids.Length; i++) // adds every element from grids to big grid
-            {
-                bigGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                bigGrid.Children.Add(grids[i]);
-                Grid.SetColumn(bigGrid.Children[i], i);
-            }
-            return bigGrid;
         }
     }
 }

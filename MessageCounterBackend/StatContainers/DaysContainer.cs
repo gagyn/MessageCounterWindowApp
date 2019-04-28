@@ -4,7 +4,7 @@ using MessageCounterBackend.StatContainers.ListTypesClasses;
 
 namespace MessageCounterBackend.StatContainers
 {
-    public class DaysContainer
+    public class DaysContainer : Container
     {
         public List<Day> Days { get; private set; }
         public Day DayWithMaxNumberOfMessages { get; private set; }

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace MessageCounterFrontend.InterfaceBackend
 {
-    internal static class NewWrapPanelMaker
+    internal static class WrapPanelMaker
     {
         public static bool IncludePeople { get; set; }
         public static bool IncludeDays { get; set; }
@@ -31,15 +31,15 @@ namespace MessageCounterFrontend.InterfaceBackend
 
             if (IncludePeople)
                 panel.Children.Add(
-                    PeopleGridMaker.MakeGrid(statsContainer.peopleContainer));
+                    new PeopleGridMaker(statsContainer.peopleContainer).Grid);
 
             if (IncludeDays)
                 panel.Children.Add(
-                    DaysTextMaker.MakeTextBlock(statsContainer.daysContainer));
+                    new DaysGridMaker(statsContainer.daysContainer).Grid);
 
             if (IncludeMessages)
                 panel.Children.Add(
-                    MessagesTextMaker.MakeTextBlock(statsContainer.messagesContainer));
+                    new MessagesGridMaker(statsContainer.messagesContainer).Grid);
 
             return panel;
         }
