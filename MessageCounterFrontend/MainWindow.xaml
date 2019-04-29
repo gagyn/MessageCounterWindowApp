@@ -21,7 +21,12 @@
             </Menu>
         </DockPanel>
 
-        <ScrollViewer x:Name="scrollViewer" Margin="20,80,20,20" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch"/>
+        <ScrollViewer 
+            x:Name="scrollViewer"
+            Margin="20,80,0,20" 
+            HorizontalScrollBarVisibility="Disabled" 
+            VerticalScrollBarVisibility="Auto" 
+            HorizontalContentAlignment="Left" />
 
         <TextBlock Text="Show statistics for: " HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top" />
 

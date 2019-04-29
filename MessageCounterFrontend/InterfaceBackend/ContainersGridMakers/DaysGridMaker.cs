@@ -42,6 +42,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
             Grid.SetRow(currentGrid.Children[i], 0);
             Grid.SetColumn(currentGrid.Children[i], 0);
+            Grid.SetColumnSpan(currentGrid.Children[i], 2); // merge two columns
             return currentGrid;
         }
         private Grid MakeInfoGrid(DaysContainer container)

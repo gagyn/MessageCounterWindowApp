@@ -1,7 +1,6 @@
 ﻿using MessageCounterBackend.StatContainers;
 using System.Windows.Controls;
-using System.Collections.Generic;
-using System.Collections;
+
 namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 {
     abstract class GridMaker
@@ -19,7 +18,9 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
         {
             Grid bigGrid = new Grid()
             {
-                Margin = new System.Windows.Thickness(0, 0, 20, 18)
+                Margin = new System.Windows.Thickness(0, 0, 20, 18),
+                ShowGridLines = true,
+                ClipToBounds = false
             };
 
             for (int i = 0; i < grids.Length; i++) // adds every element from grids to big grid

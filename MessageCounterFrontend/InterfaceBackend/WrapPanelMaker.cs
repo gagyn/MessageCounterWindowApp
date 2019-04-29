@@ -1,7 +1,5 @@
 ﻿using MessageCounterBackend;
-using MessageCounterBackend.StatContainers;
 using MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers;
-using System;
 using System.Windows.Controls;
 
 namespace MessageCounterFrontend.InterfaceBackend

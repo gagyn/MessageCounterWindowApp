@@ -1,20 +1,7 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MessageCounterFrontend.InterfaceBackend;
-using System.Threading;
 
 namespace MessageCounterFrontend
 {
@@ -26,15 +13,8 @@ namespace MessageCounterFrontend
         private MessageCounterBackend.StatsContainer statsContainer;
         private WrapPanel MainWrapPanel
         {
-            get
-            {
-                return scrollViewer.Content as WrapPanel;
-            }
-
-            set
-            {
-                scrollViewer.Content = value;
-            }
+            get => scrollViewer.Content as WrapPanel;
+            set => scrollViewer.Content = value;
         }
 
         public MainWindow()
@@ -51,8 +31,7 @@ namespace MessageCounterFrontend
                 if (false == CreateStatsContainer(fileContent))
                     return;
 
-                
-                MainWrapPanel.Children.Add(WrapPanelMaker.PrepareStatsToString(statsContainer));
+                UpdateMainPanel();
                 ChangeStatesOfCheckBoxes();
             }
         }
@@ -86,9 +65,8 @@ namespace MessageCounterFrontend
 
             if (false == CreateStatsContainer(fileContent))
                 return;
-            
-            MainWrapPanel.Children.Add(WrapPanelMaker.PrepareStatsToString(statsContainer));
 
+            UpdateMainPanel();
             checkBoxPeople.IsChecked = checkBoxDays.IsChecked = checkBoxWords.IsChecked = false;
 
             if (false == checkBoxPeople.IsEnabled)
@@ -142,7 +120,20 @@ namespace MessageCounterFrontend
             ChangeStatesOfCheckBoxes();
         }
 
-        private void UpdateMainPanel() => MainWrapPanel = WrapPanelMaker.PrepareStatsToString(statsContainer);
+        private void UpdateMainPanel()
+        {
+            MainWrapPanel = WrapPanelMaker.PrepareStatsToString(statsContainer);
+            UpdateLayout();
+            //for (int i = 0; i < MainWrapPanel.Children.Count; i++)
+            //{
+            //    var toSet = MainWrapPanel.Children[i] as Grid;
+            //    if (toSet == null)
+            //        continue;
+
+            //    toSet.MinWidth = toSet.ActualWidth;
+            //    MainWrapPanel.Children[i] = toSet;
+            //}
+        }
 
         private void ChangeStatesOfCheckBoxes()
         {
