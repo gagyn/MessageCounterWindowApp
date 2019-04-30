@@ -111,6 +111,8 @@ namespace MessageCounterFrontend
 
         private void CheckBoxWords_Checked(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Not implemented yet!");
+            return;
             ChangeStatesOfCheckBoxes();
             if (statsContainer.messagesContainer == null)
                 statsContainer.MakeMessagesContainer();
@@ -124,15 +126,6 @@ namespace MessageCounterFrontend
         {
             MainWrapPanel = WrapPanelMaker.PrepareStatsToString(statsContainer);
             UpdateLayout();
-            //for (int i = 0; i < MainWrapPanel.Children.Count; i++)
-            //{
-            //    var toSet = MainWrapPanel.Children[i] as Grid;
-            //    if (toSet == null)
-            //        continue;
-
-            //    toSet.MinWidth = toSet.ActualWidth;
-            //    MainWrapPanel.Children[i] = toSet;
-            //}
         }
 
         private void ChangeStatesOfCheckBoxes()
