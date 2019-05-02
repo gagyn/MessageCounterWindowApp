@@ -48,11 +48,6 @@ namespace MessageCounterFrontend
 
         private void SingleFile_Click(object sender, RoutedEventArgs e)
         {
-            MainWrapPanel.Children.Clear();
-
-            WrapPanelMaker.IncludePeople = WrapPanelMaker.IncludeDays
-                = WrapPanelMaker.IncludeMessages = false;
-
             string fileContent;
             try
             {
@@ -62,6 +57,11 @@ namespace MessageCounterFrontend
             {
                 return;
             }
+
+            MainWrapPanel.Children.Clear();
+
+            WrapPanelMaker.IncludePeople = WrapPanelMaker.IncludeDays
+                = WrapPanelMaker.IncludeMessages = false;
 
             if (false == CreateStatsContainer(fileContent))
                 return;
