@@ -22,15 +22,15 @@ namespace MessageCounterFrontend.InterfaceBackend
 
             if (IncludePeople)
                 panel.Children.Add(
-                    new PeopleGridMaker(statsContainer.peopleContainer).Grid);
+                    new PeopleGridMaker(statsContainer.PeopleContainer).Grid);
 
             if (IncludeDays)
                 panel.Children.Add(
-                    new DaysGridMaker(statsContainer.daysContainer).Grid);
+                    new DaysGridMaker(statsContainer.DaysContainer).Grid);
 
             if (IncludeMessages)
                 panel.Children.Add(
-                    new MessagesGridMaker(statsContainer.messagesContainer).Grid);
+                    new MessagesGridMaker(statsContainer.MessagesContainer).Grid);
 
             return panel;
         }

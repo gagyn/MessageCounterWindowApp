@@ -90,7 +90,7 @@ namespace MessageCounterFrontend
         private void CheckBoxPeople_Checked(object sender, RoutedEventArgs e)
         {
             ChangeStatesOfCheckBoxes();
-            if (statsContainer.peopleContainer == null)
+            if (statsContainer.PeopleContainer == null)
                 statsContainer.MakePeopleContainer();
 
             WrapPanelMaker.IncludePeople = true;
@@ -101,7 +101,7 @@ namespace MessageCounterFrontend
         private void CheckBoxDays_Checked(object sender, RoutedEventArgs e)
         {
             ChangeStatesOfCheckBoxes();
-            if (statsContainer.daysContainer == null)
+            if (statsContainer.DaysContainer == null)
                 statsContainer.MakeDaysContainer();
 
             WrapPanelMaker.IncludeDays = true;
@@ -114,7 +114,7 @@ namespace MessageCounterFrontend
             MessageBox.Show("Not implemented yet!");
             return;
             ChangeStatesOfCheckBoxes();
-            if (statsContainer.messagesContainer == null)
+            if (statsContainer.MessagesContainer == null)
                 statsContainer.MakeMessagesContainer();
 
             WrapPanelMaker.IncludeMessages = true;
