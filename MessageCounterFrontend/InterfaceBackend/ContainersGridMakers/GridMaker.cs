@@ -19,8 +19,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             Grid bigGrid = new Grid()
             {
                 Margin = new System.Windows.Thickness(0, 0, 20, 18),
-                ShowGridLines = true,
-                ClipToBounds = false
+                VerticalAlignment = System.Windows.VerticalAlignment.Top
             };
 
             for (int i = 0; i < grids.Length; i++) // adds every element from grids to big grid

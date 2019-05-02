@@ -43,9 +43,11 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             Grid.SetRow(currentGrid.Children[i], 0);
             Grid.SetColumn(currentGrid.Children[i], 0);
             Grid.SetColumnSpan(currentGrid.Children[i], 2); // merge two columns
+
+            currentGrid.ColumnDefinitions.RemoveAt(currentGrid.ColumnDefinitions.Count - 1);
             return currentGrid;
         }
-        private Grid MakeInfoGrid(DaysContainer container)
+        private Grid MakeInfoGrid(DaysContainer container) // grid in the first row, first column (0,0)
         {
             string content = "The larger number of messages in single day: ";
             content += container.DayWithMaxNumberOfMessages.NumberOfMessages;
@@ -57,7 +59,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             return grid;
         }
 
-        private Grid MakeDaysGrid(List<Day> days)
+        private Grid MakeDaysGrid(List<Day> days) // second row, first column (1,0)
         {
             var grid = new Grid();
 
@@ -78,7 +80,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             return grid;
         }
 
-        private Grid MakeSortedDaysGrid(List<Day> days)
+        private Grid MakeSortedDaysGrid(List<Day> days) // second row, second column (1,1)
         {
             List<Day> sortedDays = new List<Day>(days);
             sortedDays = sortedDays.OrderBy(x => x.NumberOfMessages).ToList();

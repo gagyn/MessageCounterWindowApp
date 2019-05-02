@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Message Counter" Height="600" Width="900" MinHeight="500" MinWidth="500">
+        Title="Message Counter" Height="600" Width="900" MinHeight="500" MinWidth="450">
     <Grid>
         <DockPanel HorizontalAlignment="Stretch" Height="20" LastChildFill="True" VerticalAlignment="Top" >
             <Menu DockPanel.Dock="Top">
@@ -23,10 +23,9 @@
 
         <ScrollViewer 
             x:Name="scrollViewer"
-            Margin="20,80,0,20" 
+            Margin="20,80,0,0" 
             HorizontalScrollBarVisibility="Disabled" 
-            VerticalScrollBarVisibility="Auto" 
-            HorizontalContentAlignment="Left" />
+            VerticalScrollBarVisibility="Auto" />
 
         <TextBlock Text="Show statistics for: " HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top" />
 

@@ -82,8 +82,9 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
                 var block = new TextBlock()
                 {
-                    Text = $"{p.NumberOfMessages} ({ratioString}%) of this conversation",   // 56% of this conversation
-                    HorizontalAlignment = HorizontalAlignment.Right
+                    Text = $"{p.NumberOfMessages} ({ratioString}%)",   // 56% of this conversation
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    FontWeight = FontWeights.SemiBold
                 };
 
                 grid.Children.Add(block);

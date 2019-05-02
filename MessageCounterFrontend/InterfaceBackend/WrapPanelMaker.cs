@@ -1,5 +1,6 @@
 ﻿using MessageCounterBackend;
 using MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MessageCounterFrontend.InterfaceBackend
@@ -12,20 +13,12 @@ namespace MessageCounterFrontend.InterfaceBackend
 
         public static WrapPanel PrepareStatsToString(StatsContainer statsContainer)
         {
+            var panel = new WrapPanel();
+
             if (statsContainer == null)
-                return new WrapPanel();
+                return panel;
 
-            WrapPanel panel = new WrapPanel();
-            TextBlock toReturn = new TextBlock()
-            {
-                Text = "Number of all message in this conversation: "
-                + statsContainer.NumberOfMessages + "\n"
-                + "Number of participants: "
-                + statsContainer.NumberOfParticipants,
-                Margin = new System.Windows.Thickness(0, 0, 10, 8)
-            };
-
-            panel.Children.Add(toReturn);
+            panel.Children.Add(MakeInfoGrid(statsContainer));
 
             if (IncludePeople)
                 panel.Children.Add(
@@ -40,6 +33,37 @@ namespace MessageCounterFrontend.InterfaceBackend
                     new MessagesGridMaker(statsContainer.messagesContainer).Grid);
 
             return panel;
+        }
+
+        private static Grid MakeInfoGrid(StatsContainer container)
+        {
+            const int columns = 2;
+            var textBlocks = new TextBlock[columns];
+
+            textBlocks[0] = new TextBlock() {
+                Text = "Number of all message: \n"
+                     + "Number of participants: "
+            };
+
+            textBlocks[1] = new TextBlock() {
+                Text = container.NumberOfMessages.ToString() + "\n"
+                + container.NumberOfParticipants.ToString(),
+                FontWeight = FontWeights.SemiBold
+            };
+
+            var infoGrid = new Grid()
+            {
+                Margin = new System.Windows.Thickness(0, 0, 20, 18)
+            };
+
+            for (int i = 0; i < columns; i++)
+            {
+                infoGrid.Children.Add(textBlocks[i]);
+                infoGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                Grid.SetColumn(infoGrid.Children[i], i);
+            }
+
+            return infoGrid;
         }
     }
 }
