@@ -22,8 +22,34 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
             return new Grid[]
             {
-                null
+                MakeLeftSide(messagesContainer),
+                //MakeRightSide(messagesContainer)
             };
         }
+
+        private Grid MakeLeftSide(MessagesContainer container)
+        {
+            Grid grid = new Grid();
+            for (int i = 0; i < container.SortedWordsByFrequents.Count; i++)
+            {
+                var word = container.SortedWordsByFrequents[i];
+
+                grid.Children.Add(new TextBlock()
+                {
+                    Text = word.Count().ToString() + " ==> " + word.Key
+                });
+                grid.RowDefinitions.Add(new RowDefinition());
+                Grid.SetRow(grid.Children[i], i);
+            }
+            return grid;
+        }
+
+        //private Grid MakeRightSide(MessagesContainer container)
+        //{
+        //    Grid grid = new Grid();
+
+
+        //    return grid;
+        //}
     }
 }

@@ -1,110 +1,73 @@
 ﻿using MessageCounterBackend.JsonStructure;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using System.Text.RegularExpressions;
+using MessageCounterBackend.Containers.Helpers_classes;
 
 namespace MessageCounterBackend.StatContainers.ListTypesClasses
 {
     public class Person
     {
-        public string FullName { get; private set; }
-        public int NumberOfMessages { get => Messages.Count; }
+        public string FullName { get; }
         public double SentMessagesRatio { get; private set; }
         public DaysContainer DaysWhenUserWrittenSomething { get; private set; }
         public Day MostActiveDate { get; private set; }
         public double AvgNumberOfMessageInDaysWhenUserWroteAny { get; private set; }
-        public List<IGrouping<string, string>> SortedWordsByFrequents { get; private set; }
-        public List<IGrouping<string, string>> WordsAppearedMoreThanOneTime { get; private set; }
-
-        private List<Message> Messages { get; set; }
+        public MessagesContainer PersonMessages { get; private set; }
 
         public Person(string fullName, List<Message> allMessages)
         {
-            this.FullName = DecodeString(fullName);
+            this.FullName = fullName.DecodeString();
+            PersonMessages = 
+                new MessagesContainer(FindPersonMessages(allMessages));
 
-            // all parameters are for safely
-            SetMessages(this.FullName, allMessages);
-            SetDays(this.Messages);
-            SetDoubleNumbers(allMessages.Count, NumberOfMessages, DaysWhenUserWrittenSomething.Days.Count);
-            SetFavoriteWord(this.Messages);
+            SetDays();
+            SetDoubleNumbers(allMessages.Count);
         }
 
-        private void SetMessages(string fullName, List<Message> allMessages)
+        private List<Message> FindPersonMessages(List<Message> allMessages)
         {
-            if (fullName == null)
+            if (this.FullName == null)
             {
-                throw new ArgumentNullException(nameof(fullName));
+                throw new ArgumentNullException(nameof(FullName));
             }
             if (allMessages == null)
             {
                 throw new ArgumentNullException(nameof(allMessages));
             }
 
-            Messages = new List<Message>();
+            var messages = new List<Message>();
 
             foreach (var m in allMessages)
-                if (fullName.Equals(DecodeString(m.sender_name)))
-                    Messages.Add(m);
+                if (this.FullName.Equals(m.sender_name.DecodeString()))
+                    messages.Add(m);
+
+            return messages;
         }
 
-        private void SetDays(List<Message> userMessages)
+        private void SetDays()
         {
-            if (userMessages == null)
+            if (PersonMessages?.Messages == null)
             {
-                throw new ArgumentNullException(nameof(userMessages));
+                throw new ArgumentNullException(nameof(PersonMessages));
             }
 
-            DaysWhenUserWrittenSomething = new DaysContainer(userMessages);
+            DaysWhenUserWrittenSomething = new DaysContainer(PersonMessages.Messages);
             MostActiveDate = DaysWhenUserWrittenSomething.DayWithMaxNumberOfMessages;
         }
 
-        private void SetDoubleNumbers(int allMessagesCount, int numberOfUserMessages, int numberOfUserDays)
+        private void SetDoubleNumbers(int allMessagesCount)
         {
             double ratio, avgNumber;
-            ratio = numberOfUserMessages / (float)allMessagesCount * 100;
-            avgNumber = numberOfUserMessages / (float)numberOfUserDays;
+
+            ratio = PersonMessages.NumberOfMessages 
+                / (float)allMessagesCount * 100;
+
+            avgNumber = PersonMessages.NumberOfMessages
+                / (float)DaysWhenUserWrittenSomething.Days.Count;
 
             SentMessagesRatio = Math.Round(ratio, 2);
             AvgNumberOfMessageInDaysWhenUserWroteAny = Math.Round(avgNumber, 2);
-        }
-
-        private void SetFavoriteWord(List<Message> userMessages)
-        {
-            Char[] charToRemove = 
-                { '~', '`', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=',
-                '{', '[', '}', ']', ':', ';', '"', '\'', '|', '\\', '<', ',', '>', '.', '?', '/' };
-                // I make it in this way, bcs I want to remove only special characters,
-                // but not special leters in different langs (like: 'Ą','Ź')
-
-            var sortedWords =
-                from message in (userMessages as IEnumerable<Message>)
-                where message.content != null
-                let trimmedMessage = message.content.ToLower().Trim(charToRemove)
-                from word in trimmedMessage.Split()
-                let decodedWord = DecodeString(word)
-                where decodedWord.Length >= 3
-                group decodedWord by decodedWord into groupedWords
-                orderby groupedWords.Count()
-                select groupedWords;
-
-            SortedWordsByFrequents = sortedWords.Reverse().ToList();
-            WordsAppearedMoreThanOneTime = SortedWordsByFrequents.Where(x => x.Count() >= 2).ToList();
-        }
-
-        private static string DecodeString(string text)
-        {
-            Encoding targetEncoding = Encoding.GetEncoding("ISO-8859-1");
-            try
-            {
-                var s = Regex.Unescape(text);
-                return Encoding.UTF8.GetString(targetEncoding.GetBytes(s));
-            }
-            catch
-            {
-                return text;
-            }
         }
     }
 }

@@ -111,8 +111,6 @@ namespace MessageCounterFrontend
 
         private void CheckBoxWords_Checked(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Not implemented yet!");
-            return;
             ChangeStatesOfCheckBoxes();
             if (statsContainer.MessagesContainer == null)
                 statsContainer.MakeMessagesContainer();

@@ -32,7 +32,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
         private void SortPeople(ref List<Person> people)
         {
-            people = people.OrderBy(x => x.NumberOfMessages).ToList();
+            people = people.OrderBy(x => x.PersonMessages.NumberOfMessages).ToList();
             people.Reverse(); // from now, sortedPeople containes people sorted
                                     // by number of messages (top - max number)
         }
@@ -82,7 +82,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
                 var block = new TextBlock()
                 {
-                    Text = $"{p.NumberOfMessages} ({ratioString}%)",   // 56% of this conversation
+                    Text = $"{p.PersonMessages.NumberOfMessages} ({ratioString}%)",   // 56% of this conversation
                     HorizontalAlignment = HorizontalAlignment.Right,
                     FontWeight = FontWeights.SemiBold
                 };
