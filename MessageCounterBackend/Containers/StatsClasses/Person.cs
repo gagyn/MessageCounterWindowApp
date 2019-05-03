@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace MessageCounterBackend.StatContainers.ListTypesClasses
 {
@@ -15,6 +16,7 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
         public Day MostActiveDate { get; private set; }
         public double AvgNumberOfMessageInDaysWhenUserWroteAny { get; private set; }
         public List<IGrouping<string, string>> SortedWordsByFrequents { get; private set; }
+        public List<IGrouping<string, string>> WordsAppearedMoreThanOneTime { get; private set; }
 
         private List<Message> Messages { get; set; }
 
@@ -23,7 +25,7 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
             this.FullName = DecodeString(fullName);
 
             // all parameters are for safely
-            SetMessages(fullName, allMessages);
+            SetMessages(this.FullName, allMessages);
             SetDays(this.Messages);
             SetDoubleNumbers(allMessages.Count, NumberOfMessages, DaysWhenUserWrittenSomething.Days.Count);
             SetFavoriteWord(this.Messages);
@@ -70,10 +72,17 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
 
         private void SetFavoriteWord(List<Message> userMessages)
         {
+            Char[] charToRemove = 
+                { '~', '`', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=',
+                '{', '[', '}', ']', ':', ';', '"', '\'', '|', '\\', '<', ',', '>', '.', '?', '/' };
+                // I make it in this way, bcs I want to remove only special characters,
+                // but not special leters in different langs (like: 'Ą','Ź')
+
             var sortedWords =
                 from message in (userMessages as IEnumerable<Message>)
                 where message.content != null
-                from word in message.content.Split()
+                let trimmedMessage = message.content.ToLower().Trim(charToRemove)
+                from word in trimmedMessage.Split()
                 let decodedWord = DecodeString(word)
                 where decodedWord.Length >= 3
                 group decodedWord by decodedWord into groupedWords
@@ -81,12 +90,21 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
                 select groupedWords;
 
             SortedWordsByFrequents = sortedWords.Reverse().ToList();
+            WordsAppearedMoreThanOneTime = SortedWordsByFrequents.Where(x => x.Count() >= 2).ToList();
         }
 
         private static string DecodeString(string text)
         {
             Encoding targetEncoding = Encoding.GetEncoding("ISO-8859-1");
-            return Encoding.UTF8.GetString(targetEncoding.GetBytes(text));
+            try
+            {
+                var s = Regex.Unescape(text);
+                return Encoding.UTF8.GetString(targetEncoding.GetBytes(s));
+            }
+            catch
+            {
+                return text;
+            }
         }
     }
 }
