@@ -30,18 +30,18 @@ namespace MessageCounterBackend.Containers.Helpers_classes
         {
             Char[] charToRemove =
                 { '~', '`', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=',
-            '{', '[', '}', ']', ':', ';', '"', '\'', '|', '\\', '<', ',', '>', '.', '?', '/' };
+            '{', '[', '}', ']', ':', ';', '\"', '\'', '|', '\\', '<', ',', '>', '.', '?', '/', '\u201e', '\u201d' };
             // I make it in this way, bcs I want to remove only special characters,
             // but not special leters in different langs (like: 'Ą','Ź')
 
             var sortedWords =
                 from message in (this.messages as IEnumerable<Message>)
                 where message.content != null
-                let trimmedMessage = message.content.Trim(charToRemove)
-                from word in trimmedMessage.Split()
-                let decodedWord = word.DecodeString().ToLower()
-                where decodedWord.Length >= 3
-                group decodedWord by decodedWord into groupedWords
+                let decodedLowerMessage = message.content.DecodeString().ToLower()
+                from word in decodedLowerMessage.Split()
+                let trimmedWord = word.Trim(charToRemove)
+                where trimmedWord.Length >= MinLenghtOfWords
+                group trimmedWord by trimmedWord into groupedWords
                 orderby groupedWords.Count()
                 select groupedWords;
 
