@@ -20,7 +20,6 @@ namespace MessageCounterFrontend
         public MainWindow()
         {
             InitializeComponent();
-            MainWrapPanel = new WrapPanel();
 
             var args = Environment.GetCommandLineArgs();
 
@@ -33,17 +32,13 @@ namespace MessageCounterFrontend
 
                 UpdateMainPanel();
                 ChangeStatesOfCheckBoxes();
+                closeTheFile.IsEnabled = true;
             }
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
-        }
-
-        private void CloseWindows_Click_1(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void SingleFile_Click(object sender, RoutedEventArgs e)
@@ -58,19 +53,16 @@ namespace MessageCounterFrontend
                 return;
             }
 
-            MainWrapPanel.Children.Clear();
-
-            WrapPanelMaker.IncludePeople = WrapPanelMaker.IncludeDays
-                = WrapPanelMaker.IncludeMessages = false;
-
             if (false == CreateStatsContainer(fileContent))
                 return;
 
+            ResetStatesOfVariables();
             UpdateMainPanel();
-            checkBoxPeople.IsChecked = checkBoxDays.IsChecked = checkBoxWords.IsChecked = false;
 
             if (false == checkBoxPeople.IsEnabled)
                 ChangeStatesOfCheckBoxes();
+
+            closeTheFile.IsEnabled = true;
         }
 
         private bool CreateStatsContainer(string fileContent) // returns false, when file is incorrect
@@ -85,6 +77,17 @@ namespace MessageCounterFrontend
                 return false;
             }
             return true;
+        }
+
+        private void ResetStatesOfVariables()
+        {
+            WrapPanelMaker.IncludePeople
+                = WrapPanelMaker.IncludeDays
+                = WrapPanelMaker.IncludeMessages = false;
+
+            checkBoxPeople.IsChecked 
+                = checkBoxDays.IsChecked 
+                = checkBoxWords.IsChecked = false;
         }
 
         private void CheckBoxPeople_Checked(object sender, RoutedEventArgs e)
@@ -122,7 +125,7 @@ namespace MessageCounterFrontend
 
         private void UpdateMainPanel()
         {
-            MainWrapPanel = WrapPanelMaker.PrepareStatsToString(statsContainer);
+            MainWrapPanel = WrapPanelMaker.MakeStatsWrapPanel(statsContainer);
             UpdateLayout();
         }
 
@@ -148,6 +151,15 @@ namespace MessageCounterFrontend
         private void CheckBoxWords_Unchecked(object sender, RoutedEventArgs e)
         {
             WrapPanelMaker.IncludeMessages = false;
+            UpdateMainPanel();
+        }
+
+        private void CloseTheFile_Click(object sender, RoutedEventArgs e)
+        {
+            closeTheFile.IsEnabled = false;
+            ChangeStatesOfCheckBoxes();
+            ResetStatesOfVariables();
+            statsContainer = null;
             UpdateMainPanel();
         }
     }

@@ -11,7 +11,7 @@ namespace MessageCounterFrontend.InterfaceBackend
         public static bool IncludeDays { get; set; }
         public static bool IncludeMessages { get; set; }
 
-        public static WrapPanel PrepareStatsToString(StatsContainer statsContainer)
+        public static WrapPanel MakeStatsWrapPanel(StatsContainer statsContainer)
         {
             var panel = new WrapPanel();
 
