@@ -8,26 +8,55 @@ namespace MessageCounterBackend.Containers.Helpers_classes
     /// <summary>
     /// Group words, then sorts by frequents of appearing, set result to SortedWordsByFrequents.
     /// </summary>
-    internal class SortedWordsGroupListMaker
+    public class SortedWordsGroupListMaker
     {
         /// <summary>
         /// Words, which are SHORTER, will NOT be included in the list.
         /// </summary>
-        public int MinLenghtOfWords { get; set; } = 3;
+        public static int MinLenghtOfWords
+        {
+            get => minLenghtOfWords;
+            set
+            {
+                if (value > 0)
+                    minLenghtOfWords = value;
+                else
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
         /// <summary>
-        /// Words, which appeared LESS, will NOT be included in this list.
+        /// Words, which appeared LESS times, will NOT be included in this list.
         /// </summary>
-        public int MinAppearsTimesOfWord { get; set; } = 2;
+        public static int MinAppearsTimesOfWord
+        {
+            get => minAppearsTimesOfWord;
+            set
+            {
+                if (value > 0)
+                    minAppearsTimesOfWord = value;
+                else
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
         /// <summary>
         /// Sorted list with all words, which meet the conditions (default: minlenght = 3; minAppearsTimes = 2)
         /// </summary>
         public List<IGrouping<string, string>> SortedWordsByFrequents { get => SortedWords(); }
 
-        private List<Message> messages;
+        private static int minAppearsTimesOfWord;
+        private static int minLenghtOfWords;
+        private readonly List<Message> messages;
 
+        static SortedWordsGroupListMaker() => SetDefaultValues();
         public SortedWordsGroupListMaker(List<Message> messages) => this.messages = messages;
+
+        public static void SetDefaultValues()
+        {
+            minLenghtOfWords = 3;
+            minAppearsTimesOfWord = 2;
+        }
 
         private List<IGrouping<string, string>> SortedWords()
         {

@@ -21,13 +21,17 @@ namespace MessageCounterBackend
 
         private readonly JsonStructureClass jsonObject;
 
-        public StatsContainer(string fileContent)
-        {
-            this.jsonObject = JsonConvert.DeserializeObject<JsonStructureClass>(fileContent);
-        }
+        public StatsContainer(string fileContent) 
+            => this.jsonObject = JsonConvert.DeserializeObject<JsonStructureClass>(fileContent);
 
         public void MakeMessagesContainer() => this.MessagesContainer = new MessagesContainer(jsonObject);
         public void MakeDaysContainer() => this.DaysContainer = new DaysContainer(jsonObject);
         public void MakePeopleContainer() => this.PeopleContainer = new PeopleContainer(jsonObject);
+        public void ResetContainers()
+        {
+            MessagesContainer = null;
+            DaysContainer = null;
+            PeopleContainer = null;
+        }
     }
 }

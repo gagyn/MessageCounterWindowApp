@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using MessageCounterBackend;
+using MessageCounterBackend.Containers.Helpers_classes;
 using MessageCounterFrontend.InterfaceBackend;
 using MessageCounterFrontend.SettingsWindows;
 
@@ -11,12 +13,13 @@ namespace MessageCounterFrontend
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MessageCounterBackend.StatsContainer statsContainer;
+        private StatsContainer statsContainer;
         private WrapPanel MainWrapPanel
         {
             get => scrollViewer.Content as WrapPanel;
             set => scrollViewer.Content = value;
         }
+        private bool IsAnyFileOpened { get => statsContainer != null; }
 
         public MainWindow()
         {
@@ -67,7 +70,7 @@ namespace MessageCounterFrontend
         {
             try
             {
-                statsContainer = new MessageCounterBackend.StatsContainer(fileContent);
+                statsContainer = new StatsContainer(fileContent);
             }
             catch
             {
@@ -163,17 +166,60 @@ namespace MessageCounterFrontend
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
+            while (true)
+            {
+                var window = CreateNewSettingsWindow();
+
+                if (false == window.ShowDialog())
+                    break;
+
+                var newValues = window.NewValues;
+
+                if (null == newValues)
+                    SortedWordsGroupListMaker.SetDefaultValues();
+                else
+                {
+                    try
+                    {
+                        (SortedWordsGroupListMaker.MinLenghtOfWords, SortedWordsGroupListMaker.MinAppearsTimesOfWord)
+                            = newValues.Value;
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+
+                if (IsAnyFileOpened)
+                {
+                    string message = "Settings will be changed after reloading the file. Do you want reload now?";
+                    var result = MessageBox.Show(this, message, "Question", MessageBoxButton.YesNo);
+
+                    if (result == MessageBoxResult.Yes)
+                        ReloadFile();
+                }                
+                break;
+            }
+        }
+
+        private WordsSettings CreateNewSettingsWindow()
+        {
             var window = new WordsSettings()
             {
                 Owner = this
             };
-            window.ShowDialog();
 
-            if (false == window.DialogResult)
-                return;
+            window.minLenght.Text = SortedWordsGroupListMaker.MinLenghtOfWords.ToString();
+            window.minAppearsTimes.Text = SortedWordsGroupListMaker.MinAppearsTimesOfWord.ToString();
 
-            var newValues = window.NewValues;
+            return window;
+        }
 
+        private void ReloadFile()
+        {
+            ResetStatesOfVariables();
+            statsContainer.ResetContainers();
+            UpdateMainPanel();
         }
     }
 }
