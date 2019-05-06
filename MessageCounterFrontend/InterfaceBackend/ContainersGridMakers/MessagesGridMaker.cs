@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using MessageCounterBackend.StatContainers;
-using MessageCounterBackend.StatContainers.ListTypesClasses;
 
 namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 {
@@ -22,8 +18,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
             return new Grid[]
             {
-                MakeLeftSide(messagesContainer),
-                //MakeRightSide(messagesContainer)
+                MakeLeftSide(messagesContainer)
             };
         }
 
@@ -38,18 +33,11 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
                 {
                     Text = word.Count().ToString() + " ==> " + word.Key
                 });
+
                 grid.RowDefinitions.Add(new RowDefinition());
                 Grid.SetRow(grid.Children[i], i);
             }
             return grid;
         }
-
-        //private Grid MakeRightSide(MessagesContainer container)
-        //{
-        //    Grid grid = new Grid();
-
-
-        //    return grid;
-        //}
     }
 }
