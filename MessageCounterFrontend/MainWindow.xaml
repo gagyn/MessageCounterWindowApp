@@ -14,8 +14,8 @@
                     <Separator />
                     <MenuItem Header="_Exit" Click="MenuItem_Click" />
                 </MenuItem>
-                <MenuItem Header="Settings" IsEnabled="False">
-                    <MenuItem Header="_Words settings" IsEnabled="False" />
+                <MenuItem Header="Settings">
+                    <MenuItem Header="_Words settings" Click="MenuItem_Click_1" />
                 </MenuItem>
             </Menu>
         </DockPanel>

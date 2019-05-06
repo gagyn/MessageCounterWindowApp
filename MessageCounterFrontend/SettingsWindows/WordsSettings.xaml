@@ -1,0 +1,23 @@
+﻿<base:SettingsWindow
+        xmlns:base="clr-namespace:MessageCounterFrontend.SettingsWindows"
+        x:Class="MessageCounterFrontend.SettingsWindows.WordsSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MessageCounterFrontend.SettingsWindows"
+        mc:Ignorable="d" 
+        Height="250" Width="400" 
+        ResizeMode="NoResize" WindowStyle="None"
+        WindowStartupLocation="CenterOwner"
+        BorderThickness="4">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="91,33,0,0" TextWrapping="Wrap" Text="Include only words, which..." VerticalAlignment="Top" Width="148"/>
+        <TextBlock HorizontalAlignment="Left" Margin="85,64,0,0" TextWrapping="Wrap" Text="...have more characters than: " VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="40,95,0,0" TextWrapping="Wrap" Text="...have been written more times than: " VerticalAlignment="Top"/>
+        <TextBox x:Name="minLenght" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Margin="244,62,0,0"/>
+        <TextBox x:Name="minAppearsTimes" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Margin="244,93,0,0"/>
+        <Button x:Name="saveAndExitButton" Content="Save changes and close" HorizontalAlignment="Left" Margin="49,159,0,0" VerticalAlignment="Top" Width="139" Click="SaveAndExitButton_Click"/>
+        <Button x:Name="cancelButton" Content="Discard changes" HorizontalAlignment="Left" Margin="219,159,0,0" VerticalAlignment="Top" Width="101" Click="CancelButton_Click"/>
+    </Grid>
+</base:SettingsWindow>

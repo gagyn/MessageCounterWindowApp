@@ -19,7 +19,11 @@ namespace MessageCounterBackend.StatContainers
         public MessagesContainer(List<Message> messages)
         {
             this.Messages = messages;
-            SortedWordsByFrequents = (new MostFrequentsWords(this.Messages)).SortedWordsByFrequents;
+            var sorter = new SortedWordsGroupListMaker(this.Messages)
+            {
+                // TODO: reading settings from file
+            };
+            SortedWordsByFrequents = sorter.SortedWordsByFrequents;
         }
     }
 }

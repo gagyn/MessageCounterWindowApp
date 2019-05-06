@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using MessageCounterFrontend.InterfaceBackend;
+using MessageCounterFrontend.SettingsWindows;
 
 namespace MessageCounterFrontend
 {
@@ -36,10 +37,7 @@ namespace MessageCounterFrontend
             }
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e) => Close();
 
         private void SingleFile_Click(object sender, RoutedEventArgs e)
         {
@@ -161,6 +159,21 @@ namespace MessageCounterFrontend
             ResetStatesOfVariables();
             statsContainer = null;
             UpdateMainPanel();
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            var window = new WordsSettings()
+            {
+                Owner = this
+            };
+            window.ShowDialog();
+
+            if (false == window.DialogResult)
+                return;
+
+            var newValues = window.NewValues;
+
         }
     }
 }

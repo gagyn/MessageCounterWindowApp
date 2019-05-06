@@ -5,7 +5,10 @@ using System.Linq;
 
 namespace MessageCounterBackend.Containers.Helpers_classes
 {
-    internal class MostFrequentsWords
+    /// <summary>
+    /// Group words, then sorts by frequents of appearing, set result to SortedWordsByFrequents.
+    /// </summary>
+    internal class SortedWordsGroupListMaker
     {
         /// <summary>
         /// Words, which are SHORTER, will NOT be included in the list.
@@ -24,7 +27,7 @@ namespace MessageCounterBackend.Containers.Helpers_classes
 
         private List<Message> messages;
 
-        public MostFrequentsWords(List<Message> messages) => this.messages = messages;
+        public SortedWordsGroupListMaker(List<Message> messages) => this.messages = messages;
 
         private List<IGrouping<string, string>> SortedWords()
         {
