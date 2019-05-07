@@ -25,11 +25,19 @@ namespace MessageCounterFrontend
         {
             InitializeComponent();
 
+            try
+            {
+                var reader = new FileReader(FileReader.SettingsFilePath);
+                reader.ReadSettings();
+                reader.Close();
+            }
+            catch { }
+
             var args = Environment.GetCommandLineArgs();
 
             if (args.Length > 1)
             {
-                string fileContent = new ReadFile(args[1]).Read();
+                string fileContent = new FileReaderWithDialog(args[1]).Read();
 
                 if (false == CreateStatsContainer(fileContent))
                     return;
@@ -47,7 +55,7 @@ namespace MessageCounterFrontend
             string fileContent;
             try
             {
-                fileContent = new ReadFile().Read();
+                fileContent = new FileReaderWithDialog().Read();
             }
             catch
             {
@@ -188,6 +196,17 @@ namespace MessageCounterFrontend
                     {
                         continue;
                     }
+                }
+
+                try
+                {
+                    var writer = new FileWriter(FileWriter.SettingsFilePath);
+                    writer.WriteSortedWordsGroup();
+                    writer.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Problem with file. Settings hasn't been saved.");
                 }
 
                 if (IsAnyFileOpened)

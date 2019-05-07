@@ -80,6 +80,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InterfaceBackend\FileReader.cs" />
+    <Compile Include="InterfaceBackend\FileReaderWithDialog.cs" />
+    <Compile Include="InterfaceBackend\FileWriter.cs" />
     <Compile Include="SettingsWindows\SettingsWindow.cs" />
     <Compile Include="SettingsWindows\WordsSettings.xaml.cs">
       <DependentUpon>WordsSettings.xaml</DependentUpon>
@@ -97,7 +100,6 @@
     <Compile Include="InterfaceBackend\ContainersGridMakers\GridMaker.cs" />
     <Compile Include="InterfaceBackend\ContainersGridMakers\MessagesGridMaker.cs" />
     <Compile Include="InterfaceBackend\ContainersGridMakers\PeopleGridMaker.cs" />
-    <Compile Include="InterfaceBackend\ReadFile.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

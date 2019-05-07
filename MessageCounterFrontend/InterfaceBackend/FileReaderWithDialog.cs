@@ -6,11 +6,11 @@ using System.Text;
 
 namespace MessageCounterFrontend.InterfaceBackend
 {
-    internal class ReadFile
+    internal class FileReaderWithDialog
     {
         private readonly string fileName;
 
-        public ReadFile()
+        public FileReaderWithDialog()
         {
             var openFileD = new OpenFileDialog();
             if (openFileD.ShowDialog() == true)
@@ -18,7 +18,7 @@ namespace MessageCounterFrontend.InterfaceBackend
             else
                 throw new Exception("CanceledByUser");
         }
-        public ReadFile(string fileName) => this.fileName = fileName;
+        public FileReaderWithDialog(string fileName) => this.fileName = fileName;
 
         public string Read() => new StreamReader(fileName).ReadToEnd();
     }
