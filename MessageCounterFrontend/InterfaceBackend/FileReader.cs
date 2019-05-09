@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace MessageCounterFrontend.InterfaceBackend
 {
-    class FileReader
+    class FileReader : IDisposable
     {
         public static string SettingsFilePath { get; } = "settings.config";
 
-        private StreamReader reader;
+        protected StreamReader reader;
+        private bool disposed = false;
 
+        protected FileReader() { }
         public FileReader(string path) => reader = new StreamReader(path);
         public string Read() => reader.ReadLine();
         public void ReadSettings()
@@ -21,11 +23,22 @@ namespace MessageCounterFrontend.InterfaceBackend
             SortedWordsGroupListMaker.MinLenghtOfWords = int.Parse(this.Read());
             SortedWordsGroupListMaker.MinAppearsTimesOfWord = int.Parse(this.Read());
         }
-        public void Close()
+
+        public void Dispose()
         {
-            if (null != reader)
-                reader.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
-        ~FileReader() => Close();
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed && disposing)
+            {
+                this.reader.Dispose();
+            }
+            this.disposed = true;
+        }
+
+        ~FileReader() => this.Dispose();
     }
 }

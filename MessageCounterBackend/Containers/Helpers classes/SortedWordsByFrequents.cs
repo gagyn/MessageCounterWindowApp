@@ -55,7 +55,7 @@ namespace MessageCounterBackend.Containers.Helpers_classes
         public static void SetDefaultValues()
         {
             minLenghtOfWords = 3;
-            minAppearsTimesOfWord = 2;
+            minAppearsTimesOfWord = 5;
         }
 
         private List<IGrouping<string, string>> SortedWords()

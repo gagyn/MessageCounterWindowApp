@@ -27,9 +27,8 @@ namespace MessageCounterFrontend
 
             try
             {
-                var reader = new FileReader(FileReader.SettingsFilePath);
-                reader.ReadSettings();
-                reader.Close();
+                using (var reader = new FileReader(FileReader.SettingsFilePath))
+                    reader.ReadSettings();
             }
             catch { }
 
@@ -37,7 +36,10 @@ namespace MessageCounterFrontend
 
             if (args.Length > 1)
             {
-                string fileContent = new FileReaderWithDialog(args[1]).Read();
+                string fileContent;
+
+                using (var reader = new FileReaderWithDialog(args[1]))
+                    fileContent = reader.ReadAll();
 
                 if (false == CreateStatsContainer(fileContent))
                     return;
@@ -55,7 +57,8 @@ namespace MessageCounterFrontend
             string fileContent;
             try
             {
-                fileContent = new FileReaderWithDialog().Read();
+                using (var reader = new FileReaderWithDialog())
+                    fileContent = reader.ReadAll();
             }
             catch
             {

@@ -1,25 +1,21 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace MessageCounterFrontend.InterfaceBackend
 {
-    internal class FileReaderWithDialog
+    internal class FileReaderWithDialog : FileReader
     {
-        private readonly string fileName;
-
-        public FileReaderWithDialog()
+        public FileReaderWithDialog() : base()
         {
             var openFileD = new OpenFileDialog();
             if (openFileD.ShowDialog() == true)
-                this.fileName = openFileD.FileName;
+                base.reader = new StreamReader(openFileD.FileName);
             else
                 throw new Exception("CanceledByUser");
         }
-        public FileReaderWithDialog(string fileName) => this.fileName = fileName;
+        public FileReaderWithDialog(string path) : base(path) { }
 
-        public string Read() => new StreamReader(fileName).ReadToEnd();
+        public string ReadAll() => base.reader.ReadToEnd();
     }
 }
