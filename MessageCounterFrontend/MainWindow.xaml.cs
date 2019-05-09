@@ -5,6 +5,7 @@ using MessageCounterBackend;
 using MessageCounterBackend.Containers.Helpers_classes;
 using MessageCounterFrontend.InterfaceBackend;
 using MessageCounterFrontend.SettingsWindows;
+using MessageCounterFrontend.InterfaceBackend.FileOperators;
 
 namespace MessageCounterFrontend
 {
@@ -27,7 +28,7 @@ namespace MessageCounterFrontend
 
             try
             {
-                using (var reader = new FileReader(FileReader.SettingsFilePath))
+                using (var reader = new SettingsFileReader(SettingsFileReader.SettingsFilePath))
                     reader.ReadSettings();
             }
             catch { }
@@ -203,9 +204,8 @@ namespace MessageCounterFrontend
 
                 try
                 {
-                    var writer = new FileWriter(FileWriter.SettingsFilePath);
-                    writer.WriteSortedWordsGroup();
-                    writer.Close();
+                    using (var writer = new SettingsFileWriter(SettingsFileWriter.SettingsFilePath))
+                        writer.WriteSettings();
                 }
                 catch
                 {

@@ -6,7 +6,7 @@ namespace MessageCounterFrontend.InterfaceBackend
 {
     internal class FileReaderWithDialog : FileReader
     {
-        public FileReaderWithDialog() : base()
+        public FileReaderWithDialog()
         {
             var openFileD = new OpenFileDialog();
             if (openFileD.ShowDialog() == true)
