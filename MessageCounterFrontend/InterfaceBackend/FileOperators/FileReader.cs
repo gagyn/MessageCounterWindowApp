@@ -6,10 +6,14 @@ namespace MessageCounterFrontend.InterfaceBackend
     class FileReader : IDisposable
     {
         protected StreamReader reader;
-        private bool disposed = false;
+        private bool disposed = true;
 
         protected FileReader() { }
-        public FileReader(string path) => reader = new StreamReader(path);
+        public FileReader(string path)
+        {
+            reader = new StreamReader(path);
+            disposed = false;
+        }
 
         public string ReadLine() => reader.ReadLine();
 

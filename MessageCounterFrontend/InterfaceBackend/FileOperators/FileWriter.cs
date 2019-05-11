@@ -6,9 +6,13 @@ namespace MessageCounterFrontend.InterfaceBackend
     class FileWriter : IDisposable
     {
         private readonly StreamWriter writer;
-        private bool disposed = false;
+        private bool disposed = true;
 
-        public FileWriter(string path) => writer = new StreamWriter(path);
+        public FileWriter(string path)
+        {
+            writer = new StreamWriter(path);
+            disposed = false;
+        }
 
         public void Write(string content) => writer.WriteLine(content);
         

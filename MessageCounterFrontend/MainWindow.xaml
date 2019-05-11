@@ -14,8 +14,12 @@
                     <Separator />
                     <MenuItem Header="_Exit" Click="MenuItem_Click" />
                 </MenuItem>
-                <MenuItem Header="Settings">
+                <MenuItem Header="_Settings">
                     <MenuItem Header="_Words settings" Click="MenuItem_Click_1" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_Link to facebook data downloading page" Click="LinkToDataDownloadingPage" />
+                    <MenuItem Header="_About app" IsEnabled="False" />
                 </MenuItem>
             </Menu>
         </DockPanel>

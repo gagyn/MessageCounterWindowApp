@@ -243,5 +243,8 @@ namespace MessageCounterFrontend
             statsContainer.ResetContainers();
             UpdateMainPanel();
         }
+
+        private void LinkToDataDownloadingPage(object sender, RoutedEventArgs e) 
+            => System.Diagnostics.Process.Start("https://www.facebook.com/settings?tab=your_facebook_information");
     }
 }
