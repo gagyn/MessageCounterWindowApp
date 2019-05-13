@@ -36,5 +36,11 @@ namespace MessageCounterFrontend.SettingsWindows
             var regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void TextBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Paste)
+                e.Handled = true;
+        }
     }
 }

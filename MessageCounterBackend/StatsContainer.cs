@@ -12,7 +12,7 @@ namespace MessageCounterBackend
     /// </summary>
     public class StatsContainer
     {
-        public MessagesContainer MessagesContainer { get; set; }
+        public MessagesContainer WordsContainer { get; set; }
         public DaysContainer DaysContainer { get; set; }
         public PeopleContainer PeopleContainer { get; set; }
 
@@ -24,12 +24,12 @@ namespace MessageCounterBackend
         public StatsContainer(string fileContent) 
             => this.jsonObject = JsonConvert.DeserializeObject<JsonStructureClass>(fileContent);
 
-        public void MakeMessagesContainer() => this.MessagesContainer = new MessagesContainer(jsonObject);
+        public void MakeWordsContainer() => this.WordsContainer = new MessagesContainer(jsonObject);
         public void MakeDaysContainer() => this.DaysContainer = new DaysContainer(jsonObject);
         public void MakePeopleContainer() => this.PeopleContainer = new PeopleContainer(jsonObject);
         public void ResetContainers()
         {
-            MessagesContainer = null;
+            WordsContainer = null;
             DaysContainer = null;
             PeopleContainer = null;
         }

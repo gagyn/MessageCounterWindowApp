@@ -15,8 +15,12 @@
         <TextBlock HorizontalAlignment="Left" Margin="91,33,0,0" TextWrapping="Wrap" Text="Include only words, which..." VerticalAlignment="Top" Width="148"/>
         <TextBlock HorizontalAlignment="Left" Margin="85,64,0,0" TextWrapping="Wrap" Text="...have more characters than: " VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="40,95,0,0" TextWrapping="Wrap" Text="...have been written more times than: " VerticalAlignment="Top"/>
-        <TextBox x:Name="minLenght" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Margin="244,62,0,0" PreviewTextInput="TextBox_PreviewTextInput" MaxLength="4"/>
-        <TextBox x:Name="minAppearsTimes" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Margin="244,93,0,0" PreviewTextInput="TextBox_PreviewTextInput" MaxLength="6"/>
+        
+        <TextBox x:Name="minLenght" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Margin="244,62,0,0"
+                 PreviewTextInput="TextBox_PreviewTextInput" MaxLength="4" ContextMenu="{x:Null}" CommandManager.PreviewExecuted="TextBox_PreviewExecuted"/>
+        <TextBox x:Name="minAppearsTimes" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Margin="244,93,0,0" 
+                 PreviewTextInput="TextBox_PreviewTextInput" MaxLength="6" ContextMenu="{x:Null}" CommandManager.PreviewExecuted="TextBox_PreviewExecuted"/>
+        
         <Button x:Name="saveAndExitButton" Content="Save changes and close" HorizontalAlignment="Left" Margin="45,179,0,0" VerticalAlignment="Top" Width="139" Click="SaveAndExitButton_Click"/>
         <Button x:Name="cancelButton" Content="Discard changes" HorizontalAlignment="Left" Margin="210,179,0,0" VerticalAlignment="Top" Width="101" Click="CancelButton_Click"/>
         <Button x:Name="resetToDefault" Content="Reset to default" HorizontalAlignment="Left" Margin="230,125,0,0" VerticalAlignment="Top" Width="90" Click="ResetToDefault_Click"/>

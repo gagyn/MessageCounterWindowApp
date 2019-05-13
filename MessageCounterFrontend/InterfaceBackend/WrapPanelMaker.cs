@@ -9,7 +9,7 @@ namespace MessageCounterFrontend.InterfaceBackend
     {
         public static bool IncludePeople { get; set; }
         public static bool IncludeDays { get; set; }
-        public static bool IncludeMessages { get; set; }
+        public static bool IncludeWords { get; set; }
 
         public static WrapPanel MakeStatsWrapPanel(StatsContainer statsContainer)
         {
@@ -28,9 +28,9 @@ namespace MessageCounterFrontend.InterfaceBackend
                 panel.Children.Add(
                     new DaysGridMaker(statsContainer.DaysContainer).Grid);
 
-            if (IncludeMessages)
+            if (IncludeWords)
                 panel.Children.Add(
-                    new MessagesGridMaker(statsContainer.MessagesContainer).Grid);
+                    new MessagesGridMaker(statsContainer.WordsContainer).Grid);
 
             return panel;
         }
