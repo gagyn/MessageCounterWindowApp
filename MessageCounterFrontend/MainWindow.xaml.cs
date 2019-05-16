@@ -5,6 +5,8 @@ using MessageCounterBackend.Containers.Helpers_classes;
 using MessageCounterFrontend.InterfaceBackend;
 using MessageCounterFrontend.SettingsWindows;
 using MessageCounterFrontend.InterfaceBackend.FileOperators;
+using System.IO;
+using MessageCounterFrontend.InfoWindows;
 
 namespace MessageCounterFrontend
 {
@@ -31,51 +33,57 @@ namespace MessageCounterFrontend
             var args = Environment.GetCommandLineArgs();
 
             if (args.Length > 1)
-            {
-                try
-                {
-                    using (var reader = new FileReaderWithDialog(args[1]))
-                    {
-                        var fileContent = reader.ReadAll();
-                        var stats = CreateStatsContainer(fileContent);
-                        this.statsPage = new MainPage(this, stats);
-                    }
-
-                }
-                catch
-                {
-                    //TODO: catch
-                    return;
-                }
-
-                closeTheFile.IsEnabled = true;
-                mainFrame.Navigate(statsPage);
-            }
+                TryToLoadTheFile(args);
         }
 
-        private void Exit_Click(object sender, RoutedEventArgs e) => Close();
+        private void OpenFile_Click(object sender, RoutedEventArgs e) => TryToLoadTheFile();
 
-        private void SingleFile_Click(object sender, RoutedEventArgs e)
+        private void TryToLoadTheFile() => TryToLoadTheFile(null);
+        private void TryToLoadTheFile(string[] args)
         {
-            string fileContent;
             try
             {
-                using (var reader = new FileReaderWithDialog())
-                    fileContent = reader.ReadAll();
+                string fileContent;
 
-                var stats = CreateStatsContainer(fileContent);
+                if (null == args)   // if from OpenFile_Click
+                    using (var reader = new FileReaderWithDialog())
+                        fileContent = reader.ReadAll();     // IOException
+
+                else                // if from command line args
+                    using (var reader = new FileReaderWithDialog(args[1]))
+                        fileContent = reader.ReadAll();     // IOException
+
+                var stats = CreateStatsContainer(fileContent);   // Newtonsoft.Json.JsonReaderException
                 this.statsPage = new MainPage(this, stats);
+                    
             }
-            catch
+            catch (Exception e)
             {
-                return;
+                HandleExceptionsWhileLoading(e);
             }
 
             closeTheFile.IsEnabled = true;
             mainFrame.Navigate(statsPage);
         }
 
-        private StatsContainer CreateStatsContainer(string fileContent) // returns false, when file is incorrect
+        private void HandleExceptionsWhileLoading(Exception e)
+        {
+            if (e is IOException)
+                MessageBox.Show("Problem with opening the file: " + e.Message);
+
+            else if (e is Newtonsoft.Json.JsonSerializationException)
+                return;
+
+            else if (e is CanceledByUserException)
+                return;
+
+            else
+                MessageBox.Show("Unknown problem: " + e.Message);
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e) => Close();
+
+        private StatsContainer CreateStatsContainer(string fileContent) // throw exception, when file is incorrect
         {
             try
             {
@@ -157,11 +165,9 @@ namespace MessageCounterFrontend
         }
 
         private void LinkToDataDownloadingPage_Click(object sender, RoutedEventArgs e) 
-            => System.Diagnostics.Process.Start("https://www.facebook.com/settings?tab=your_facebook_information");
+            => System.Diagnostics.Process.Start(Instructions.LinkToDownloadSite);
 
-        private void OpenInstructions_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void OpenInstructions_Click(object sender, RoutedEventArgs e) 
+            => mainFrame.Navigate(new Instructions());
     }
 }

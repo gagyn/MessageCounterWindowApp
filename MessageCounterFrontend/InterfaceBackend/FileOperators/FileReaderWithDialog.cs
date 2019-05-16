@@ -4,6 +4,11 @@ using System.IO;
 
 namespace MessageCounterFrontend.InterfaceBackend
 {
+    class CanceledByUserException : Exception
+    {
+
+    }
+
     internal class FileReaderWithDialog : FileReader
     {
         public FileReaderWithDialog()
@@ -12,7 +17,7 @@ namespace MessageCounterFrontend.InterfaceBackend
             if (openFileD.ShowDialog() == true)
                 base.reader = new StreamReader(openFileD.FileName);
             else
-                throw new Exception("CanceledByUser");
+                throw new CanceledByUserException();
         }
         public FileReaderWithDialog(string path) : base(path) { }
 

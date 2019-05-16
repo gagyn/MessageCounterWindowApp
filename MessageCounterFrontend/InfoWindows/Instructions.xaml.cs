@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace MessageCounterFrontend.InfoWindows
@@ -9,15 +8,17 @@ namespace MessageCounterFrontend.InfoWindows
     /// </summary>
     public partial class Instructions : Page
     {
+        public static readonly string LinkToDownloadSite = "https://www.facebook.com/settings?tab=your_facebook_information";
+
         public Instructions()
         {
             InitializeComponent();
         }
 
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e) 
-            => System.Diagnostics.Process.Start(e.Uri.AbsoluteUri);
-
         private void ReturnButton_Click(object sender, System.Windows.RoutedEventArgs e)
             => NavigationService.GoBack();
+
+        private void Hyperlink_Click(object sender, System.Windows.RoutedEventArgs e) 
+            => System.Diagnostics.Process.Start(LinkToDownloadSite);
     }
 }
