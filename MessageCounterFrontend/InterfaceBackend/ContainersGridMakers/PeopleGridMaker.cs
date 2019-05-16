@@ -16,6 +16,9 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
         protected override Grid[] MakeGrids(Container container)
         {
+            if (null == container)
+                throw new ArgumentNullException();
+
             if (!(container is PeopleContainer peopleContainer)) 
                 throw new ArgumentException();  // if container isn't for people
 

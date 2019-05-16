@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using MessageCounterBackend;
 using MessageCounterBackend.Containers.Helpers_classes;
 using MessageCounterFrontend.InterfaceBackend;
 using MessageCounterFrontend.SettingsWindows;
 using MessageCounterFrontend.InterfaceBackend.FileOperators;
+using System.IO;
+using MessageCounterFrontend.InfoWindows;
 
 namespace MessageCounterFrontend
 {
@@ -14,19 +15,15 @@ namespace MessageCounterFrontend
     /// </summary>
     public partial class MainWindow : Window
     {
-        private StatsContainer statsContainer;
-        private WrapPanel MainWrapPanel
-        {
-            get => scrollViewer.Content as WrapPanel;
-            set => scrollViewer.Content = value;
-        }
-        private bool IsAnyFileOpened { get => statsContainer != null; }
+        private MainPage statsPage;
+
+        private bool IsAnyFileOpened { get => this.statsPage != null; }
 
         public MainWindow()
         {
             InitializeComponent();
 
-            try
+            try  // Reading settings file
             {
                 using (var reader = new SettingsFileReader(SettingsFileReader.SettingsFilePath))
                     reader.ReadSettings();
@@ -36,139 +33,77 @@ namespace MessageCounterFrontend
             var args = Environment.GetCommandLineArgs();
 
             if (args.Length > 1)
+                TryToLoadTheFile(args);
+        }
+
+        private void OpenFile_Click(object sender, RoutedEventArgs e) => TryToLoadTheFile();
+
+        private void TryToLoadTheFile() => TryToLoadTheFile(null);
+        private void TryToLoadTheFile(string[] args)
+        {
+            try
             {
                 string fileContent;
 
-                using (var reader = new FileReaderWithDialog(args[1]))
-                    fileContent = reader.ReadAll();
+                if (null == args)   // if from OpenFile_Click
+                    using (var reader = new FileReaderWithDialog())
+                        fileContent = reader.ReadAll();     // IOException
 
-                if (false == CreateStatsContainer(fileContent))
-                    return;
+                else                // if from command line args
+                    using (var reader = new FileReaderWithDialog(args[1]))
+                        fileContent = reader.ReadAll();     // IOException
 
-                UpdateMainPanel();
-                ChangeEnableStatesOfCheckBoxes();
-                closeTheFile.IsEnabled = true;
+                var stats = CreateStatsContainer(fileContent);   // Newtonsoft.Json.JsonReaderException
+                this.statsPage = new MainPage(this, stats);
+                    
             }
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e) => Close();
-
-        private void SingleFile_Click(object sender, RoutedEventArgs e)
-        {
-            string fileContent;
-            try
+            catch (Exception e)
             {
-                using (var reader = new FileReaderWithDialog())
-                    fileContent = reader.ReadAll();
+                HandleExceptionsWhileLoading(e);
             }
-            catch
-            {
-                return;
-            }
-
-            if (false == CreateStatsContainer(fileContent))
-                return;
-
-            ResetStatesOfVariables();
-            UpdateMainPanel();
-
-            if (false == checkBoxPeople.IsEnabled)
-                ChangeEnableStatesOfCheckBoxes();
 
             closeTheFile.IsEnabled = true;
+            mainFrame.Navigate(statsPage);
         }
 
-        private bool CreateStatsContainer(string fileContent) // returns false, when file is incorrect
+        private void HandleExceptionsWhileLoading(Exception e)
+        {
+            if (e is IOException)
+                MessageBox.Show("Problem with opening the file: " + e.Message);
+
+            else if (e is Newtonsoft.Json.JsonSerializationException)
+                return;
+
+            else if (e is CanceledByUserException)
+                return;
+
+            else
+                MessageBox.Show("Unknown problem: " + e.Message);
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e) => Close();
+
+        private StatsContainer CreateStatsContainer(string fileContent) // throw exception, when file is incorrect
         {
             try
             {
-                statsContainer = new StatsContainer(fileContent);
+                return new StatsContainer(fileContent);
             }
             catch
             {
                 MessageBox.Show("The file is incorrect!");
-                return false;
+                throw;
             }
-            return true;
-        }
-
-        private void ResetStatesOfVariables()
-        {
-            WrapPanelMaker.IncludePeople
-                = WrapPanelMaker.IncludeDays
-                = WrapPanelMaker.IncludeWords = false;
-
-            checkBoxPeople.IsChecked 
-                = checkBoxDays.IsChecked 
-                = checkBoxWords.IsChecked = false;
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {            
-            switch ((e.Source as CheckBox).Name)
-            {
-                case nameof(checkBoxPeople):
-                    if (e.RoutedEvent.Name == "Checked")
-                        MakePeopleContainerIfNeeded();
-                    WrapPanelMaker.IncludePeople = !WrapPanelMaker.IncludePeople;
-                    break;
-
-                case nameof(checkBoxDays):
-                    if (e.RoutedEvent.Name == "Checked")
-                        MakeDaysContainerIfNeeded();
-                    WrapPanelMaker.IncludeDays = !WrapPanelMaker.IncludeDays;
-                    break;
-
-                case nameof(checkBoxWords):
-                    if (e.RoutedEvent.Name == "Checked")
-                        MakeWordsContainerIfNeeded();
-                    WrapPanelMaker.IncludeWords = !WrapPanelMaker.IncludeWords;
-                    break;
-            }
-            UpdateMainPanel();
-        }
-
-        private void MakePeopleContainerIfNeeded()
-        {
-            if (null == statsContainer.PeopleContainer)
-                statsContainer.MakePeopleContainer();
-        }
-
-        private void MakeDaysContainerIfNeeded()
-        {
-            if (null == statsContainer.DaysContainer)
-                statsContainer.MakeDaysContainer();
-        }
-
-        private void MakeWordsContainerIfNeeded()
-        {
-            if (null == statsContainer.WordsContainer)
-                statsContainer.MakeWordsContainer();
-        }
-
-        private void UpdateMainPanel()
-        {
-            MainWrapPanel = WrapPanelMaker.MakeStatsWrapPanel(statsContainer);
-            UpdateLayout();
-        }
-
-        private void ChangeEnableStatesOfCheckBoxes()
-        {
-            checkBoxPeople.IsEnabled = !checkBoxPeople.IsEnabled;
-            checkBoxDays.IsEnabled = !checkBoxDays.IsEnabled;
-            checkBoxWords.IsEnabled = !checkBoxWords.IsEnabled;
         }
 
         private void CloseTheFile_Click(object sender, RoutedEventArgs e)
         {
             closeTheFile.IsEnabled = false;
-            ChangeEnableStatesOfCheckBoxes();
-            ResetStatesOfVariables();
-            statsContainer = null;
-            UpdateMainPanel();
+            mainFrame.Content = "";
+            statsPage = null;
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        private void OpenWordsSettings(object sender, RoutedEventArgs e)
         {
             while (true)
             {
@@ -204,13 +139,13 @@ namespace MessageCounterFrontend
                     MessageBox.Show("Problem with file. Settings hasn't been saved.");
                 }
 
-                if (IsAnyFileOpened)
+                if (this.IsAnyFileOpened)
                 {
                     string message = "Settings will be changed after reloading the file. Do you want reload now?";
                     var result = MessageBox.Show(this, message, "Question", MessageBoxButton.YesNo);
 
                     if (result == MessageBoxResult.Yes)
-                        ReloadFile();
+                        this.statsPage.ReloadFile();
                 }                
                 break;
             }
@@ -229,14 +164,10 @@ namespace MessageCounterFrontend
             return window;
         }
 
-        private void ReloadFile()
-        {
-            ResetStatesOfVariables();
-            statsContainer.ResetContainers();
-            UpdateMainPanel();
-        }
+        private void LinkToDataDownloadingPage_Click(object sender, RoutedEventArgs e) 
+            => System.Diagnostics.Process.Start(Instructions.LinkToDownloadSite);
 
-        private void LinkToDataDownloadingPage(object sender, RoutedEventArgs e) 
-            => System.Diagnostics.Process.Start("https://www.facebook.com/settings?tab=your_facebook_information");
+        private void OpenInstructions_Click(object sender, RoutedEventArgs e) 
+            => mainFrame.Navigate(new Instructions());
     }
 }
