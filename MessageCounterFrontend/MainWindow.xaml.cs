@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using MessageCounterBackend;
 using MessageCounterBackend.Containers.Helpers_classes;
 using MessageCounterFrontend.InterfaceBackend;
 using MessageCounterFrontend.SettingsWindows;
 using MessageCounterFrontend.InterfaceBackend.FileOperators;
-using System.IO;
 
 namespace MessageCounterFrontend
 {
