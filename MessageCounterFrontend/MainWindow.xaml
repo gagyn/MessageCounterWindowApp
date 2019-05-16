@@ -12,34 +12,20 @@
                     <MenuItem Header="_Open new file" Name="openNewFile" Click="SingleFile_Click" />
                     <MenuItem Header="_Close this file" Name="closeTheFile" Click="CloseTheFile_Click" IsEnabled="False" />
                     <Separator />
-                    <MenuItem Header="_Exit" Click="MenuItem_Click" />
+                    <MenuItem Header="_Exit" Click="Exit_Click" />
                 </MenuItem>
                 <MenuItem Header="_Settings">
-                    <MenuItem Header="_Words settings" Click="MenuItem_Click_1" />
+                    <MenuItem Header="_Words settings" Click="OpenWordsSettings" />
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem Header="_Link to facebook data downloading page" Click="LinkToDataDownloadingPage" />
+                    <MenuItem Header="_Link to facebook data downloading page" Click="LinkToDataDownloadingPage_Click" />
+                    <MenuItem Header="_How to use this application?" Click="OpenInstructions_Click" />
                     <MenuItem Header="_About app" IsEnabled="False" />
                 </MenuItem>
             </Menu>
         </DockPanel>
 
-        <ScrollViewer 
-            x:Name="scrollViewer"
-            Margin="20,80,0,0" 
-            HorizontalScrollBarVisibility="Disabled" 
-            VerticalScrollBarVisibility="Auto" />
+        <Frame x:Name="mainFrame" Margin="20,30,0,0" NavigationUIVisibility="Hidden" />
 
-        <TextBlock Text="Show statistics for: " HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top" />
-
-        <CheckBox x:Name="checkBoxPeople" Content="People" HorizontalAlignment="Left" Margin="130,40,0,0" VerticalAlignment="Top"
-                  Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" IsEnabled="False"/>
-
-        <CheckBox x:Name="checkBoxDays" Content="Days" HorizontalAlignment="Left" Margin="200,40,0,0" VerticalAlignment="Top" 
-                  Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" IsEnabled="False"/>
-
-        <CheckBox x:Name="checkBoxWords" Content="Words" HorizontalAlignment="Left" Margin="260,40,0,0" VerticalAlignment="Top"
-                  Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" IsEnabled="False"/>
-        
     </Grid>
 </Window>

@@ -80,15 +80,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InfoWindows\Instructions.xaml.cs">
+      <DependentUpon>Instructions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InterfaceBackend\FileOperators\FileReader.cs" />
     <Compile Include="InterfaceBackend\FileOperators\FileReaderWithDialog.cs" />
     <Compile Include="InterfaceBackend\FileOperators\FileWriter.cs" />
     <Compile Include="InterfaceBackend\FileOperators\SettingsFileReader.cs" />
     <Compile Include="InterfaceBackend\FileOperators\SettingsFileWriter.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsWindows\SettingsWindow.cs" />
     <Compile Include="SettingsWindows\WordsSettings.xaml.cs">
       <DependentUpon>WordsSettings.xaml</DependentUpon>
     </Compile>
+    <Page Include="InfoWindows\Instructions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
