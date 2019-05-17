@@ -140,13 +140,8 @@ namespace MessageCounterFrontend
                 }
 
                 if (this.IsAnyFileOpened)
-                {
-                    string message = "Settings will be changed after reloading the file. Do you want reload now?";
-                    var result = MessageBox.Show(this, message, "Question", MessageBoxButton.YesNo);
-
-                    if (result == MessageBoxResult.Yes)
-                        this.statsPage.ReloadFile();
-                }                
+                    this.statsPage.ReloadFile();
+                
                 break;
             }
         }
