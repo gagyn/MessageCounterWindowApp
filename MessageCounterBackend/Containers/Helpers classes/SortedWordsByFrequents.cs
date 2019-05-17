@@ -74,13 +74,11 @@ namespace MessageCounterBackend.Containers.Helpers_classes
                 let trimmedWord = word.Trim(charToRemove)
                 where trimmedWord.Length >= MinLenghtOfWords
                 group trimmedWord by trimmedWord into groupedWords
-                orderby groupedWords.Count()
+                orderby groupedWords.Count() descending
                 select groupedWords;
 
-            var reversed = sortedWords.Reverse();
-            reversed = reversed.Where(x => x.Count() >= MinAppearsTimesOfWord);
-
-            return reversed.ToList();
+            var toReturn = sortedWords.Where(x => x.Count() >= MinAppearsTimesOfWord);
+            return toReturn.ToList();
         }
     }
 }

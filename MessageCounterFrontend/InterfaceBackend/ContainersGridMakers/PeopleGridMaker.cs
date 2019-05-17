@@ -10,9 +10,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 {
     class PeopleGridMaker : GridMaker
     {
-        public PeopleGridMaker(Container container) : base(container)
-        {
-        }
+        public PeopleGridMaker(Container container) : base(container) { }
 
         protected override Grid[] MakeGrids(Container container)
         {
@@ -22,22 +20,15 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             if (!(container is PeopleContainer peopleContainer)) 
                 throw new ArgumentException();  // if container isn't for people
 
-            List<Person> people = new List<Person>(peopleContainer.people);
-            SortPeople(ref people);
+            List<Person> people = new List<Person>(peopleContainer.SortedPeople);
 
             return new Grid[]
             {
                 MakeLeftSide(people),
                 MakeCenter(people.Count),
-                MakeRightSide(people)
+                MakeRightSide(people),
+                MakeMoreRighterSide(people)
             };
-        }
-
-        private void SortPeople(ref List<Person> people)
-        {
-            people = people.OrderBy(x => x.PersonMessages.NumberOfMessages).ToList();
-            people.Reverse(); // from now, sortedPeople containes people sorted
-                                    // by number of messages (top - max number)
         }
 
         private Grid MakeLeftSide(List<Person> people)
@@ -59,7 +50,8 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
         private Grid MakeCenter(int peopleCount)
         {
             Grid grid = new Grid();
-            while (peopleCount-- > 0)
+            
+            for (int i = 0; i < peopleCount; i++)
             {
                 grid.Children.Add(new TextBlock()
                 {
@@ -67,8 +59,8 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
                     HorizontalAlignment = HorizontalAlignment.Left
                 });
                 grid.RowDefinitions.Add(new RowDefinition());
-                int i = grid.Children.Count - 1;
-                Grid.SetRow(grid.Children[i], i);
+                int row = grid.Children.Count - 1;
+                Grid.SetRow(grid.Children[row], row);
             }
             return grid;
         }
@@ -76,8 +68,6 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
         private Grid MakeRightSide(List<Person> people)
         {
             Grid grid = new Grid();
-            foreach (var _ in people)
-                grid.RowDefinitions.Add(new RowDefinition());
 
             foreach (var p in people)
             {
@@ -92,10 +82,41 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 
                 grid.Children.Add(block);
                 int i = grid.Children.Count - 1;
+                grid.RowDefinitions.Add(new RowDefinition());
                 Grid.SetRow(grid.Children[i], i);
             }
 
             return grid;
         }
+
+        private Grid MakeMoreRighterSide(List<Person> people)
+        {
+            Grid grid = new Grid();
+
+            for (int i = 0; i < people.Count; i++)
+            {
+                Person p = people[i];
+                string ratioString1 = MakeRatioString(p.SentUniqueWordsRatio);
+                string ratioString2 = MakeRatioString(p.SentAllWordsRatio);
+
+                var block = new TextBlock()
+                {
+                    Text = $"{p.PersonMessages.NumberOfUniqueWords}/{p.PersonMessages.NumberOfAllWords}"
+                         + $" ({ratioString1}%/{ratioString2}%)",
+
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    FontWeight = FontWeights.SemiBold,
+                    Margin = new Thickness(6, 0, 0, 0)
+                };
+
+                grid.Children.Add(block);
+                grid.RowDefinitions.Add(new RowDefinition());
+                Grid.SetRow(grid.Children[i], i);
+            }
+
+            return grid;
+        }
+
+        private string MakeRatioString(double ratio) => string.Format("{0:00.00}", ratio);
     }
 }

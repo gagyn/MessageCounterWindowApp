@@ -9,7 +9,9 @@ namespace MessageCounterBackend.StatContainers
     {
         public List<Message> Messages { get; }
         public int NumberOfMessages => Messages.Count;
-        public int NumberOfWords => SortedWordsByFrequents.Count;
+        public int NumberOfUniqueWords => SortedWordsByFrequents.Count;
+        public int NumberOfAllWords => GetNumberOfAllWords();
+
         public List<IGrouping<string, string>> SortedWordsByFrequents { get; }
 
         public MessagesContainer(JsonStructureClass jsonObject) 
@@ -19,6 +21,15 @@ namespace MessageCounterBackend.StatContainers
             this.Messages = messages;
             var sorter = new SorterWordsGroupListMaker(this.Messages);
             SortedWordsByFrequents = sorter.SortedWordsByFrequents;
+        }
+
+        private int GetNumberOfAllWords()
+        {
+            int count = 0;
+
+            foreach (var gr in SortedWordsByFrequents)
+                count += gr.ToList().Count;
+            return count;
         }
     }
 }

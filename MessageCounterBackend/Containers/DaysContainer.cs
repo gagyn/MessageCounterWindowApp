@@ -12,7 +12,8 @@ namespace MessageCounterBackend.StatContainers
         public List<Day> SortedDays { get; }
         public Day DayWithMaxNumberOfMessages { get; }
 
-        public DaysContainer(JsonStructureClass jsonObject) : this(jsonObject.messages as List<Message>) { }
+        public DaysContainer(JsonStructureClass jsonObject) 
+            : this(jsonObject.messages.ToList()) { }
         public DaysContainer(List<Message> messages)
         {
             Days = MakeDaysList(messages);

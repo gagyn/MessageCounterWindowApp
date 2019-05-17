@@ -10,7 +10,8 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
     {
         public string FullName { get; }
         public double SentMessagesRatio { get; private set; }
-        public double SentWordsRatio { get; private set; }
+        public double SentUniqueWordsRatio { get; private set; }
+        public double SentAllWordsRatio { get; private set; }
         public double AvgNumberOfMessageInDaysWhenUserWroteAny { get; private set; }
         public double AvgNumberOfWordsInDaysWhenUserWroteAny { get; private set; }
         public DaysContainer DaysWhenUserWrittenSomething { get; private set; }
@@ -27,7 +28,8 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
                 new MessagesContainer(FindPersonMessages(container.Messages));
 
             SetDays();
-            SetDoubleNumbers(container.NumberOfMessages, container.NumberOfWords);
+            SetDoubleNumbers(container.NumberOfMessages, 
+                container.NumberOfUniqueWords, container.NumberOfAllWords);
         }
 
         private List<Message> FindPersonMessages(List<Message> allMessages)
@@ -56,9 +58,9 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
             MostActiveDate = DaysWhenUserWrittenSomething.DayWithMaxNumberOfMessages;
         }
 
-        private void SetDoubleNumbers(int allMessagesCount, int allWordsCount)
+        private void SetDoubleNumbers(int allMessagesCount, int uniqueWordsCount, int allWordsCount)
         {
-            double ratioMesses, ratioWords, avgNumberMesses, avgNumberWords;
+            double ratioMesses, ratioWords, ratioAllWords, avgNumberMesses, avgNumberWords;
 
             ratioMesses = PersonMessages.NumberOfMessages 
                 / (float)allMessagesCount * 100;
@@ -66,14 +68,18 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
             avgNumberMesses = PersonMessages.NumberOfMessages
                 / (float)DaysWhenUserWrittenSomething.Days.Count;
 
-            ratioWords = PersonMessages.NumberOfWords
+            ratioWords = PersonMessages.NumberOfUniqueWords
+                / (float)uniqueWordsCount * 100;
+
+            ratioAllWords = PersonMessages.NumberOfAllWords
                 / (float)allWordsCount * 100;
 
-            avgNumberWords = PersonMessages.NumberOfWords
+            avgNumberWords = PersonMessages.NumberOfUniqueWords
                 / (float)DaysWhenUserWrittenSomething.Days.Count;
 
             SentMessagesRatio = Math.Round(ratioMesses, 2);
-            SentWordsRatio = Math.Round(ratioWords, 2);
+            SentUniqueWordsRatio = Math.Round(ratioWords, 2);
+            SentAllWordsRatio = Math.Round(ratioAllWords, 2);
 
             AvgNumberOfMessageInDaysWhenUserWroteAny = Math.Round(avgNumberMesses, 2);
             AvgNumberOfWordsInDaysWhenUserWroteAny   = Math.Round(avgNumberWords, 2);

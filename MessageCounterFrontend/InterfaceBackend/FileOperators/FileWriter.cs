@@ -25,7 +25,7 @@ namespace MessageCounterFrontend.InterfaceBackend
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed && disposing)
-                this.writer.Dispose();
+                this.writer?.Dispose();
 
             this.disposed = true;
         }

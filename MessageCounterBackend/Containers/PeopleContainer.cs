@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using MessageCounterBackend.JsonStructure;
 using MessageCounterBackend.StatContainers.ListTypesClasses;
 
@@ -8,18 +7,21 @@ namespace MessageCounterBackend.StatContainers
 {
     public class PeopleContainer : Container
     {
-        public List<Person> people;
+        public List<Person> People { get; }
+        public List<Person> SortedPeople { get; }
 
         public PeopleContainer(JsonStructureClass jsonObject)
         {
-            people = new List<Person>();
+            People = new List<Person>();
             var container = new MessagesContainer(jsonObject);
 
             foreach (var p in jsonObject.participants)
             {
                 var person = new Person(p.name, container);
-                this.people.Add(person);
+                this.People.Add(person);
             }
+
+            SortedPeople = People.OrderByDescending(x => x.PersonMessages.NumberOfMessages).ToList();
         }
     }
 }
