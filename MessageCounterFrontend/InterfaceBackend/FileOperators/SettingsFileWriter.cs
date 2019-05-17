@@ -10,8 +10,8 @@ namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 
         public void WriteSettings()
         {
-            base.Write(SortedWordsGroupListMaker.MinLenghtOfWords.ToString());
-            base.Write(SortedWordsGroupListMaker.MinAppearsTimesOfWord.ToString());
+            base.Write(SorterWordsGroupListMaker.MinLenghtOfWords.ToString());
+            base.Write(SorterWordsGroupListMaker.MinAppearsTimesOfWord.ToString());
         }
     }
 }

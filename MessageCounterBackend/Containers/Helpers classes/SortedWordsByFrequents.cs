@@ -8,7 +8,7 @@ namespace MessageCounterBackend.Containers.Helpers_classes
     /// <summary>
     /// Group words, then sorts by frequents of appearing, set result to SortedWordsByFrequents.
     /// </summary>
-    public class SortedWordsGroupListMaker
+    public class SorterWordsGroupListMaker
     {
         /// <summary>
         /// Words, which are SHORTER, will NOT be included in the list.
@@ -49,8 +49,8 @@ namespace MessageCounterBackend.Containers.Helpers_classes
         private static int minLenghtOfWords;
         private readonly List<Message> messages;
 
-        static SortedWordsGroupListMaker() => SetDefaultValues();
-        public SortedWordsGroupListMaker(List<Message> messages) => this.messages = messages;
+        static SorterWordsGroupListMaker() => SetDefaultValues();
+        public SorterWordsGroupListMaker(List<Message> messages) => this.messages = messages;
 
         public static void SetDefaultValues()
         {

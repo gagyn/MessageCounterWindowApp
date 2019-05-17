@@ -115,12 +115,12 @@ namespace MessageCounterFrontend
                 var newValues = window.NewValues;
 
                 if (null == newValues)
-                    SortedWordsGroupListMaker.SetDefaultValues();
+                    SorterWordsGroupListMaker.SetDefaultValues();
                 else
                 {
                     try
                     {
-                        (SortedWordsGroupListMaker.MinLenghtOfWords, SortedWordsGroupListMaker.MinAppearsTimesOfWord)
+                        (SorterWordsGroupListMaker.MinLenghtOfWords, SorterWordsGroupListMaker.MinAppearsTimesOfWord)
                             = newValues.Value;
                     }
                     catch
@@ -158,8 +158,8 @@ namespace MessageCounterFrontend
                 Owner = this
             };
 
-            window.minLenght.Text = SortedWordsGroupListMaker.MinLenghtOfWords.ToString();
-            window.minAppearsTimes.Text = SortedWordsGroupListMaker.MinAppearsTimesOfWord.ToString();
+            window.minLenght.Text = SorterWordsGroupListMaker.MinLenghtOfWords.ToString();
+            window.minAppearsTimes.Text = SorterWordsGroupListMaker.MinAppearsTimesOfWord.ToString();
 
             return window;
         }

@@ -8,34 +8,14 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
 {
     public class Day
     {
-        public DateTime thisDateTime;
-        public int NumberOfMessages { get => messages.Count; }
+        public DateTime ThisDateTime { get; set; }
+        public int NumberOfMessages => MessagesContainer.NumberOfMessages;
+        public MessagesContainer MessagesContainer { get; }
 
-        private readonly List<Message> messages;
-
-        public Day() => messages = new List<Message>();
-        public Day(List<Message> messages, ref int currentIndex)
+        public Day(List<Message> messages, DateTime date)
         {
-            this.thisDateTime = BeginOfDay(MiliSecToDate(messages[currentIndex].timestamp_ms)); // setting date of this.day
-            this.messages = new List<Message>();
-
-            DateTime currentDate = MiliSecToDate(messages[currentIndex].timestamp_ms);
-            ulong lastMiliSec = LastMiliSecAtThisDate(currentDate); // after this milisecond there is a next day
-
-            // while message was sent on this day
-            for (; currentIndex < messages.Count && messages[currentIndex].timestamp_ms < lastMiliSec; currentIndex++) 
-                this.messages.Add(messages[currentIndex]);  // adding to this.messages all messages for this day
+            this.ThisDateTime = date;
+            this.MessagesContainer = new MessagesContainer(messages);
         }
-        
-        private DateTime MiliSecToDate(ulong mili)
-            => new DateTime(1970, 1, 1).AddMilliseconds(mili);
-        private ulong DateToMiliSec(DateTime date) 
-            => (ulong)(date - new DateTime(1970, 1, 1)).TotalMilliseconds;
-
-        private ulong LastMiliSecAtThisDate(DateTime date) 
-            => DateToMiliSec(new DateTime(date.Year, date.Month, date.Day, 23, 59, 59, 999));
-
-        private DateTime BeginOfDay(DateTime date)
-            => new DateTime(date.Year, date.Month, date.Day, 0, 0, 0, 0);
     }
 }

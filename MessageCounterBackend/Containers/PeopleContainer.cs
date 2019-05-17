@@ -13,9 +13,11 @@ namespace MessageCounterBackend.StatContainers
         public PeopleContainer(JsonStructureClass jsonObject)
         {
             people = new List<Person>();
+            var container = new MessagesContainer(jsonObject);
+
             foreach (var p in jsonObject.participants)
             {
-                var person = new Person(p.name, (List<Message>)jsonObject.messages);
+                var person = new Person(p.name, container);
                 this.people.Add(person);
             }
         }

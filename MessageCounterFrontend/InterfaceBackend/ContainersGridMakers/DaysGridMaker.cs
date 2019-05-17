@@ -9,9 +9,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
 {
     class DaysGridMaker : GridMaker
     {
-        public DaysGridMaker(Container container) : base(container)
-        {
-        }
+        public DaysGridMaker(Container container) : base(container) { }
 
         protected override Grid[] MakeGrids(Container container)
         {
@@ -24,7 +22,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             Grid[] grids =
             {
                 MakeDaysGrid(daysContainer.Days),
-                MakeSortedDaysGrid(daysContainer.Days),
+                MakeDaysGrid(daysContainer.SortedDays),
                 MakeInfoGrid(daysContainer) // the last Grid (InfoGrid) will be in first row
                                             // the rest will be in second row
             };
@@ -50,19 +48,20 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             currentGrid.ColumnDefinitions.RemoveAt(currentGrid.ColumnDefinitions.Count - 1);
             return currentGrid;
         }
+
         private Grid MakeInfoGrid(DaysContainer container) // grid in the first row, first column (0,0)
         {
             string content = "The larger number of messages in single day: ";
             content += container.DayWithMaxNumberOfMessages.NumberOfMessages;
             content += " on ";
-            content += container.DayWithMaxNumberOfMessages.thisDateTime.ToShortDateString();
+            content += container.DayWithMaxNumberOfMessages.ThisDateTime.ToShortDateString();
 
             var grid = new Grid();
             grid.Children.Add(new TextBlock() { Text = content });
             return grid;
         }
 
-        private Grid MakeDaysGrid(List<Day> days) // second row, first column (1,0)
+        private Grid MakeDaysGrid(List<Day> days) // second row, first and second column (1,0) && (1,1)
         {
             var grid = new Grid();
 
@@ -70,7 +69,7 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             {
                 TextBlock block = new TextBlock()
                 {
-                    Text = days[i].thisDateTime.ToShortDateString()
+                    Text = days[i].ThisDateTime.ToShortDateString()
                     + " ==> " + days[i].NumberOfMessages,
                     Margin = new System.Windows.Thickness(0, 0, 5, 0)
                 };
@@ -81,15 +80,6 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
             }
 
             return grid;
-        }
-
-        private Grid MakeSortedDaysGrid(List<Day> days) // second row, second column (1,1)
-        {
-            List<Day> sortedDays = new List<Day>(days);
-            sortedDays = sortedDays.OrderBy(x => x.NumberOfMessages).ToList();
-            sortedDays.Reverse();
-
-            return MakeDaysGrid(sortedDays);
         }
     }
 }

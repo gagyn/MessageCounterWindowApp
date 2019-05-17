@@ -8,15 +8,16 @@ namespace MessageCounterBackend.StatContainers
     public class MessagesContainer : Container
     {
         public List<Message> Messages { get; }
-        public int NumberOfMessages { get => Messages.Count; }
-        public List<IGrouping<string, string>> SortedWordsByFrequents { get; private set; }
+        public int NumberOfMessages => Messages.Count;
+        public int NumberOfWords => SortedWordsByFrequents.Count;
+        public List<IGrouping<string, string>> SortedWordsByFrequents { get; }
 
         public MessagesContainer(JsonStructureClass jsonObject) 
             : this(jsonObject.messages.ToList()) { }
         public MessagesContainer(List<Message> messages)
         {
             this.Messages = messages;
-            var sorter = new SortedWordsGroupListMaker(this.Messages);
+            var sorter = new SorterWordsGroupListMaker(this.Messages);
             SortedWordsByFrequents = sorter.SortedWordsByFrequents;
         }
     }
