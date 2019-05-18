@@ -7,6 +7,7 @@ using MessageCounterFrontend.SettingsWindows;
 using MessageCounterFrontend.InterfaceBackend.FileOperators;
 using System.IO;
 using MessageCounterFrontend.InfoWindows;
+using System.Windows.Controls;
 
 namespace MessageCounterFrontend
 {
@@ -22,6 +23,8 @@ namespace MessageCounterFrontend
         public MainWindow()
         {
             InitializeComponent();
+
+            mainFrame.Navigate(new Page());
 
             try  // Reading settings file
             {
@@ -99,7 +102,7 @@ namespace MessageCounterFrontend
         private void CloseTheFile_Click(object sender, RoutedEventArgs e)
         {
             closeTheFile.IsEnabled = false;
-            mainFrame.Content = "";
+            mainFrame.GoBack();
             statsPage = null;
         }
 
@@ -128,22 +131,21 @@ namespace MessageCounterFrontend
                         continue;
                     }
                 }
-
-                try
-                {
-                    using (var writer = new SettingsFileWriter(SettingsFileWriter.SettingsFilePath))
-                        writer.WriteSettings();
-                }
-                catch
-                {
-                    MessageBox.Show("Problem with file. Settings hasn't been saved.");
-                }
-
-                if (this.IsAnyFileOpened)
-                    this.statsPage.ReloadFile();
-                
                 break;
             }
+
+            try
+            {
+                using (var writer = new SettingsFileWriter(SettingsFileWriter.SettingsFilePath))
+                    writer.WriteSettings();
+            }
+            catch
+            {
+                MessageBox.Show("Problem with file. Settings hasn't been saved.");
+            }
+
+            if (this.IsAnyFileOpened)
+                this.statsPage.ReloadFile();
         }
 
         private WordsSettings CreateNewSettingsWindow()
