@@ -19,6 +19,10 @@ namespace MessageCounterBackend.StatContainers
         public MessagesContainer(List<Message> messages)
         {
             this.Messages = messages;
+
+            if (messages.Count == 0)
+                SortedWordsByFrequents = new List<IGrouping<string, string>>();
+
             var sorter = new SorterWordsGroupListMaker(this.Messages);
             SortedWordsByFrequents = sorter.SortedWordsByFrequents;
         }
