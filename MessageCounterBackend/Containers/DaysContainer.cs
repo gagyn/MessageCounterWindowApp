@@ -18,7 +18,9 @@ namespace MessageCounterBackend.StatContainers
         {
             Days = MakeDaysList(messages);
             SortedDays = SortDaysList(Days);
-            DayWithMaxNumberOfMessages = SortedDays.First();
+
+            if (SortedDays.Count != 0)
+                DayWithMaxNumberOfMessages = SortedDays.First();
         }
 
         private List<Day> MakeDaysList(List<Message> messages)
