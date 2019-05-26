@@ -99,10 +99,13 @@ namespace MessageCounterFrontend.InterfaceBackend.ContainersTextBoxMakers
                 string ratioString1 = MakeRatioString(p.SentUniqueWordsRatio);
                 string ratioString2 = MakeRatioString(p.SentAllWordsRatio);
 
+                string text = p.PersonMessages.NumberOfUniqueWords
+                    + " / " + p.PersonMessages.NumberOfAllWords
+                    + $" ({ratioString1}% / {ratioString2}%)";
+
                 var block = new TextBlock()
                 {
-                    Text = $"{p.PersonMessages.NumberOfUniqueWords}/{p.PersonMessages.NumberOfAllWords}"
-                         + $" ({ratioString1}%/{ratioString2}%)",
+                    Text = text,
 
                     HorizontalAlignment = HorizontalAlignment.Left,
                     FontWeight = FontWeights.SemiBold,
