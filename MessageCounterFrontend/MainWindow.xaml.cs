@@ -39,9 +39,8 @@ namespace MessageCounterFrontend
                 TryToLoadTheFile(args);
         }
 
-        private void OpenFile_Click(object sender, RoutedEventArgs e) => TryToLoadTheFile();
+        private void OpenFile_Click(object sender, RoutedEventArgs e) => TryToLoadTheFile(null);
 
-        private void TryToLoadTheFile() => TryToLoadTheFile(null);
         private void TryToLoadTheFile(string[] args)
         {
             try
@@ -63,6 +62,7 @@ namespace MessageCounterFrontend
             catch (Exception e)
             {
                 HandleExceptionsWhileLoading(e);
+                return;
             }
 
             closeTheFile.IsEnabled = true;
