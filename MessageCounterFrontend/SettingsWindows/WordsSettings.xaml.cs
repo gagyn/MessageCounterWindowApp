@@ -11,7 +11,13 @@ namespace MessageCounterFrontend.SettingsWindows
     {
         public (int minLenght, int minAppearsTimes)? NewValues { get; private set; }
 
-        public WordsSettings() => InitializeComponent();
+        public WordsSettings(int minLenght, int minAppearsTimes)
+        {
+            InitializeComponent();
+
+            this.minLenght.Text = minLenght.ToString();
+            this.minAppearsTimes.Text = minAppearsTimes.ToString();
+        }
 
         protected override void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
         {

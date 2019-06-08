@@ -9,7 +9,6 @@
       Title="Instructions">
 
     <Grid>
-        <Button Margin="0,0" Width="50" Height="30" Click="ReturnButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Marlett" FontSize="20" Content="3"/>
         <TextBlock Margin="50,50,500,200" FontWeight="DemiBold" TextWrapping="Wrap">
             The first thing you need to do is downloading your all messenger messages from Facebook.
             <Hyperlink Click="Hyperlink_Click">(click here to open web browser)</Hyperlink>

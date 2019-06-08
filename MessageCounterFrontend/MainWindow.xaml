@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Message Counter" Height="600" Width="900" MinHeight="500" MinWidth="450">
+        Title="Message Counter" Height="600" Width="1200" MinHeight="600" MinWidth="450">
     <Grid>
         <DockPanel HorizontalAlignment="Stretch" Height="20" LastChildFill="True" VerticalAlignment="Top" >
             <Menu DockPanel.Dock="Top">
@@ -15,7 +15,7 @@
                     <MenuItem Header="_Exit" Click="Exit_Click" />
                 </MenuItem>
                 <MenuItem Header="_Settings">
-                    <MenuItem Header="_Words settings" Click="OpenWordsSettings" />
+                    <MenuItem Header="_Words settings" Click="OpenWordsSettings_Click" />
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="_Link to facebook data downloading page" Click="LinkToDataDownloadingPage_Click" />
@@ -24,8 +24,9 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
+        
+        <Button x:Name="returnButton" Visibility="Hidden" Margin="0,20" Width="50" Height="30" Click="ReturnButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Marlett" FontSize="20" Content="3"/>
 
-        <Frame x:Name="mainFrame" Margin="20,30,0,0" NavigationUIVisibility="Hidden" />
-
+        <Frame x:Name="mainFrame" Margin="56,30,0,0" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" />
     </Grid>
 </Window>

@@ -21,7 +21,7 @@ namespace MessageCounterBackend.Containers.Helpers_classes
                 if (value > 0)
                     minLenghtOfWords = value;
                 else
-                    throw new ArgumentOutOfRangeException();
+                    minLenghtOfWords = 1;
             }
         }
 
@@ -36,7 +36,7 @@ namespace MessageCounterBackend.Containers.Helpers_classes
                 if (value > 0)
                     minAppearsTimesOfWord = value;
                 else
-                    throw new ArgumentOutOfRangeException();
+                    minAppearsTimesOfWord = 1;
             }
         }
 

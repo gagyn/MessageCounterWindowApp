@@ -8,6 +8,7 @@ using MessageCounterFrontend.InterfaceBackend.FileOperators;
 using System.IO;
 using MessageCounterFrontend.InfoWindows;
 using System.Windows.Controls;
+using MessageCounterFrontend.MainWindowOperations;
 
 namespace MessageCounterFrontend
 {
@@ -36,129 +37,42 @@ namespace MessageCounterFrontend
             var args = Environment.GetCommandLineArgs();
 
             if (args.Length > 1)
-                TryToLoadTheFile(args);
+            {
+                var fileOpener = new FileOpener(this, args);
+                OpenStatsPageIfNeeded(fileOpener);
+            }
         }
 
-        private void OpenFile_Click(object sender, RoutedEventArgs e) => TryToLoadTheFile(null);
-
-        private void TryToLoadTheFile(string[] args)
+        public void OpenFile_Click(object sender, RoutedEventArgs e) 
+            => OpenStatsPageIfNeeded(new FileOpener(this));
+        public void Exit_Click(object sender, RoutedEventArgs e) => Close();
+        public void OpenWordsSettings_Click(object sender, RoutedEventArgs e) => new SettingsOpener(this);
+        public void ReloadFileIfNeeded()
         {
-            try
-            {
-                string fileContent;
-
-                if (null == args)   // if from OpenFile_Click
-                    using (var reader = new FileReaderWithDialog())
-                        fileContent = reader.ReadAll();     // IOException
-
-                else                // if from command line args
-                    using (var reader = new FileReaderWithDialog(args[1]))
-                        fileContent = reader.ReadAll();     // IOException
-
-                var stats = CreateStatsContainer(fileContent);   // Newtonsoft.Json.JsonReaderException
-                this.statsPage = new MainPage(this, stats);
-                    
-            }
-            catch (Exception e)
-            {
-                HandleExceptionsWhileLoading(e);
-                return;
-            }
-
-            closeTheFile.IsEnabled = true;
-            mainFrame.Navigate(statsPage);
+            if (IsAnyFileOpened)
+                statsPage.ReloadFile();
         }
 
-        private void HandleExceptionsWhileLoading(Exception e)
+        private void OpenStatsPageIfNeeded(FileOpener opener)
         {
-            if (e is IOException)
-                MessageBox.Show("Problem with opening the file: " + e.Message);
-
-            else if (e is Newtonsoft.Json.JsonSerializationException)
-                return;
-
-            else if (e is CanceledByUserException)
-                return;
-
-            else
-                MessageBox.Show("Unknown problem: " + e.Message);
-        }
-
-        private void Exit_Click(object sender, RoutedEventArgs e) => Close();
-
-        private StatsContainer CreateStatsContainer(string fileContent) // throw exception, when file is incorrect
-        {
-            try
+            if (opener.StatsPage != null)
             {
-                return new StatsContainer(fileContent);
-            }
-            catch
-            {
-                MessageBox.Show("The file is incorrect!");
-                throw;
+                statsPage = opener.StatsPage;
+                mainFrame.Navigate(statsPage);
+                closeTheFile.IsEnabled = true;
             }
         }
 
         private void CloseTheFile_Click(object sender, RoutedEventArgs e)
         {
             closeTheFile.IsEnabled = false;
-            mainFrame.GoBack();
+
+            mainFrame.Navigate(new Page());
+
+            while (mainFrame.CanGoBack)
+                mainFrame.GoBack();
+            
             statsPage = null;
-        }
-
-        private void OpenWordsSettings(object sender, RoutedEventArgs e)
-        {
-            while (true)
-            {
-                var window = CreateNewSettingsWindow();
-
-                if (false == window.ShowDialog())
-                    break;
-
-                var newValues = window.NewValues;
-
-                if (null == newValues)
-                    SorterWordsGroupListMaker.SetDefaultValues();
-                else
-                {
-                    try
-                    {
-                        (SorterWordsGroupListMaker.MinLenghtOfWords, SorterWordsGroupListMaker.MinAppearsTimesOfWord)
-                            = newValues.Value;
-                    }
-                    catch
-                    {
-                        continue;
-                    }
-                }
-                break;
-            }
-
-            try
-            {
-                using (var writer = new SettingsFileWriter(SettingsFileWriter.SettingsFilePath))
-                    writer.WriteSettings();
-            }
-            catch
-            {
-                MessageBox.Show("Problem with file. Settings hasn't been saved.");
-            }
-
-            if (this.IsAnyFileOpened)
-                this.statsPage.ReloadFile();
-        }
-
-        private WordsSettings CreateNewSettingsWindow()
-        {
-            var window = new WordsSettings()
-            {
-                Owner = this
-            };
-
-            window.minLenght.Text = SorterWordsGroupListMaker.MinLenghtOfWords.ToString();
-            window.minAppearsTimes.Text = SorterWordsGroupListMaker.MinAppearsTimesOfWord.ToString();
-
-            return window;
         }
 
         private void LinkToDataDownloadingPage_Click(object sender, RoutedEventArgs e) 
@@ -166,5 +80,21 @@ namespace MessageCounterFrontend
 
         private void OpenInstructions_Click(object sender, RoutedEventArgs e) 
             => mainFrame.Navigate(new Instructions());
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.GoBack();
+
+            if (false == mainFrame.CanGoBack)
+                returnButton.Visibility = Visibility.Hidden;
+        }
+
+        private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (mainFrame.CanGoBack)
+                returnButton.Visibility = Visibility.Visible;
+            else
+                returnButton.Visibility = Visibility.Hidden;
+        }
     }
 }

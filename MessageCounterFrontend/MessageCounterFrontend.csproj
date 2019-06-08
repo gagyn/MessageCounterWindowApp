@@ -88,18 +88,26 @@
     <Compile Include="InterfaceBackend\FileOperators\FileWriter.cs" />
     <Compile Include="InterfaceBackend\FileOperators\SettingsFileReader.cs" />
     <Compile Include="InterfaceBackend\FileOperators\SettingsFileWriter.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="MainWindowOperations\FileOpener.cs" />
+    <Compile Include="MainWindowOperations\SettingsOpener.cs" />
     <Compile Include="SettingsWindows\SettingsWindow.cs" />
     <Compile Include="SettingsWindows\WordsSettings.xaml.cs">
       <DependentUpon>WordsSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatsPages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatsPages\OneItemPages\PersonPage.xaml.cs">
+      <DependentUpon>PersonPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatsPages\OneItemPages\PersonStrings.cs" />
+    <Compile Include="StatsPages\PeoplePage.xaml.cs">
+      <DependentUpon>PeoplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatsPages\StartPage.xaml.cs">
+      <DependentUpon>StartPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="InfoWindows\Instructions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,7 +119,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="InterfaceBackend\WrapPanelMaker.cs" />
     <Compile Include="InterfaceBackend\ContainersGridMakers\DaysGridMaker.cs" />
     <Compile Include="InterfaceBackend\ContainersGridMakers\GridMaker.cs" />
     <Compile Include="InterfaceBackend\ContainersGridMakers\MessagesGridMaker.cs" />
@@ -121,6 +128,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SettingsWindows\WordsSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatsPages\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StatsPages\OneItemPages\PersonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatsPages\PeoplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatsPages\StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,5 +196,6 @@
   <ItemGroup>
     <Resource Include="favicon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

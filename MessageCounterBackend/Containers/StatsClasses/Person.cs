@@ -12,7 +12,7 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
         public double SentMessagesRatio { get; private set; }
         public double SentUniqueWordsRatio { get; private set; }
         public double SentAllWordsRatio { get; private set; }
-        public double AvgNumberOfMessageInDaysWhenUserWroteAny { get; private set; }
+        public double AvgNumberOfMessagesInDaysWhenUserWroteAny { get; private set; }
         public double AvgNumberOfWordsInDaysWhenUserWroteAny { get; private set; }
         public DaysContainer DaysWhenUserWrittenSomething { get; private set; }
         public Day MostActiveDate { get; private set; }
@@ -81,7 +81,7 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
             SentUniqueWordsRatio = Math.Round(ratioWords, 2);
             SentAllWordsRatio = Math.Round(ratioAllWords, 2);
 
-            AvgNumberOfMessageInDaysWhenUserWroteAny = Math.Round(avgNumberMesses, 2);
+            AvgNumberOfMessagesInDaysWhenUserWroteAny = Math.Round(avgNumberMesses, 2);
             AvgNumberOfWordsInDaysWhenUserWroteAny   = Math.Round(avgNumberWords, 2);
         }
     }

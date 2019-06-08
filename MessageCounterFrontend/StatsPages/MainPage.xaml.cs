@@ -1,5 +1,8 @@
 ﻿using MessageCounterBackend;
 using MessageCounterFrontend.InterfaceBackend;
+using MessageCounterFrontend.StatsPage;
+using MessageCounterFrontend.StatsPages.OneItemPages;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,59 +28,35 @@ namespace MessageCounterFrontend
             this.StatsContainer = container;
 
             InitializeComponent();
-
-            ResetStatesOfVariables();
         }
 
         public void ReloadFile()
         {
             StatsContainer.ResetContainers();
-            MakeNeededContainers();
-            UpdateMainPanel();
         }
 
         private void ResetStatesOfVariables()
         {
-            WrapPanelMaker.IncludePeople
-                = WrapPanelMaker.IncludeDays
-                = WrapPanelMaker.IncludeWords = false;
-
-            checkBoxPeople.IsChecked
-                = checkBoxDays.IsChecked
-                = checkBoxWords.IsChecked = false;
+            throw new NotImplementedException();
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void Buttons_Clicks(object sender, RoutedEventArgs e)
         {
-            switch ((e.Source as CheckBox).Name)
+            switch ((e.Source as Button).Name)
             {
-                case nameof(checkBoxPeople):
-                    WrapPanelMaker.IncludePeople = !WrapPanelMaker.IncludePeople;
+                case nameof(peopleB):
+                    MakePeopleContainerIfNeeded();
+                    NavigationService.Navigate(new PeoplePage(StatsContainer.PeopleContainer));
                     break;
 
-                case nameof(checkBoxDays):
-                    WrapPanelMaker.IncludeDays = !WrapPanelMaker.IncludeDays;
+                case nameof(daysB):
+                    throw new NotImplementedException();
                     break;
 
-                case nameof(checkBoxWords):
-                    WrapPanelMaker.IncludeWords = !WrapPanelMaker.IncludeWords;
+                case nameof(WordsB):
+                    throw new NotImplementedException();
                     break;
             }
-
-            MakeNeededContainers();
-            UpdateMainPanel();
-        }
-
-        private void MakeNeededContainers()
-        {
-            if (WrapPanelMaker.IncludePeople)
-                MakePeopleContainerIfNeeded();
-
-            if (WrapPanelMaker.IncludeDays)
-                MakeDaysContainerIfNeeded();
-
-            if (WrapPanelMaker.IncludeWords)
-                MakeWordsContainerIfNeeded();
         }
 
         private void MakePeopleContainerIfNeeded()
@@ -96,12 +75,6 @@ namespace MessageCounterFrontend
         {
             if (null == StatsContainer.WordsContainer)
                 StatsContainer.MakeWordsContainer();
-        }
-
-        private void UpdateMainPanel()
-        {
-            MainWrapPanel = WrapPanelMaker.MakeStatsWrapPanel(StatsContainer);
-            UpdateLayout();
         }
     }
 }

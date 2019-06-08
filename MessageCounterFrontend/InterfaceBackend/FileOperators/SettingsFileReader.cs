@@ -4,7 +4,7 @@ namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 {
     class SettingsFileReader : FileReader
     {
-        public static string SettingsFilePath { get; } = "settings.config";
+        public static string SettingsFilePath => "settings.config";
 
         public SettingsFileReader(string path) : base(path) { }
 
