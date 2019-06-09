@@ -16,6 +16,9 @@ namespace MessageCounterFrontend.MainWindowOperations
 
         private MainWindow Window { get; }
 
+        /// <summary>
+        /// StatsPage IS NULL if there was any exception (problem with file / canceled by user)
+        /// </summary>
         public FileOpener(MainWindow window) : this(window, null) { }
         public FileOpener(MainWindow window, string[] args)
         {
@@ -45,7 +48,6 @@ namespace MessageCounterFrontend.MainWindowOperations
                 HandleExceptionsWhileLoading(e);
                 return;
             }
-
         }
 
         private void HandleExceptionsWhileLoading(Exception e)

@@ -9,6 +9,7 @@ using System.IO;
 using MessageCounterFrontend.InfoWindows;
 using System.Windows.Controls;
 using MessageCounterFrontend.MainWindowOperations;
+using MessageCounterFrontend.StatsPages;
 
 namespace MessageCounterFrontend
 {
@@ -25,7 +26,7 @@ namespace MessageCounterFrontend
         {
             InitializeComponent();
 
-            mainFrame.Navigate(new Page());
+            mainFrame.Navigate(new StartPage(this));
 
             try  // Reading settings file
             {
@@ -66,8 +67,6 @@ namespace MessageCounterFrontend
         private void CloseTheFile_Click(object sender, RoutedEventArgs e)
         {
             closeTheFile.IsEnabled = false;
-
-            mainFrame.Navigate(new Page());
 
             while (mainFrame.CanGoBack)
                 mainFrame.GoBack();

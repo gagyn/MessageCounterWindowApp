@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Message Counter" Height="600" Width="1200" MinHeight="600" MinWidth="450">
+        Title="Message Counter" Height="600" Width="1200" MinHeight="400" MinWidth="900">
     <Grid>
         <DockPanel HorizontalAlignment="Stretch" Height="20" LastChildFill="True" VerticalAlignment="Top" >
             <Menu DockPanel.Dock="Top">

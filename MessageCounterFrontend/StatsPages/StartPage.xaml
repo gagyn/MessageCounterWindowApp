@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MessageCounterFrontend.StatsPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" MinHeight="450" MaxHeight="800"
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="Start Page">
 
-    <Grid>
-        <Button x:Name="openFileButton" Content="Open a file" HorizontalAlignment="Center" VerticalAlignment="Center" Width="171" Height="78"
-                Click="OpenFileButton_Click" Margin="162,182,467,190"/>
-        <Button x:Name="openSettingsButton" Content="Change the settings" HorizontalAlignment="Center" VerticalAlignment="Center" Width="171" Height="78"
-            Click="OpenSettingsButton_Click" Margin="458,182,171,190"/>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
+        <Button x:Name="openFileButton" Content="Open a file" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="80"
+                Click="OpenFileButton_Click"/>
+        <Button x:Name="openSettingsButton" Content="Change the settings" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="80"
+            Click="OpenSettingsButton_Click"/>
 
     </Grid>
 </Page>
