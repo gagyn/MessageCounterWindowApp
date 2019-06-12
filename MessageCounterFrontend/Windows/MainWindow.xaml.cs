@@ -69,7 +69,8 @@ namespace MessageCounterFrontend
 
         private void OpenInstructions_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.Navigate(new Instructions());
+            if (mainFrame.NavigationService.Content.GetType() != typeof(Instructions)) // doesn't allow to open a few the same pages with instructions
+                mainFrame.Navigate(new Instructions());
         }
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e) 
