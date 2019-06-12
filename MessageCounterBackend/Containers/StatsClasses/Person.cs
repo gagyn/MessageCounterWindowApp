@@ -65,24 +65,36 @@ namespace MessageCounterBackend.StatContainers.ListTypesClasses
             ratioMesses = PersonMessages.NumberOfMessages 
                 / (float)allMessagesCount * 100;
 
-            avgNumberMesses = PersonMessages.NumberOfMessages
-                / (float)DaysWhenUserWrittenSomething.Days.Count;
+            if (DaysWhenUserWrittenSomething.Days.Count == 0)
+                avgNumberMesses = 0;
+            else
+                avgNumberMesses = PersonMessages.NumberOfMessages
+                    / (float)DaysWhenUserWrittenSomething.Days.Count;
 
-            ratioWords = PersonMessages.NumberOfUniqueWords
-                / (float)uniqueWordsCount * 100;
+            if (uniqueWordsCount == 0)
+                ratioWords = 0;
+            else
+                ratioWords = PersonMessages.NumberOfUniqueWords
+                    / (float)uniqueWordsCount * 100;
 
-            ratioAllWords = PersonMessages.NumberOfAllWords
-                / (float)allWordsCount * 100;
+            if (allWordsCount == 0)
+                ratioAllWords = 0;
+            else
+                ratioAllWords = PersonMessages.NumberOfAllWords
+                    / (float)allWordsCount * 100;
 
-            avgNumberWords = PersonMessages.NumberOfUniqueWords
-                / (float)DaysWhenUserWrittenSomething.Days.Count;
+            if (DaysWhenUserWrittenSomething.Days.Count == 0)
+                avgNumberWords = 0;
+            else
+                avgNumberWords = PersonMessages.NumberOfUniqueWords
+                    / (float)DaysWhenUserWrittenSomething.Days.Count;
 
             SentMessagesRatio = Math.Round(ratioMesses, 2);
             SentUniqueWordsRatio = Math.Round(ratioWords, 2);
             SentAllWordsRatio = Math.Round(ratioAllWords, 2);
 
             AvgNumberOfMessagesInDaysWhenUserWroteAny = Math.Round(avgNumberMesses, 2);
-            AvgNumberOfWordsInDaysWhenUserWroteAny   = Math.Round(avgNumberWords, 2);
+            AvgNumberOfWordsInDaysWhenUserWroteAny    = Math.Round(avgNumberWords, 2);
         }
     }
 }
