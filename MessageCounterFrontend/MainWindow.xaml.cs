@@ -40,12 +40,12 @@ namespace MessageCounterFrontend
             if (args.Length > 1)
             {
                 var fileOpener = new FileOpener(this, args);
-                OpenStatsPageIfNeeded(fileOpener);
+                OpenStatsPageIfPossible(fileOpener);
             }
         }
 
         public void OpenFile_Click(object sender, RoutedEventArgs e) 
-            => OpenStatsPageIfNeeded(new FileOpener(this));
+            => OpenStatsPageIfPossible(new FileOpener(this));
         public void Exit_Click(object sender, RoutedEventArgs e) => Close();
         public void OpenWordsSettings_Click(object sender, RoutedEventArgs e) => new SettingsOpener(this);
         public void ReloadFileIfNeeded()
@@ -54,11 +54,11 @@ namespace MessageCounterFrontend
                 statsPage.ReloadFile();
         }
 
-        private void OpenStatsPageIfNeeded(FileOpener opener)
+        private void OpenStatsPageIfPossible(FileOpener opener)
         {
             if (opener.StatsPage != null)
             {
-                statsPage = opener.StatsPage;
+                this.statsPage = opener.StatsPage;
                 mainFrame.Navigate(statsPage);
                 closeTheFile.IsEnabled = true;
             }
@@ -70,7 +70,8 @@ namespace MessageCounterFrontend
 
             while (mainFrame.CanGoBack)
                 mainFrame.GoBack();
-            
+
+            mainFrame.Navigate(new StartPage(this));
             statsPage = null;
         }
 
