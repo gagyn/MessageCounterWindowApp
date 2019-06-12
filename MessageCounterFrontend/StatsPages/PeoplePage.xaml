@@ -18,9 +18,4 @@
             <DataGridTextColumn Header="Average number of words" Binding="{Binding AvgNumberOfWords}" Width="100" />
         </DataGrid.Columns>
     </DataGrid>
-    <!--  <ScrollViewer
-        Name="viewer"
-        Margin="0,0,0,0"
-        HorizontalScrollBarVisibility="Disabled"  -->
-
 </Page>

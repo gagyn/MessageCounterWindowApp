@@ -12,9 +12,9 @@ namespace MessageCounterFrontend.MainWindowOperations
 {
     class SettingsOpener
     {
-        private readonly MainWindow window;
+        private readonly Window window;
 
-        public SettingsOpener(MainWindow window)
+        public SettingsOpener(Window window)
         {
             this.window = window;
             OpenWordsSettings();
@@ -36,7 +36,7 @@ namespace MessageCounterFrontend.MainWindowOperations
                 SetValues(newValues.Value);
 
             TryToSaveToFile();
-            window.ReloadFileIfNeeded();
+            //TODO: in mainWindow class: window.ReloadFileIfNeeded();
         }
 
         private (int, int)? GetValues()

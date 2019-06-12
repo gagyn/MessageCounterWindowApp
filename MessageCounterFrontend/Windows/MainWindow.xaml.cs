@@ -18,35 +18,29 @@ namespace MessageCounterFrontend
     /// </summary>
     public partial class MainWindow : Window
     {
+        public bool Exiting { get; private set; } = false;
+        private bool HandledClosing { get; set; } = false;
+
         private MainPage statsPage;
 
         private bool IsAnyFileOpened { get => this.statsPage != null; }
 
-        public MainWindow()
+        public MainWindow(string pathToFile)
         {
             InitializeComponent();
 
-            mainFrame.Navigate(new StartPage(this));
-
-            try  // Reading settings file
-            {
-                using (var reader = new SettingsFileReader(SettingsFileReader.SettingsFilePath))
-                    reader.ReadSettings();
-            }
-            catch { }
-
-            var args = Environment.GetCommandLineArgs();
-
-            if (args.Length > 1)
-            {
-                var fileOpener = new FileOpener(this, args);
-                OpenStatsPageIfPossible(fileOpener);
-            }
+            var opener = new FileOpener(this, pathToFile);
+            OpenStatsPageIfPossible(opener);
         }
 
         public void OpenFile_Click(object sender, RoutedEventArgs e) 
             => OpenStatsPageIfPossible(new FileOpener(this));
-        public void Exit_Click(object sender, RoutedEventArgs e) => Close();
+        public void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Exiting = true;
+            HandledClosing = true;
+            Close();
+        }
         public void OpenWordsSettings_Click(object sender, RoutedEventArgs e) => new SettingsOpener(this);
         public void ReloadFileIfNeeded()
         {
@@ -66,28 +60,23 @@ namespace MessageCounterFrontend
 
         private void CloseTheFile_Click(object sender, RoutedEventArgs e)
         {
-            closeTheFile.IsEnabled = false;
-
-            while (mainFrame.CanGoBack)
-                mainFrame.GoBack();
-
-            mainFrame.Navigate(new StartPage(this));
-            statsPage = null;
+            this.HandledClosing = true;
+            Close();
         }
 
         private void LinkToDataDownloadingPage_Click(object sender, RoutedEventArgs e) 
             => System.Diagnostics.Process.Start(Instructions.LinkToDownloadSite);
 
-        private void OpenInstructions_Click(object sender, RoutedEventArgs e) 
-            => mainFrame.Navigate(new Instructions());
-
-        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        private void OpenInstructions_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.GoBack();
-
-            if (false == mainFrame.CanGoBack)
-                returnButton.Visibility = Visibility.Hidden;
+            mainFrame.Navigate(new Instructions());
         }
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e) 
+            => mainFrame.GoBack();
+
+        private void ForwardButton_Click(object sender, RoutedEventArgs e)
+            => mainFrame.GoForward();
 
         private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -95,6 +84,17 @@ namespace MessageCounterFrontend
                 returnButton.Visibility = Visibility.Visible;
             else
                 returnButton.Visibility = Visibility.Hidden;
+
+            if (mainFrame.CanGoForward)
+                forwardButton.Visibility = Visibility.Visible;
+            else
+                forwardButton.Visibility = Visibility.Hidden;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (false == this.HandledClosing)
+                this.Exiting = true;
         }
     }
 }

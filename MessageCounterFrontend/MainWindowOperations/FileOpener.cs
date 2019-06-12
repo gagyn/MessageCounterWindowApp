@@ -20,24 +20,24 @@ namespace MessageCounterFrontend.MainWindowOperations
         /// StatsPage IS NULL if there was any exception (problem with file / canceled by user)
         /// </summary>
         public FileOpener(MainWindow window) : this(window, null) { }
-        public FileOpener(MainWindow window, string[] args)
+        public FileOpener(MainWindow window, string path)
         {
             Window = window;
-            TryToLoadTheFile(args);
+            TryToLoadTheFile(path); // TODO: Refactor this method
         }
 
-        private void TryToLoadTheFile(string[] args)
+        private void TryToLoadTheFile(string path)
         {
             try
             {
                 string fileContent;
 
-                if (null == args)   // if from OpenFile_Click
+                if (null == path)   // if from OpenFile_Click
                     using (var reader = new FileReaderWithDialog()) // CanceledByUserException
                         fileContent = reader.ReadAll();     // IOException
 
                 else                // if from command line args
-                    using (var reader = new FileReaderWithDialog(args[1]))
+                    using (var reader = new FileReaderWithDialog(path))
                         fileContent = reader.ReadAll();     // IOException
 
                 var stats = CreateStatsContainer(fileContent);   // Newtonsoft.Json.JsonReaderException
