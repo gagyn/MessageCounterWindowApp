@@ -27,11 +27,14 @@ namespace MessageCounterBackend
         public void MakeWordsContainer() => this.WordsContainer = new MessagesContainer(jsonObject);
         public void MakeDaysContainer() => this.DaysContainer = new DaysContainer(jsonObject);
         public void MakePeopleContainer() => this.PeopleContainer = new PeopleContainer(jsonObject);
-        public void ResetContainers()
+        public void ReloadContainers()
         {
-            WordsContainer = null;
-            DaysContainer = null;
-            PeopleContainer = null;
+            if (WordsContainer != null)
+                MakeWordsContainer();
+            if (DaysContainer != null)
+                MakeDaysContainer();
+            if (PeopleContainer != null)
+                MakePeopleContainer();
         }
     }
 }

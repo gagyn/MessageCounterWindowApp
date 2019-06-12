@@ -18,7 +18,7 @@
         <TextBlock
             Margin="120,10"
             HorizontalAlignment="Left" VerticalAlignment="Top"
-            Width="300" Height="20"
+            Height="20"
             Text="Show statistics for every person in this conversation." />
 
         <Button 
@@ -30,7 +30,7 @@
         <TextBlock
             Margin="120,60"
             HorizontalAlignment="Left" VerticalAlignment="Top"
-            Width="300" Height="20"
+            Height="20"
             Text="Show statistics for all days, when someone from this conversation wrote any message." />
 
         <Button 
@@ -42,10 +42,10 @@
         <TextBlock
             Margin="120,110"
             HorizontalAlignment="Left" VerticalAlignment="Top"
-            Width="300" Height="20"
+            Height="20"
             Text="Show statistics for all words from this converation." />
-        
-        
+
+
         <ScrollViewer 
             x:Name="scrollViewer"
             Margin="0,150,0,10" 

@@ -1,10 +1,9 @@
 ﻿using MessageCounterBackend;
-using MessageCounterFrontend.InterfaceBackend;
 using MessageCounterFrontend.StatsPage;
-using MessageCounterFrontend.StatsPages.OneItemPages;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace MessageCounterFrontend
 {
@@ -30,14 +29,16 @@ namespace MessageCounterFrontend
             InitializeComponent();
         }
 
-        public void ReloadFile()
+        public Page Reload(Page currentContentOfPage)
         {
-            StatsContainer.ResetContainers();
-        }
+            this.StatsContainer.ReloadContainers();
 
-        private void ResetStatesOfVariables()
-        {
-            throw new NotImplementedException();
+            switch (currentContentOfPage)
+            {
+                case PeoplePage p:
+                    return new PeoplePage(StatsContainer.PeopleContainer);
+            }
+            return null;
         }
 
         private void Buttons_Clicks(object sender, RoutedEventArgs e)

@@ -5,17 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MessageCounterFrontend.StatsPage"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="400" d:DesignWidth="800"
       Title="PeoplePage">
 
-    <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <DataGrid x:Name="dataGrid" Margin="0,0,0,10" AutoGenerateColumns="False" 
+              IsReadOnly="True" CanUserAddRows="False" 
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <DataGrid.Columns>
             <DataGridTextColumn Header="Full name" Binding="{Binding FullName}" Width="200"/>
             <DataGridTextColumn Header="Number of messages" Binding="{Binding NumberOfMess}" Width="130"/>
             <DataGridTextColumn Header="Messages share" Binding="{Binding SentMessesRatio}" Width="100"/>
             <DataGridTextColumn Header="Words share" Binding="{Binding SentWordsRatio}" Width="100" />
-            <DataGridTextColumn Header="Average number of messages" Binding="{Binding AvgNumberOfMesses}" Width="100" />
-            <DataGridTextColumn Header="Average number of words" Binding="{Binding AvgNumberOfWords}" Width="100" />
+            <DataGridTextColumn Header="Average number of messages" Binding="{Binding AvgNumberOfMesses}" Width="200" />
+            <DataGridTextColumn Header="Average number of words" Binding="{Binding AvgNumberOfWords}" Width="200" />
         </DataGrid.Columns>
     </DataGrid>
 </Page>

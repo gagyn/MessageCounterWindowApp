@@ -26,15 +26,19 @@ namespace MessageCounterFrontend.StatsPage
     /// </summary>
     public partial class PeoplePage : Page
     {
-        private List<PersonStrings> PeopleStrings { get; }
-        public PeoplePage(PeopleContainer container)
+        private List<PersonStrings> GetPeopleStrings(PeopleContainer container)
         {
             var people = container.SortedPeople;
-            PeopleStrings = people.Select(x => new PersonStrings(x)).ToList();
+            return people.Select(x => new PersonStrings(x)).ToList();
+        }
 
+        public PeoplePage(PeopleContainer container)
+        {
             InitializeComponent();
 
-            this.dataGrid.ItemsSource = PeopleStrings;
+            Refresh(container);
         }
+
+        public void Refresh(PeopleContainer container) => this.dataGrid.ItemsSource = GetPeopleStrings(container);
     }
 }

@@ -12,6 +12,8 @@ namespace MessageCounterFrontend.MainWindowOperations
 {
     class SettingsOpener
     {
+        public bool ChangedValues { get; private set; } = false;
+
         private readonly Window window;
 
         public SettingsOpener(Window window)
@@ -36,7 +38,7 @@ namespace MessageCounterFrontend.MainWindowOperations
                 SetValues(newValues.Value);
 
             TryToSaveToFile();
-            //TODO: in mainWindow class: window.ReloadFileIfNeeded();
+            this.ChangedValues = true;
         }
 
         private (int, int)? GetValues()

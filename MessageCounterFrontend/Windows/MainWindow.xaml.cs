@@ -10,6 +10,7 @@ using MessageCounterFrontend.InfoWindows;
 using System.Windows.Controls;
 using MessageCounterFrontend.MainWindowOperations;
 using MessageCounterFrontend.StatsPages;
+using MessageCounterFrontend.StatsPage;
 
 namespace MessageCounterFrontend
 {
@@ -41,11 +42,16 @@ namespace MessageCounterFrontend
             HandledClosing = true;
             Close();
         }
-        public void OpenWordsSettings_Click(object sender, RoutedEventArgs e) => new SettingsOpener(this);
-        public void ReloadFileIfNeeded()
+        public void OpenWordsSettings_Click(object sender, RoutedEventArgs e)
         {
-            if (IsAnyFileOpened)
-                statsPage.ReloadFile();
+            var settings = new SettingsOpener(this);
+
+            if (settings.ChangedValues && this.IsAnyFileOpened)
+            {
+                var page = this.statsPage.Reload((Page)mainFrame.Content);
+                if (page != null)
+                    mainFrame.Navigate(page);
+            }
         }
 
         private void OpenStatsPageIfPossible(FileOpener opener)
@@ -69,7 +75,7 @@ namespace MessageCounterFrontend
 
         private void OpenInstructions_Click(object sender, RoutedEventArgs e)
         {
-            if (mainFrame.NavigationService.Content.GetType() != typeof(Instructions)) // doesn't allow to open a few the same pages with instructions
+            if (mainFrame.Content.GetType() != typeof(Instructions)) // doesn't allow to open a few the same pages with instructions
                 mainFrame.Navigate(new Instructions());
         }
 

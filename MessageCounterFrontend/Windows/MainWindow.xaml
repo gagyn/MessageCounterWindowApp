@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Closing="Window_Closing"
-        Title="Message Counter" Height="600" Width="1200" MinHeight="400" MinWidth="900">
+        Title="Message Counter" Height="600" Width="1200" MinHeight="350" MinWidth="750">
     <Grid>
         <DockPanel HorizontalAlignment="Stretch" Height="20" LastChildFill="True" VerticalAlignment="Top" >
             <Menu DockPanel.Dock="Top">
@@ -29,6 +29,6 @@
         <Button x:Name="returnButton" Visibility="Hidden" Margin="0,20,0,0" Width="50" Height="30" Click="ReturnButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Marlett" FontSize="20" Content="3" RenderTransformOrigin="0.44,0.2"/>
         <Button x:Name="forwardButton" Visibility="Hidden" Margin="50,20,0,0" Width="50" Height="30" Click="ForwardButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Marlett" FontSize="20" Content="4" RenderTransformOrigin="0.44,0.2"/>
 
-        <Frame x:Name="mainFrame" Margin="10,55,46,-25" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" />
+        <Frame x:Name="mainFrame" Margin="10,55,10,0" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" />
     </Grid>
 </Window>
