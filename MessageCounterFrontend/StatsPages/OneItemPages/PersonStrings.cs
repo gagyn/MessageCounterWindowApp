@@ -14,12 +14,12 @@ namespace MessageCounterFrontend.StatsPages.OneItemPages
         public PersonStrings(Person person) => this.Person = person;
 
         public string FullName => Person.FullName;
-        public string NumberOfMess => Person.PersonMessages.NumberOfMessages.ToString();
-        public string SentMessesRatio => Person.SentMessagesRatio.ToString() + "%";
-        public string SentWordsRatio => Person.SentAllWordsRatio.ToString() + "%";
-        public string SentUniqueWordsRatio => Person.SentUniqueWordsRatio.ToString() + "%";
-        public string AvgNumberOfMesses => Person.AvgNumberOfMessagesInDaysWhenUserWroteAny.ToString();
-        public string AvgNumberOfWords => Person.AvgNumberOfWordsInDaysWhenUserWroteAny.ToString();
+        public double NumberOfMess => Person.PersonMessages.NumberOfMessages;
+        public string SentMessesRatio => string.Format("{0:00.00}%", Person.SentMessagesRatio);
+        public string SentWordsRatio => string.Format("{0:00.00}%", Person.SentAllWordsRatio);
+        public string SentUniqueWordsRatio => string.Format("{0:00.00}%", Person.SentUniqueWordsRatio);
+        public double AvgNumberOfMesses => Person.AvgNumberOfMessagesInDaysWhenUserWroteAny;
+        public double AvgNumberOfWords => Person.AvgNumberOfWordsInDaysWhenUserWroteAny;
 
     }
 }
