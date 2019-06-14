@@ -34,15 +34,17 @@ namespace MessageCounterFrontend
             OpenStatsPageIfPossible(opener);
         }
 
-        public void OpenFile_Click(object sender, RoutedEventArgs e) 
+        private void OpenFile_Click(object sender, RoutedEventArgs e) 
             => OpenStatsPageIfPossible(new FileOpener(this));
-        public void Exit_Click(object sender, RoutedEventArgs e)
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Exiting = true;
             HandledClosing = true;
             Close();
         }
-        public void OpenWordsSettings_Click(object sender, RoutedEventArgs e)
+
+        private void OpenWordsSettings_Click(object sender, RoutedEventArgs e)
         {
             var settings = new SettingsOpener(this);
 
@@ -70,6 +72,8 @@ namespace MessageCounterFrontend
             Close();
         }
 
+        private void HomeButton_Click(object sender, RoutedEventArgs e) => CloseTheFile_Click(sender, e);
+
         private void LinkToDataDownloadingPage_Click(object sender, RoutedEventArgs e) 
             => System.Diagnostics.Process.Start(Instructions.LinkToDownloadSite);
 
@@ -87,15 +91,8 @@ namespace MessageCounterFrontend
 
         private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            if (mainFrame.CanGoBack)
-                returnButton.Visibility = Visibility.Visible;
-            else
-                returnButton.Visibility = Visibility.Hidden;
-
-            if (mainFrame.CanGoForward)
-                forwardButton.Visibility = Visibility.Visible;
-            else
-                forwardButton.Visibility = Visibility.Hidden;
+            returnButton.Visibility = mainFrame.CanGoBack ? Visibility.Visible : Visibility.Hidden;
+            forwardButton.Visibility = mainFrame.CanGoForward ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

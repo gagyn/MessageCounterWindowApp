@@ -25,10 +25,18 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        
-        <Button x:Name="returnButton" Visibility="Hidden" Margin="0,20,0,0" Width="50" Height="30" Click="ReturnButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Marlett" FontSize="20" Content="3" RenderTransformOrigin="0.44,0.2"/>
-        <Button x:Name="forwardButton" Visibility="Hidden" Margin="50,20,0,0" Width="50" Height="30" Click="ForwardButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Marlett" FontSize="20" Content="4" RenderTransformOrigin="0.44,0.2"/>
 
+        <Button x:Name="returnButton" Visibility="Hidden" Margin="50,20" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Click="ReturnButton_Click" FontFamily="Marlett" FontSize="20" Content="3"/>
+        <Button x:Name="forwardButton" Visibility="Hidden" Margin="100,20" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Click="ForwardButton_Click" FontFamily="Marlett" FontSize="20" Content="4"/>
+
+        <Button x:Name="homeButton" Visibility="Visible" Margin="0,20" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Click="HomeButton_Click">
+            <Image Source="../Icons/home-button.png"/>
+            <!-- Icon mady by Freepik from www.flaticon.com -->
+        </Button>
+        
         <Frame x:Name="mainFrame" Margin="10,55,10,0" NavigationUIVisibility="Hidden" Navigated="MainFrame_Navigated" />
     </Grid>
 </Window>
