@@ -1,5 +1,6 @@
 ﻿using MessageCounterBackend;
 using MessageCounterFrontend.InterfaceBackend;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,69 +13,69 @@ namespace MessageCounterFrontend.MainWindowOperations
 {
     class FileOpener
     {
-        public MainPage StatsPage { get; private set; }
-
-        private MainWindow Window { get; }
-
         /// <summary>
         /// StatsPage IS NULL if there was any exception (problem with file / canceled by user)
         /// </summary>
-        public FileOpener(MainWindow window) : this(window, null) { }
-        public FileOpener(MainWindow window, string path)
-        {
-            Window = window;
-            TryToLoadTheFile(path); // TODO: Refactor this method
-        }
-
-        private void TryToLoadTheFile(string path)
+        public MainPage StatsPage { get; private set; }
+        
+        public FileOpener() // if from OpenFile_Click
         {
             try
             {
                 string fileContent;
 
-                if (null == path)   // if from OpenFile_Click
-                    using (var reader = new FileReaderWithDialog()) // CanceledByUserException
-                        fileContent = reader.ReadAll();     // IOException
+                using (var reader = new FileReaderWithDialog())
+                    fileContent = reader.ReadToEnd();
 
-                else                // if from command line args
-                    using (var reader = new FileReaderWithDialog(path))
-                        fileContent = reader.ReadAll();     // IOException
-
-                var stats = CreateStatsContainer(fileContent);   // Newtonsoft.Json.JsonReaderException
-                StatsPage = new MainPage(Window, stats);
+                AssignStatsPage(fileContent);
             }
             catch (Exception e)
             {
                 HandleExceptionsWhileLoading(e);
-                return;
             }
+        }
+
+        public FileOpener(string path)  // if from command args
+        {
+            try
+            {
+                string fileContent;
+
+                using (var reader = new StreamReader(path))
+                    fileContent = reader.ReadToEnd();
+
+                AssignStatsPage(fileContent);
+            }
+            catch (Exception e)
+            {
+                HandleExceptionsWhileLoading(e);
+            }
+        }
+
+        private void AssignStatsPage(string fileContent)
+        {
+            var stats = new StatsContainer(fileContent); // constructor throws exception, when file is incorrect
+            StatsPage = new MainPage(stats);
         }
 
         private void HandleExceptionsWhileLoading(Exception e)
         {
-            if (e is IOException)
-                MessageBox.Show("Problem with opening the file: " + e.Message);
-
-            else if (e is Newtonsoft.Json.JsonSerializationException)
-                return;
-
-            else if (e is CanceledByUserException)
-                return;
-
-            else
-                MessageBox.Show("Unknown problem: " + e.Message);
-        }
-
-        private StatsContainer CreateStatsContainer(string fileContent) // throw exception, when file is incorrect
-        {
-            try
+            switch (e)
             {
-                return new StatsContainer(fileContent);
-            }
-            catch
-            {
-                MessageBox.Show("The file is incorrect!");
-                throw;
+                case IOException _:
+                    MessageBox.Show("Problem with opening the file.");
+                    break;
+
+                case JsonSerializationException _:
+                    MessageBox.Show("Problem with parsing the file - the file is incorrect. Make sure the file is a correct message history file.");
+                    break;
+
+                case CanceledByUserException _:
+                    break;
+
+                default:
+                    MessageBox.Show("Uknown problem: " + e.Message);
+                    break;
             }
         }
     }

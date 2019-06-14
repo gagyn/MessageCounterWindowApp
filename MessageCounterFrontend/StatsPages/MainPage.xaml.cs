@@ -12,8 +12,6 @@ namespace MessageCounterFrontend
     /// </summary>
     public partial class MainPage : Page
     {
-        private readonly Window mainWindow;
-
         private StatsContainer StatsContainer { get; set; }
         private WrapPanel MainWrapPanel
         {
@@ -21,11 +19,9 @@ namespace MessageCounterFrontend
             set => scrollViewer.Content = value;
         }
 
-        public MainPage(Window window, StatsContainer container)
+        public MainPage(StatsContainer container)
         {
-            this.mainWindow = window;
             this.StatsContainer = container;
-
             InitializeComponent();
         }
 
@@ -35,7 +31,7 @@ namespace MessageCounterFrontend
 
             switch (currentContentOfPage)
             {
-                case PeoplePage p:
+                case PeoplePage _:
                     return new PeoplePage(StatsContainer.PeopleContainer);
             }
             return null;
