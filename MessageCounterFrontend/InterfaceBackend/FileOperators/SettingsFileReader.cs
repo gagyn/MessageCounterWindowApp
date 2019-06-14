@@ -1,8 +1,9 @@
-﻿using MessageCounterBackend.Containers.Helpers_classes;
+﻿using System.IO;
+using MessageCounterBackend.Containers.Helpers_classes;
 
 namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 {
-    class SettingsFileReader : FileReader
+    class SettingsFileReader : StreamReader
     {
         public static string SettingsFilePath => "settings.config";
 
