@@ -30,12 +30,12 @@ namespace MessageCounterFrontend
         {
             InitializeComponent();
 
-            var opener = new FileOpener(this, pathToFile);
+            var opener = new FileOpener(pathToFile);
             OpenStatsPageIfPossible(opener);
         }
 
         private void OpenFile_Click(object sender, RoutedEventArgs e) 
-            => OpenStatsPageIfPossible(new FileOpener(this));
+            => OpenStatsPageIfPossible(new FileOpener());
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
