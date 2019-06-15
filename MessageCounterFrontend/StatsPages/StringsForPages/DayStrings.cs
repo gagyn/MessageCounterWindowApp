@@ -1,7 +1,7 @@
 ﻿using System;
 using MessageCounterBackend.StatContainers.ListTypesClasses;
 
-namespace MessageCounterFrontend.StatsPages.OneItemPages
+namespace MessageCounterFrontend.StatsPages.SettingsForPages
 {
     class DayStrings
     {

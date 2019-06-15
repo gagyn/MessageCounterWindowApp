@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MessageCounterBackend.StatContainers;
 using MessageCounterFrontend.StatsPages.OneItemPages;
+using MessageCounterFrontend.StatsPages.SettingsForPages;
 
 namespace MessageCounterFrontend.StatsPages
 {

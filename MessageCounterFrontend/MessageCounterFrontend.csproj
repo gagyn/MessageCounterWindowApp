@@ -111,11 +111,11 @@
     <Compile Include="StatsPages\OneItemPages\DayPage.xaml.cs">
       <DependentUpon>DayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatsPages\OneItemPages\DayStrings.cs" />
+    <Compile Include="StatsPages\StringsForPages\DayStrings.cs" />
     <Compile Include="StatsPages\OneItemPages\PersonPage.xaml.cs">
       <DependentUpon>PersonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatsPages\OneItemPages\PersonStrings.cs" />
+    <Compile Include="StatsPages\StringsForPages\PersonStrings.cs" />
     <Compile Include="StatsPages\PeoplePage.xaml.cs">
       <DependentUpon>PeoplePage.xaml</DependentUpon>
     </Compile>
