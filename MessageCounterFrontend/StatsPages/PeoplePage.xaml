@@ -11,8 +11,15 @@
     <DataGrid x:Name="dataGrid" Margin="0,0,0,10" AutoGenerateColumns="False" 
               IsReadOnly="True" CanUserAddRows="False" 
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+              Sorting="DataGrid_Sorting">
 
+        <DataGrid.Resources>
+            <Style TargetType="{x:Type DataGridCell}">
+                <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
+            </Style>
+        </DataGrid.Resources>
+        
         <DataGrid.Columns>
             <DataGridTextColumn Header="Full name" Binding="{Binding FullName}" Width="200">
                 <DataGridTextColumn.ElementStyle>
@@ -39,7 +46,7 @@
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
 
-            <DataGridTextColumn Header="Words share" Binding="{Binding SentWordsRatio}" Width="100">
+            <DataGridTextColumn Header="Words share" Binding="{Binding SentWordsRatio}" Width="82">
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -47,7 +54,7 @@
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
 
-            <DataGridTextColumn Header="Average number of messages" Binding="{Binding AvgNumberOfMesses, StringFormat=N2}" Width="200" >
+            <DataGridTextColumn Header="Average number of messages" Binding="{Binding AvgNumberOfMesses, StringFormat=N2}" Width="170" >
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -55,7 +62,7 @@
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
 
-            <DataGridTextColumn Header="Average number of words" Binding="{Binding AvgNumberOfWords, StringFormat=N2}" Width="200">
+            <DataGridTextColumn Header="Average number of words" Binding="{Binding AvgNumberOfWords, StringFormat=N2}" Width="155">
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />

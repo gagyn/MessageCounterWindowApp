@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageCounterBackend.StatContainers.ListTypesClasses;
 
 namespace MessageCounterFrontend.StatsPages.OneItemPages
 {
@@ -20,7 +21,7 @@ namespace MessageCounterFrontend.StatsPages.OneItemPages
     /// </summary>
     public partial class PersonPage : Page
     {
-        public PersonPage()
+        public PersonPage(Person person)
         {
             InitializeComponent();
         }

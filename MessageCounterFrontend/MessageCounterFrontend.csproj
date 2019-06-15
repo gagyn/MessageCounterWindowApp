@@ -127,10 +127,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="InterfaceBackend\ContainersGridMakers\DaysGridMaker.cs" />
-    <Compile Include="InterfaceBackend\ContainersGridMakers\GridMaker.cs" />
-    <Compile Include="InterfaceBackend\ContainersGridMakers\MessagesGridMaker.cs" />
-    <Compile Include="InterfaceBackend\ContainersGridMakers\PeopleGridMaker.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
