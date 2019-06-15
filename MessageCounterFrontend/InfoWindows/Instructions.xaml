@@ -13,7 +13,7 @@
             The first thing you need to do is downloading your all messenger messages from Facebook.
             <Hyperlink Click="Hyperlink_Click">(click here to open web browser)</Hyperlink>
             <LineBreak/><LineBreak/>
-            When you have downloaded data, you need to unpacked.<LineBreak/>
+            When you have downloaded data, you need to unpack the zip folder.<LineBreak/>
             Than you can open the file in this application.
         </TextBlock>
     </Grid>

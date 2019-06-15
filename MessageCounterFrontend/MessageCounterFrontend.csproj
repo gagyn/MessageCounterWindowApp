@@ -102,9 +102,16 @@
     <Compile Include="SettingsWindows\WordsSettings.xaml.cs">
       <DependentUpon>WordsSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatsPages\DaysPage.xaml.cs">
+      <DependentUpon>DaysPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StatsPages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatsPages\OneItemPages\DayPage.xaml.cs">
+      <DependentUpon>DayPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatsPages\OneItemPages\DayStrings.cs" />
     <Compile Include="StatsPages\OneItemPages\PersonPage.xaml.cs">
       <DependentUpon>PersonPage.xaml</DependentUpon>
     </Compile>
@@ -116,6 +123,14 @@
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="InfoWindows\Instructions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatsPages\DaysPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatsPages\OneItemPages\DayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using MessageCounterBackend;
 using MessageCounterFrontend.StatsPage;
+using MessageCounterFrontend.StatsPages;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,10 +48,12 @@ namespace MessageCounterFrontend
                     break;
 
                 case nameof(daysB):
-                    throw new NotImplementedException();
+                    MakeDaysContainerIfNeeded();
+                    NavigationService.Navigate(new DaysPage(StatsContainer.DaysContainer));
                     break;
 
                 case nameof(WordsB):
+                    MakeWordsContainerIfNeeded();
                     throw new NotImplementedException();
                     break;
             }

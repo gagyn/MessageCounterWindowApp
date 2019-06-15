@@ -32,7 +32,7 @@ namespace MessageCounterFrontend.StatsPage
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var personStrings = dataGrid.SelectedItem as PersonStrings;
-            var person = container.SortedPeople.First(x => x.FullName.Equals(personStrings.FullName));
+            var person = personStrings.Person;
 
             NavigationService.Navigate(new PersonPage(person));
         }
