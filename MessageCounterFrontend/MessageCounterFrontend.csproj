@@ -90,7 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="InfoWindows\Instructions.xaml.cs">
+    <Compile Include="Windows\InfoWindows\Instructions.xaml.cs">
       <DependentUpon>Instructions.xaml</DependentUpon>
     </Compile>
     <Compile Include="InterfaceBackend\FileOperators\FileReaderWithDialog.cs" />
@@ -98,39 +98,39 @@
     <Compile Include="InterfaceBackend\FileOperators\SettingsFileWriter.cs" />
     <Compile Include="MainWindowOperations\FileOpener.cs" />
     <Compile Include="MainWindowOperations\SettingsOpener.cs" />
-    <Compile Include="SettingsWindows\SettingsWindow.cs" />
-    <Compile Include="SettingsWindows\WordsSettings.xaml.cs">
+    <Compile Include="Windows\SettingsWindows\SettingsWindow.cs" />
+    <Compile Include="Windows\SettingsWindows\WordsSettings.xaml.cs">
       <DependentUpon>WordsSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatsPages\DaysPage.xaml.cs">
+    <Compile Include="Pages\StatsPages\DaysPage.xaml.cs">
       <DependentUpon>DaysPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatsPages\MainPage.xaml.cs">
+    <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatsPages\OneItemPages\DayPage.xaml.cs">
+    <Compile Include="Pages\StatsPages\OneItemPages\DayPage.xaml.cs">
       <DependentUpon>DayPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatsPages\StringsForPages\DayStrings.cs" />
-    <Compile Include="StatsPages\OneItemPages\PersonPage.xaml.cs">
+    <Compile Include="Pages\StatsPages\StringsForPages\DayStrings.cs" />
+    <Compile Include="Pages\StatsPages\OneItemPages\PersonPage.xaml.cs">
       <DependentUpon>PersonPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StatsPages\StringsForPages\PersonStrings.cs" />
-    <Compile Include="StatsPages\PeoplePage.xaml.cs">
+    <Compile Include="Pages\StatsPages\StringsForPages\PersonStrings.cs" />
+    <Compile Include="Pages\StatsPages\PeoplePage.xaml.cs">
       <DependentUpon>PeoplePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="InfoWindows\Instructions.xaml">
+    <Page Include="Windows\InfoWindows\Instructions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StatsPages\DaysPage.xaml">
+    <Page Include="Pages\StatsPages\DaysPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StatsPages\OneItemPages\DayPage.xaml">
+    <Page Include="Pages\StatsPages\OneItemPages\DayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,19 +146,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SettingsWindows\WordsSettings.xaml">
+    <Page Include="Windows\SettingsWindows\WordsSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StatsPages\MainPage.xaml">
+    <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="StatsPages\OneItemPages\PersonPage.xaml">
+    <Page Include="Pages\StatsPages\OneItemPages\PersonPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StatsPages\PeoplePage.xaml">
+    <Page Include="Pages\StatsPages\PeoplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
