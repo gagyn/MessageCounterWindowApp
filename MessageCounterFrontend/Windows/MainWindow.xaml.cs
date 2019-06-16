@@ -1,18 +1,10 @@
-﻿using System;
 using System.Windows;
-using MessageCounterBackend;
-using MessageCounterBackend.Containers.Helpers_classes;
-using MessageCounterFrontend.InterfaceBackend;
-using MessageCounterFrontend.SettingsWindows;
-using MessageCounterFrontend.InterfaceBackend.FileOperators;
-using System.IO;
-using MessageCounterFrontend.InfoWindows;
 using System.Windows.Controls;
 using MessageCounterFrontend.MainWindowOperations;
-using MessageCounterFrontend.StatsPages;
-using MessageCounterFrontend.StatsPage;
+using MessageCounterFrontend.Pages;
+using MessageCounterFrontend.Windows.InfoWindows;
 
-namespace MessageCounterFrontend
+namespace MessageCounterFrontend.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

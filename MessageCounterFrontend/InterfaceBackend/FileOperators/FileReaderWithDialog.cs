@@ -1,8 +1,8 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.IO;
 
-namespace MessageCounterFrontend.InterfaceBackend
+namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 {
     class CanceledByUserException : Exception
     {

@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 using MessageCounterBackend.StatContainers.ListTypesClasses;
 
-namespace MessageCounterFrontend.StatsPages.OneItemPages
+namespace MessageCounterFrontend.Pages.StatsPages.OneItemPages
 {
     /// <summary>
     /// Interaction logic for PersonPage.xaml

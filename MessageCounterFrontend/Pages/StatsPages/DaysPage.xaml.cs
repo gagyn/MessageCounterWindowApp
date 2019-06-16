@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MessageCounterBackend.StatContainers;
-using MessageCounterFrontend.StatsPages.OneItemPages;
-using MessageCounterFrontend.StatsPages.SettingsForPages;
+using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
+using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 
-namespace MessageCounterFrontend.StatsPages
+namespace MessageCounterFrontend.Pages.StatsPages
 {
     /// <summary>
     /// Interaction logic for DaysPage.xaml

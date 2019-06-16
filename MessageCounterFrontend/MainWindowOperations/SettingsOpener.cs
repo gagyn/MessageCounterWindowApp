@@ -1,11 +1,7 @@
 ﻿using MessageCounterBackend.Containers.Helpers_classes;
 using MessageCounterFrontend.InterfaceBackend.FileOperators;
-using MessageCounterFrontend.SettingsWindows;
+using MessageCounterFrontend.Windows.SettingsWindows;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MessageCounterFrontend.MainWindowOperations

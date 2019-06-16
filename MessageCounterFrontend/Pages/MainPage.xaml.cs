@@ -1,12 +1,11 @@
-﻿using MessageCounterBackend;
-using MessageCounterFrontend.StatsPage;
-using MessageCounterFrontend.StatsPages;
+using MessageCounterBackend;
+using MessageCounterFrontend.Pages.StatsPages;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace MessageCounterFrontend
+namespace MessageCounterFrontend.Pages
 {
     /// <summary>
     /// Interaction logic for MainPage.xaml

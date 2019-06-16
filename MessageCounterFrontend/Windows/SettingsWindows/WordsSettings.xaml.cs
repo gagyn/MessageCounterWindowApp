@@ -1,8 +1,8 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
-namespace MessageCounterFrontend.SettingsWindows
+namespace MessageCounterFrontend.Windows.SettingsWindows
 {
     /// <summary>
     /// Interaction logic for WordsSettings.xaml

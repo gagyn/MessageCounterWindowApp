@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace MessageCounterFrontend.InfoWindows
+namespace MessageCounterFrontend.Windows.InfoWindows
 {
     /// <summary>
     /// Interaction logic for Instructions.xaml

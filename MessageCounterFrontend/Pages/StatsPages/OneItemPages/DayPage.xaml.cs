@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MessageCounterBackend.StatContainers.ListTypesClasses;
 
-namespace MessageCounterFrontend.StatsPages.OneItemPages
+namespace MessageCounterFrontend.Pages.StatsPages.OneItemPages
 {
     /// <summary>
     /// Interaction logic for DayPage.xaml

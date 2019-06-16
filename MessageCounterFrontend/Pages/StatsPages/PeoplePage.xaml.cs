@@ -1,13 +1,13 @@
-﻿using MessageCounterBackend.StatContainers;
-using MessageCounterFrontend.StatsPages.OneItemPages;
-using MessageCounterFrontend.StatsPages.SettingsForPages;
+using MessageCounterBackend.StatContainers;
+using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
+using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace MessageCounterFrontend.StatsPage
+namespace MessageCounterFrontend.Pages.StatsPages
 {
     /// <summary>
     /// Interaction logic for PeoplePage.xaml

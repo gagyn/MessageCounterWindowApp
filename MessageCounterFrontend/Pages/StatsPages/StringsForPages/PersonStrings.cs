@@ -1,6 +1,6 @@
-﻿using MessageCounterBackend.StatContainers.ListTypesClasses;
+using MessageCounterBackend.StatContainers.ListTypesClasses;
 
-namespace MessageCounterFrontend.StatsPages.SettingsForPages
+namespace MessageCounterFrontend.Pages.StatsPages.StringsForPages
 {
     class PersonStrings
     {
