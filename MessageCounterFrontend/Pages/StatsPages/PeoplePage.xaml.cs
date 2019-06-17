@@ -35,7 +35,8 @@ namespace MessageCounterFrontend.Pages.StatsPages
             var personStrings = dataGrid.SelectedItem as PersonStrings;
             var person = personStrings.Person;
 
-            NavigationService.Navigate(new PersonPage(person));
+            // TODO: 
+            //NavigationService.Navigate(new PersonPage(person));
         }
 
         private void DataGrid_Sorting(object sender, DataGridSortingEventArgs e)

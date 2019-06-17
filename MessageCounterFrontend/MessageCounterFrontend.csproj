@@ -93,6 +93,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\StatsPages\StringsForPages\WordsStrings.cs" />
+    <Compile Include="Pages\StatsPages\WordsPage.xaml.cs">
+      <DependentUpon>WordsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\InfoWindows\Instructions.xaml.cs">
       <DependentUpon>Instructions.xaml</DependentUpon>
     </Compile>
@@ -125,6 +129,10 @@
     <Compile Include="Windows\StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\StatsPages\WordsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\InfoWindows\Instructions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

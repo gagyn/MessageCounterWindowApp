@@ -1,6 +1,5 @@
 using MessageCounterBackend;
 using MessageCounterFrontend.Pages.StatsPages;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -33,6 +32,10 @@ namespace MessageCounterFrontend.Pages
             {
                 case PeoplePage _:
                     return new PeoplePage(StatsContainer.PeopleContainer);
+                case DaysPage _:
+                    return new DaysPage(StatsContainer.DaysContainer);
+                case WordsPage _:
+                    return new WordsPage(StatsContainer.WordsContainer);
             }
             return null;
         }
@@ -53,7 +56,7 @@ namespace MessageCounterFrontend.Pages
 
                 case nameof(WordsB):
                     MakeWordsContainerIfNeeded();
-                    throw new NotImplementedException();
+                    NavigationService.Navigate(new WordsPage(StatsContainer.WordsContainer));
                     break;
             }
         }

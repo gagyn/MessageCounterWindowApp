@@ -35,7 +35,8 @@ namespace MessageCounterFrontend.Pages.StatsPages
             var dayStrings = dataGrid.SelectedItem as DayStrings;
             var day = dayStrings.Day;
 
-            NavigationService.Navigate(new DayPage(day));
+            // TODO: 
+            //NavigationService.Navigate(new DayPage(day));
         }
 
         private void DataGrid_Sorting(object sender, DataGridSortingEventArgs e)
