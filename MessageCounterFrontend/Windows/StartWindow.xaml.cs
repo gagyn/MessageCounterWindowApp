@@ -22,14 +22,12 @@ namespace MessageCounterFrontend.Windows
     /// </summary>
     public partial class StartWindow : Window
     {
-        private MainWindow MainWindow { get; }
-
         public StartWindow()
         {
             InitializeComponent();
             TryToReadSettingsFile();
 
-            string path = TryToReadArgs();
+            string path = ReadArgs();
 
             if (path != null)
                 OpenMainWindow(path);
@@ -45,7 +43,7 @@ namespace MessageCounterFrontend.Windows
             catch { }
         }
 
-        private string TryToReadArgs()
+        private string ReadArgs()
         {
             var args = Environment.GetCommandLineArgs();
 
@@ -65,15 +63,23 @@ namespace MessageCounterFrontend.Windows
 
         private void OpenMainWindow(string path)
         {
-            var mainWin = new MainWindow(path);
+            MainWindow mainWindow;
+            try
+            {
+                mainWindow = new MainWindow(path);
+            }
+            catch
+            {
+                return;
+            }
 
             this.Visibility = Visibility.Collapsed;
 
-            mainWin.ShowDialog();
+            mainWindow.ShowDialog();
 
             this.Visibility = Visibility.Visible;
 
-            if (mainWin.Exiting)
+            if (mainWindow.Exiting)
                 Close();
         }
 

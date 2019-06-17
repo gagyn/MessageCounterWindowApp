@@ -29,6 +29,7 @@ namespace MessageCounterFrontend.MainWindowOperations
             catch (Exception e)
             {
                 HandleExceptionsWhileLoading(e);
+                throw;
             }
         }
 
@@ -46,6 +47,7 @@ namespace MessageCounterFrontend.MainWindowOperations
             catch (Exception e)
             {
                 HandleExceptionsWhileLoading(e);
+                throw;
             }
         }
 

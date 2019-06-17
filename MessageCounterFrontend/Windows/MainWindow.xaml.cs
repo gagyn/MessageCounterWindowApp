@@ -22,12 +22,33 @@ namespace MessageCounterFrontend.Windows
         {
             InitializeComponent();
 
-            var opener = new FileOpener(pathToFile);
-            OpenStatsPageIfPossible(opener);
+            try
+            {
+                var opener = new FileOpener(pathToFile);
+                OpenStatsPage(opener);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
-        private void OpenFile_Click(object sender, RoutedEventArgs e) 
-            => OpenStatsPageIfPossible(new FileOpener());
+        private void OpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var opener = new FileOpener();
+                OpenStatsPage(opener);
+            }
+            catch { }
+        }
+
+        private void OpenStatsPage(FileOpener opener)
+        {
+            this.statsPage = opener.StatsPage;
+            mainFrame.Navigate(statsPage);
+            closeTheFile.IsEnabled = true;
+        }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
@@ -45,16 +66,6 @@ namespace MessageCounterFrontend.Windows
                 var page = this.statsPage.Reload((Page)mainFrame.Content);
                 if (page != null)
                     mainFrame.Navigate(page);
-            }
-        }
-
-        private void OpenStatsPageIfPossible(FileOpener opener)
-        {
-            if (opener.StatsPage != null)
-            {
-                this.statsPage = opener.StatsPage;
-                mainFrame.Navigate(statsPage);
-                closeTheFile.IsEnabled = true;
             }
         }
 
