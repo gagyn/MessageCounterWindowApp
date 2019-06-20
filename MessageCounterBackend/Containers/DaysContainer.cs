@@ -1,10 +1,10 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MessageCounterBackend.Containers.StatsClasses;
+using MessageCounterBackend.Containers.StatsClasses.DateNameSpace;
 using MessageCounterBackend.JsonStructure;
-using MessageCounterBackend.StatContainers.ListTypesClasses;
 
-namespace MessageCounterBackend.StatContainers
+namespace MessageCounterBackend.Containers
 {
     public class DaysContainer : Container
     {
@@ -26,7 +26,7 @@ namespace MessageCounterBackend.StatContainers
         private List<Day> MakeDaysList(List<Message> messages)
         {
             // group into single days with their messages
-            var grouped = messages.GroupBy(x => BeginOfDay(MiliSecToDate(x.timestamp_ms)));
+            var grouped = messages.GroupBy(x => new Date(x.timestamp_ms));
             var days = new List<Day>();
 
             foreach (var d in grouped)
@@ -37,11 +37,5 @@ namespace MessageCounterBackend.StatContainers
 
         private List<Day> SortDaysList(List<Day> days)
             => days.OrderByDescending(x => x.NumberOfMessages).ToList();
-
-        private DateTime MiliSecToDate(ulong mili)
-            => new DateTime(1970, 1, 1).AddMilliseconds(mili);
-
-        private DateTime BeginOfDay(DateTime date)
-            => new DateTime(date.Year, date.Month, date.Day, 0, 0, 0, 0);
     }
 }

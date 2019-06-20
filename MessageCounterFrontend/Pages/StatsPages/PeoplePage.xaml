@@ -1,0 +1,73 @@
+﻿<Page x:Class="MessageCounterFrontend.Pages.StatsPages.PeoplePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="1000"
+      Title="PeoplePage">
+
+    <DataGrid x:Name="dataGrid" Margin="0,0,0,10" AutoGenerateColumns="False" 
+              IsReadOnly="True" CanUserAddRows="False" 
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+              Sorting="DataGrid_Sorting">
+
+        <DataGrid.Resources>
+            <Style TargetType="{x:Type DataGridCell}">
+                <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
+            </Style>
+        </DataGrid.Resources>
+        
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Full name" Binding="{Binding FullName}" Width="200">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Right" />
+                        <Setter Property="TextBlock.Margin" Value="15,0,15,0" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Number of messages" Binding="{Binding NumberOfMess}" Width="130">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Messages share" Binding="{Binding SentMessesRatio}" Width="100">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Words share" Binding="{Binding SentWordsRatio}" Width="82">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Average number of messages" Binding="{Binding AvgNumberOfMesses, StringFormat=N2}" Width="170" >
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Average number of words" Binding="{Binding AvgNumberOfWords, StringFormat=N2}" Width="155">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</Page>

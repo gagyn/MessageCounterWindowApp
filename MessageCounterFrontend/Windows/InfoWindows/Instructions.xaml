@@ -1,20 +1,18 @@
-﻿<Page x:Class="MessageCounterFrontend.InfoWindows.Instructions"
+﻿<Page x:Class="MessageCounterFrontend.Windows.InfoWindows.Instructions"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MessageCounterFrontend.InfoWindows"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Instructions">
 
     <Grid>
-        <Button Margin="0,0" Width="50" Height="30" Click="ReturnButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Marlett" FontSize="20" Content="3"/>
         <TextBlock Margin="50,50,500,200" FontWeight="DemiBold" TextWrapping="Wrap">
             The first thing you need to do is downloading your all messenger messages from Facebook.
             <Hyperlink Click="Hyperlink_Click">(click here to open web browser)</Hyperlink>
             <LineBreak/><LineBreak/>
-            When you have downloaded data, you need to unpacked.<LineBreak/>
+            When you have downloaded data, you need to unpack the zip folder.<LineBreak/>
             Than you can open the file in this application.
         </TextBlock>
     </Grid>

@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using MessageCounterBackend.Containers.Helpers_classes;
+using MessageCounterBackend.Containers.StatsClasses;
 using MessageCounterBackend.JsonStructure;
 
-namespace MessageCounterBackend.StatContainers
+namespace MessageCounterBackend.Containers
 {
     public class MessagesContainer : Container
     {
         public List<Message> Messages { get; }
         public int NumberOfMessages => Messages.Count;
-        public int NumberOfUniqueWords => SortedWordsByFrequents.Count;
+        public int NumberOfUniqueWords => SortedWords.Count;
         public int NumberOfAllWords => GetNumberOfAllWords();
 
-        public List<IGrouping<string, string>> SortedWordsByFrequents { get; }
+        public List<Word> SortedWords { get; }
 
         public MessagesContainer(JsonStructureClass jsonObject) 
             : this(jsonObject.messages.ToList()) { }
@@ -21,18 +22,22 @@ namespace MessageCounterBackend.StatContainers
             this.Messages = messages;
 
             if (messages.Count == 0)
-                SortedWordsByFrequents = new List<IGrouping<string, string>>();
+                SortedWords = new List<Word>();
 
             var sorter = new SorterWordsGroupListMaker(this.Messages);
-            SortedWordsByFrequents = sorter.SortedWordsByFrequents;
+            var groupedSortedWords = sorter.SortedWordsByFrequents;
+
+            var words = groupedSortedWords.Select(x => new Word(x.Key, x.Count()));
+
+            SortedWords = words.ToList();
         }
 
         private int GetNumberOfAllWords()
         {
             int count = 0;
 
-            foreach (var gr in SortedWordsByFrequents)
-                count += gr.ToList().Count;
+            foreach (var word in SortedWords)
+                count += word.NumberOfOccurrences;
             return count;
         }
     }

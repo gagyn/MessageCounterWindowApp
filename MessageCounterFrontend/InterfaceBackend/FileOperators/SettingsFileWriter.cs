@@ -1,8 +1,9 @@
-﻿using MessageCounterBackend.Containers.Helpers_classes;
+﻿using System.IO;
+using MessageCounterBackend.Containers.Helpers_classes;
 
 namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 {
-    class SettingsFileWriter : FileWriter
+    class SettingsFileWriter : StreamWriter
     {
         public static string SettingsFilePath { get; } = "settings.config";
 
@@ -10,8 +11,8 @@ namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 
         public void WriteSettings()
         {
-            base.Write(SorterWordsGroupListMaker.MinLenghtOfWords.ToString());
-            base.Write(SorterWordsGroupListMaker.MinAppearsTimesOfWord.ToString());
+            base.WriteLine(SorterWordsGroupListMaker.MinLenghtOfWords.ToString());
+            base.WriteLine(SorterWordsGroupListMaker.MinAppearsTimesOfWord.ToString());
         }
     }
 }

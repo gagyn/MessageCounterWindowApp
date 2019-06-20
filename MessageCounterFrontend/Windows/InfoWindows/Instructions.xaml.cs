@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace MessageCounterFrontend.InfoWindows
+namespace MessageCounterFrontend.Windows.InfoWindows
 {
     /// <summary>
     /// Interaction logic for Instructions.xaml
@@ -14,9 +14,6 @@ namespace MessageCounterFrontend.InfoWindows
         {
             InitializeComponent();
         }
-
-        private void ReturnButton_Click(object sender, System.Windows.RoutedEventArgs e)
-            => NavigationService.GoBack();
 
         private void Hyperlink_Click(object sender, System.Windows.RoutedEventArgs e) 
             => System.Diagnostics.Process.Start(LinkToDownloadSite);

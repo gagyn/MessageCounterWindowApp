@@ -7,13 +7,14 @@
     <ProjectGuid>{7D899DB0-119C-4727-81A1-B462C0BD5FAA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MessageCounterFrontend</RootNamespace>
-    <AssemblyName>MessageCounterFrontend</AssemblyName>
+    <AssemblyName>Message Counter</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -54,7 +54,20 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - without args|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug - without args\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'D|AnyCPU'">
+    <OutputPath>bin\D\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -80,30 +93,60 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="InfoWindows\Instructions.xaml.cs">
+    <Compile Include="Pages\StatsPages\StringsForPages\Comparers\DayStringsComparer.cs" />
+    <Compile Include="Pages\StatsPages\StringsForPages\WordStrings.cs" />
+    <Compile Include="Pages\StatsPages\WordsPage.xaml.cs">
+      <DependentUpon>WordsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\InfoWindows\Instructions.xaml.cs">
       <DependentUpon>Instructions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InterfaceBackend\FileOperators\FileReader.cs" />
     <Compile Include="InterfaceBackend\FileOperators\FileReaderWithDialog.cs" />
-    <Compile Include="InterfaceBackend\FileOperators\FileWriter.cs" />
     <Compile Include="InterfaceBackend\FileOperators\SettingsFileReader.cs" />
     <Compile Include="InterfaceBackend\FileOperators\SettingsFileWriter.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SettingsWindows\SettingsWindow.cs" />
-    <Compile Include="SettingsWindows\WordsSettings.xaml.cs">
+    <Compile Include="MainWindowOperations\FileOpener.cs" />
+    <Compile Include="MainWindowOperations\SettingsOpener.cs" />
+    <Compile Include="Windows\SettingsWindows\SettingsWindow.cs" />
+    <Compile Include="Windows\SettingsWindows\WordsSettings.xaml.cs">
       <DependentUpon>WordsSettings.xaml</DependentUpon>
     </Compile>
-    <Page Include="InfoWindows\Instructions.xaml">
+    <Compile Include="Pages\StatsPages\DaysPage.xaml.cs">
+      <DependentUpon>DaysPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StatsPages\OneItemPages\DayPage.xaml.cs">
+      <DependentUpon>DayPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StatsPages\StringsForPages\DayStrings.cs" />
+    <Compile Include="Pages\StatsPages\OneItemPages\PersonPage.xaml.cs">
+      <DependentUpon>PersonPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StatsPages\StringsForPages\PersonStrings.cs" />
+    <Compile Include="Pages\StatsPages\PeoplePage.xaml.cs">
+      <DependentUpon>PeoplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StartWindow.xaml.cs">
+      <DependentUpon>StartWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Pages\StatsPages\WordsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="Windows\InfoWindows\Instructions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Pages\StatsPages\DaysPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StatsPages\OneItemPages\DayPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -111,16 +154,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="InterfaceBackend\WrapPanelMaker.cs" />
-    <Compile Include="InterfaceBackend\ContainersGridMakers\DaysGridMaker.cs" />
-    <Compile Include="InterfaceBackend\ContainersGridMakers\GridMaker.cs" />
-    <Compile Include="InterfaceBackend\ContainersGridMakers\MessagesGridMaker.cs" />
-    <Compile Include="InterfaceBackend\ContainersGridMakers\PeopleGridMaker.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SettingsWindows\WordsSettings.xaml">
+    <Page Include="Windows\SettingsWindows\WordsSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\StatsPages\OneItemPages\PersonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StatsPages\PeoplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,7 +225,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="favicon.ico" />
+    <Resource Include="Icons\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\home-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

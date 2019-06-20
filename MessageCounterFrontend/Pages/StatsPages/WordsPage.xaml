@@ -1,0 +1,41 @@
+﻿<Page x:Class="MessageCounterFrontend.Pages.StatsPages.WordsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MessageCounterFrontend.Pages.StatsPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="WordsPage">
+
+    <DataGrid x:Name="dataGrid" Margin="0,0,0,10" AutoGenerateColumns="False"
+              IsReadOnly="True" CanUserAddRows="False"
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+              Sorting="DataGrid_Sorting">
+
+        <DataGrid.Resources>
+            <Style TargetType="{x:Type DataGridCell}">
+                <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
+            </Style>
+        </DataGrid.Resources>
+
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Word" Binding="{Binding Text}" Width="140">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Number of occurrences" Binding="{Binding NumberOfOccurrences}" Width="auto">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</Page>

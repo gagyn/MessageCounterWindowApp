@@ -1,0 +1,55 @@
+﻿<Page x:Class="MessageCounterFrontend.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MessageCounterFrontend"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+
+    <Grid>
+        <Button 
+            Name="peopleB"
+            Margin="40,10" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Width="60" Height="20" Content="People"
+            Click="Buttons_Clicks" />
+        <TextBlock
+            Margin="120,10"
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Height="20"
+            Text="Show statistics for every person in this conversation." />
+
+        <Button 
+            Name="daysB"
+            Margin="40,60" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Width="60" Height="20" Content="Days"
+            Click="Buttons_Clicks" />
+        <TextBlock
+            Margin="120,60"
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Height="20"
+            Text="Show statistics for all days, when someone from this conversation wrote any message." />
+
+        <Button 
+            Name="WordsB"
+            Margin="40,110" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Width="60" Height="20" Content="Words"
+            Click="Buttons_Clicks" />
+        <TextBlock
+            Margin="120,110"
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Height="20"
+            Text="Show statistics for all words from this converation." />
+
+
+        <ScrollViewer 
+            x:Name="scrollViewer"
+            Margin="0,150,0,10" 
+            HorizontalScrollBarVisibility="Disabled" 
+            VerticalScrollBarVisibility="Auto" />
+    </Grid>
+</Page>
