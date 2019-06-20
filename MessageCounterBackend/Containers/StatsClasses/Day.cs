@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using MessageCounterBackend.Containers.StatsClasses.Date;
 using MessageCounterBackend.JsonStructure;
 
 namespace MessageCounterBackend.StatContainers.ListTypesClasses
 {
     public class Day
     {
-        public DateTime ThisDateTime { get; set; }
+        public Date ThisDate { get; set; }
         public int NumberOfMessages => MessagesContainer.NumberOfMessages;
         public MessagesContainer MessagesContainer { get; }
 
-        public Day(List<Message> messages, DateTime date)
+        public Day(List<Message> messages, Date date)
         {
-            this.ThisDateTime = date;
+            this.ThisDate = date;
             this.MessagesContainer = new MessagesContainer(messages);
         }
     }

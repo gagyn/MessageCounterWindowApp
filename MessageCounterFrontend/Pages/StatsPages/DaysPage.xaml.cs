@@ -1,9 +1,13 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
+using MessageCounterBackend.Containers.StatsClasses.Date;
 using MessageCounterBackend.StatContainers;
+using MessageCounterBackend.StatContainers.ListTypesClasses;
 using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
 using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 
@@ -14,20 +18,21 @@ namespace MessageCounterFrontend.Pages.StatsPages
     /// </summary>
     public partial class DaysPage : Page
     {
-        private readonly DaysContainer container;
+        private DaysContainer Container { get; }
+        private ICollectionView LcvDayStrings => new ListCollectionView(GetDaysStrings().ToList());
 
         public DaysPage(DaysContainer container)
         {
             InitializeComponent();
 
-            this.container = container;
-            this.dataGrid.ItemsSource = GetDaysStrings();
+            this.Container = container;
+            this.dataGrid.ItemsSource = LcvDayStrings;
         }
 
-        private List<DayStrings> GetDaysStrings()
+        private IEnumerable<DayStrings> GetDaysStrings()
         {
-            var days = this.container.Days;
-            return days.Select(x => new DayStrings(x)).ToList();
+            var days = this.Container.Days;
+            return days.Select(x => new DayStrings(x));
         }
 
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -43,7 +48,25 @@ namespace MessageCounterFrontend.Pages.StatsPages
         {
             if (e.Column.SortDirection == null)
                 e.Column.SortDirection = ListSortDirection.Ascending;
-            e.Handled = false;
+
+            if (e.Column.SortMemberPath == typeof(Date).Name)
+            {
+                DateSortHandler(sender, e);
+                e.Handled = true;
+            }
+            else // other columns sort in a default way
+                e.Handled = false;
+        }
+
+        void DateSortHandler(object sender, DataGridSortingEventArgs e)
+        {
+            ListSortDirection direction = ( e.Column.SortDirection != ListSortDirection.Ascending ) ? ListSortDirection.Ascending : ListSortDirection.Descending;
+
+            e.Column.SortDirection = direction;
+
+            ListCollectionView lcv = (ListCollectionView)CollectionViewSource.GetDefaultView(dataGrid.ItemsSource);
+
+            lcv.CustomSort = new DayStringsComparer(direction);
         }
     }
 }
