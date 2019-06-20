@@ -1,14 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using MessageCounterBackend.Containers.StatsClasses.Date;
-using MessageCounterBackend.StatContainers;
-using MessageCounterBackend.StatContainers.ListTypesClasses;
-using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
+using MessageCounterBackend.Containers;
+using MessageCounterBackend.Containers.StatsClasses;
+using MessageCounterBackend.Containers.StatsClasses.DateNameSpace;
 using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 
 namespace MessageCounterFrontend.Pages.StatsPages
@@ -19,7 +17,8 @@ namespace MessageCounterFrontend.Pages.StatsPages
     public partial class DaysPage : Page
     {
         private DaysContainer Container { get; }
-        private ICollectionView LcvDayStrings => new ListCollectionView(GetDaysStrings().ToList());
+        private ICollectionView LcvDayStrings 
+            => new ListCollectionView(GetDaysStrings().ToList());
 
         public DaysPage(DaysContainer container)
         {

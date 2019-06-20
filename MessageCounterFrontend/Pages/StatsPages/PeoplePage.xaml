@@ -24,7 +24,7 @@
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Right" />
-                        <Setter Property="TextBlock.Margin" Value="0,0,15,0" />
+                        <Setter Property="TextBlock.Margin" Value="15,0,15,0" />
                     </Style>
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>

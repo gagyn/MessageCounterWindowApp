@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using MessageCounterBackend.Containers.StatsClasses.Date;
+using System.Collections.Generic;
+using MessageCounterBackend.Containers.StatsClasses.DateNameSpace;
 using MessageCounterBackend.JsonStructure;
 
-namespace MessageCounterBackend.StatContainers.ListTypesClasses
+namespace MessageCounterBackend.Containers.StatsClasses
 {
     public class Day
     {

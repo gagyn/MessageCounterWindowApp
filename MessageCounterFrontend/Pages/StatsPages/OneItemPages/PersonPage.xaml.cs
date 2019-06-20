@@ -1,5 +1,5 @@
 using System.Windows.Controls;
-using MessageCounterBackend.StatContainers.ListTypesClasses;
+using MessageCounterBackend.Containers.StatsClasses;
 
 namespace MessageCounterFrontend.Pages.StatsPages.OneItemPages
 {

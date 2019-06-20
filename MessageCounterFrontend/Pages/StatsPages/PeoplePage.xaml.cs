@@ -1,5 +1,4 @@
-using MessageCounterBackend.StatContainers;
-using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
+using MessageCounterBackend.Containers;
 using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 using System.Collections.Generic;
 using System.ComponentModel;

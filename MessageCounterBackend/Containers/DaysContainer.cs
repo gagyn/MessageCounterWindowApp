@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
-using MessageCounterBackend.Containers.StatsClasses.Date;
+using MessageCounterBackend.Containers.StatsClasses;
+using MessageCounterBackend.Containers.StatsClasses.DateNameSpace;
 using MessageCounterBackend.JsonStructure;
-using MessageCounterBackend.StatContainers.ListTypesClasses;
 
-namespace MessageCounterBackend.StatContainers
+namespace MessageCounterBackend.Containers
 {
     public class DaysContainer : Container
     {

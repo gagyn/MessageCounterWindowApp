@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using MessageCounterBackend.Containers.StatsClasses;
 using MessageCounterBackend.JsonStructure;
-using MessageCounterBackend.StatContainers.ListTypesClasses;
 
-namespace MessageCounterBackend.StatContainers
+namespace MessageCounterBackend.Containers
 {
     public class PeopleContainer : Container
     {

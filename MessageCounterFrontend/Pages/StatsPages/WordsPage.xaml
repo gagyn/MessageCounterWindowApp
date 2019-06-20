@@ -19,9 +19,23 @@
                 <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
             </Style>
         </DataGrid.Resources>
-        
-        <DataGrid.Columns>
 
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Word" Binding="{Binding Text}" Width="140">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Number of occurrences" Binding="{Binding NumberOfOccurrences}" Width="auto">
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
         </DataGrid.Columns>
     </DataGrid>
 </Page>

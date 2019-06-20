@@ -1,4 +1,4 @@
-using MessageCounterBackend.StatContainers.ListTypesClasses;
+using MessageCounterBackend.Containers.StatsClasses;
 
 namespace MessageCounterFrontend.Pages.StatsPages.StringsForPages
 {

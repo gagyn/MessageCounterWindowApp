@@ -94,7 +94,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Pages\StatsPages\StringsForPages\Comparers\DayStringsComparer.cs" />
-    <Compile Include="Pages\StatsPages\StringsForPages\WordsStrings.cs" />
+    <Compile Include="Pages\StatsPages\StringsForPages\WordStrings.cs" />
     <Compile Include="Pages\StatsPages\WordsPage.xaml.cs">
       <DependentUpon>WordsPage.xaml</DependentUpon>
     </Compile>

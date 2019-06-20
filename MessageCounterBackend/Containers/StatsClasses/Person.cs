@@ -1,10 +1,10 @@
-﻿using MessageCounterBackend.JsonStructure;
+using MessageCounterBackend.JsonStructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using MessageCounterBackend.Containers.Helpers_classes;
 
-namespace MessageCounterBackend.StatContainers.ListTypesClasses
+namespace MessageCounterBackend.Containers.StatsClasses
 {
     public class Person
     {

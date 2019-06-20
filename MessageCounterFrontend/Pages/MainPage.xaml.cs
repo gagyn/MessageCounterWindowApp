@@ -35,7 +35,7 @@ namespace MessageCounterFrontend.Pages
                 case DaysPage _:
                     return new DaysPage(StatsContainer.DaysContainer);
                 case WordsPage _:
-                    return new WordsPage(StatsContainer.WordsContainer);
+                    return new WordsPage(StatsContainer.WordsContainer.SortedWords);
             }
             return null;
         }
@@ -56,7 +56,7 @@ namespace MessageCounterFrontend.Pages
 
                 case nameof(WordsB):
                     MakeWordsContainerIfNeeded();
-                    NavigationService.Navigate(new WordsPage(StatsContainer.WordsContainer));
+                    NavigationService.Navigate(new WordsPage(StatsContainer.WordsContainer.SortedWords));
                     break;
             }
         }
