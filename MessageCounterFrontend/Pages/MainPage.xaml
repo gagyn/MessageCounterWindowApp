@@ -39,17 +39,11 @@
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Width="60" Height="20" Content="Words"
             Click="Buttons_Clicks" />
+        
         <TextBlock
             Margin="120,110"
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Height="20"
             Text="Show statistics for all words from this converation." />
-
-
-        <ScrollViewer 
-            x:Name="scrollViewer"
-            Margin="0,150,0,10" 
-            HorizontalScrollBarVisibility="Disabled" 
-            VerticalScrollBarVisibility="Auto" />
     </Grid>
 </Page>

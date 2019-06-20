@@ -12,11 +12,6 @@ namespace MessageCounterFrontend.Pages
     public partial class MainPage : Page
     {
         private StatsContainer StatsContainer { get; set; }
-        private WrapPanel MainWrapPanel
-        {
-            get => scrollViewer.Content as WrapPanel;
-            set => scrollViewer.Content = value;
-        }
 
         public MainPage(StatsContainer container)
         {

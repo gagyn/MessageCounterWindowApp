@@ -75,7 +75,7 @@ namespace MessageCounterFrontend.Windows
             Close();
         }
 
-        private void HomeButton_Click(object sender, RoutedEventArgs e) => CloseTheFile_Click(sender, e);
+        private void HomeButton_Click(object sender, RoutedEventArgs e) => mainFrame.Navigate(statsPage);
 
         private void LinkToDataDownloadingPage_Click(object sender, RoutedEventArgs e) 
             => System.Diagnostics.Process.Start(Instructions.LinkToDownloadSite);
