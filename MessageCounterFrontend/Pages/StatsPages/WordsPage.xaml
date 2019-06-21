@@ -22,6 +22,13 @@
 
         <DataGrid.Columns>
             <DataGridTextColumn Header="Word" Binding="{Binding Text}" Width="140">
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -29,7 +36,14 @@
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
 
-            <DataGridTextColumn Header="Number of occurrences" Binding="{Binding NumberOfOccurrences}" Width="auto">
+            <DataGridTextColumn Header="Number of occurrences" Binding="{Binding NumberOfOccurrences}">
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />

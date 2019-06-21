@@ -20,7 +20,14 @@
         </DataGrid.Resources>
 
         <DataGrid.Columns>
-            <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="200">
+            <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="180">
+                
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Right" />
@@ -30,6 +37,13 @@
             </DataGridTextColumn>
 
             <DataGridTextColumn Header="Number of messages" Binding="{Binding NumberOfMessages}" Width="130">
+                
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />

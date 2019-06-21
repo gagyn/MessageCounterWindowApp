@@ -21,6 +21,13 @@
         
         <DataGrid.Columns>
             <DataGridTextColumn Header="Full name" Binding="{Binding FullName}" Width="200">
+                
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Right" />
@@ -30,6 +37,13 @@
             </DataGridTextColumn>
 
             <DataGridTextColumn Header="Number of messages" Binding="{Binding NumberOfMess}" Width="130">
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -38,6 +52,13 @@
             </DataGridTextColumn>
 
             <DataGridTextColumn Header="Messages share" Binding="{Binding SentMessesRatio}" Width="100">
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -46,6 +67,13 @@
             </DataGridTextColumn>
 
             <DataGridTextColumn Header="Words share" Binding="{Binding SentWordsRatio}" Width="82">
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -54,6 +82,13 @@
             </DataGridTextColumn>
 
             <DataGridTextColumn Header="Average number of messages" Binding="{Binding AvgNumberOfMesses, StringFormat=N2}" Width="170" >
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
@@ -62,6 +97,13 @@
             </DataGridTextColumn>
 
             <DataGridTextColumn Header="Average number of words" Binding="{Binding AvgNumberOfWords, StringFormat=N2}" Width="155">
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+                
                 <DataGridTextColumn.ElementStyle>
                     <Style>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
