@@ -107,11 +107,11 @@
     <Compile Include="Pages\StatsPages\WordsPage.xaml.cs">
       <DependentUpon>WordsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\InfoWindows\InfoImagePage.xaml.cs">
+    <Compile Include="Pages\InfoPages\InfoImagePage.xaml.cs">
       <DependentUpon>InfoImagePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\InfoWindows\Instructions.xaml.cs">
-      <DependentUpon>Instructions.xaml</DependentUpon>
+    <Compile Include="Pages\InfoPages\InstructionsPage.xaml.cs">
+      <DependentUpon>InstructionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="InterfaceBackend\FileOperators\FileReaderWithDialog.cs" />
     <Compile Include="InterfaceBackend\FileOperators\SettingsFileReader.cs" />
@@ -146,11 +146,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\InfoWindows\InfoImagePage.xaml">
+    <Page Include="Pages\InfoPages\InfoImagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\InfoWindows\Instructions.xaml">
+    <Page Include="Pages\InfoPages\InstructionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,7 +247,7 @@
     <Resource Include="Icons\home-button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Windows\InfoWindows\info.png" />
+    <Resource Include="Pages\InfoPages\info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
