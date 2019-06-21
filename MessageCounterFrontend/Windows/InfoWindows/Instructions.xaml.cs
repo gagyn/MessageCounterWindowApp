@@ -1,4 +1,7 @@
+using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
 namespace MessageCounterFrontend.Windows.InfoWindows
@@ -17,5 +20,8 @@ namespace MessageCounterFrontend.Windows.InfoWindows
 
         private void Hyperlink_Click(object sender, System.Windows.RoutedEventArgs e) 
             => System.Diagnostics.Process.Start(LinkToDownloadSite);
+
+        private void ImageButton_Click(object sender, System.Windows.RoutedEventArgs e) 
+            => NavigationService.Navigate(new InfoImagePage());
     }
 }

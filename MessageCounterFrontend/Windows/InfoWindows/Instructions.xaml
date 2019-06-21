@@ -8,12 +8,13 @@
       Title="Instructions">
 
     <Grid>
-        <TextBlock Margin="50,50,500,200" FontWeight="DemiBold" TextWrapping="Wrap">
+        <TextBlock Margin="50,91,43,20" FontWeight="DemiBold" TextWrapping="Wrap">
             The first thing you need to do is downloading your all messenger messages from Facebook.
             <Hyperlink Click="Hyperlink_Click">(click here to open web browser)</Hyperlink>
             <LineBreak/><LineBreak/>
             When you have downloaded data, you need to unpack the zip folder.<LineBreak/>
             Than you can open the file in this application.
         </TextBlock>
+        <Button x:Name="imageButton" Content="Open image in a new page" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ImageButton_Click" Margin="50,53,0,0" />
     </Grid>
 </Page>

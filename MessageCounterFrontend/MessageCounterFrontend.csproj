@@ -83,6 +83,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -105,6 +106,9 @@
     <Compile Include="Pages\StatsPages\StringsForPages\WordStrings.cs" />
     <Compile Include="Pages\StatsPages\WordsPage.xaml.cs">
       <DependentUpon>WordsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\InfoWindows\InfoImagePage.xaml.cs">
+      <DependentUpon>InfoImagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\InfoWindows\Instructions.xaml.cs">
       <DependentUpon>Instructions.xaml</DependentUpon>
@@ -139,6 +143,10 @@
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Pages\StatsPages\WordsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\InfoWindows\InfoImagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,6 +245,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\home-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Windows\InfoWindows\info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
