@@ -96,6 +96,7 @@ namespace MessageCounterFrontend.Windows
         {
             returnButton.Visibility = mainFrame.CanGoBack ? Visibility.Visible : Visibility.Hidden;
             forwardButton.Visibility = mainFrame.CanGoForward ? Visibility.Visible : Visibility.Hidden;
+            homeButton.Visibility = mainFrame.Content is MainPage ? Visibility.Hidden : Visibility.Visible;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
