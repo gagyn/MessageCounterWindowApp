@@ -102,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pages\ChoicePage.cs" />
+    <Compile Include="Pages\StatsPages\OneItemPages\WordPage.cs">
+      <DependentUpon>WordsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\StatsPages\StringsForPages\Comparers\DayStringsComparer.cs" />
     <Compile Include="Pages\StatsPages\StringsForPages\WordStrings.cs" />
     <Compile Include="Pages\StatsPages\WordsPage.xaml.cs">
@@ -142,6 +146,10 @@
     <Compile Include="Windows\StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\StatsPages\OneItemPages\WordsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\StatsPages\WordsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

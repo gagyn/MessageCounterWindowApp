@@ -1,4 +1,6 @@
-﻿<Page x:Class="MessageCounterFrontend.Pages.StatsPages.OneItemPages.PersonPage"
+﻿<my:ChoicePage
+    xmlns:my="clr-namespace:MessageCounterFrontend.Pages"
+    x:Class="MessageCounterFrontend.Pages.StatsPages.OneItemPages.PersonPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,6 +10,30 @@
       Title="PersonPage">
 
     <Grid>
-        
+        <Button 
+            x:Name="daysB"
+            Margin="40,10" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Width="60" Height="20" Content="Days"
+            Click="Buttons_Clicks" />
+        <TextBlock
+            Margin="120,10"
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Height="20"
+            Text="Show statistics for all days, when the person wrote any message on this conversation." />
+
+        <Button 
+            x:Name="wordsB"
+            Margin="40,60" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Width="60" Height="20" Content="Words"
+            Click="Buttons_Clicks" />
+
+        <TextBlock
+            Margin="120,60"
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Height="20"
+            Text="Show statistics for all words written by the person on this conversation." />
+
     </Grid>
-</Page>
+</my:ChoicePage>

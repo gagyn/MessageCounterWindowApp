@@ -4,8 +4,8 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using MessageCounterBackend.Containers;
 using MessageCounterBackend.Containers.StatsClasses;
+using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
 using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 
 namespace MessageCounterFrontend.Pages.StatsPages
@@ -34,7 +34,6 @@ namespace MessageCounterFrontend.Pages.StatsPages
             var wordStrings = dataGrid.SelectedItem as WordStrings;
             var word = wordStrings.Word;
 
-            // TODO: 
             //NavigationService.Navigate(new WordPage(word));
         }
 

@@ -11,7 +11,17 @@ namespace MessageCounterBackend.Containers
         public List<Message> Messages { get; }
         public int NumberOfMessages => Messages.Count;
         public int NumberOfUniqueWords => SortedWords.Count;
-        public int NumberOfAllWords => GetNumberOfAllWords();
+        public int NumberOfAllWords
+        {
+            get
+            {
+                int count = 0;
+
+                foreach (var word in SortedWords)
+                    count += word.NumberOfOccurrences;
+                return count;
+            }
+        }
 
         public List<Word> SortedWords { get; }
 
@@ -22,7 +32,10 @@ namespace MessageCounterBackend.Containers
             this.Messages = messages;
 
             if (messages.Count == 0)
+            {
                 SortedWords = new List<Word>();
+                return;
+            }
 
             var sorter = new SorterWordsGroupListMaker(this.Messages);
             var groupedSortedWords = sorter.SortedWordsByFrequents;
@@ -30,15 +43,6 @@ namespace MessageCounterBackend.Containers
             var words = groupedSortedWords.Select(x => new Word(x.Key, x.Count()));
 
             SortedWords = words.ToList();
-        }
-
-        private int GetNumberOfAllWords()
-        {
-            int count = 0;
-
-            foreach (var word in SortedWords)
-                count += word.NumberOfOccurrences;
-            return count;
         }
     }
 }

@@ -1,4 +1,5 @@
 using MessageCounterBackend.Containers;
+using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
 using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,8 +35,7 @@ namespace MessageCounterFrontend.Pages.StatsPages
             var personStrings = dataGrid.SelectedItem as PersonStrings;
             var person = personStrings.Person;
 
-            // TODO: 
-            //NavigationService.Navigate(new PersonPage(person));
+            NavigationService.Navigate(new PersonPage(person));
         }
 
         private void DataGrid_Sorting(object sender, DataGridSortingEventArgs e)

@@ -2,6 +2,7 @@
 using MessageCounterBackend.JsonStructure;
 using System.Collections.Generic;
 using MessageCounterBackend.Containers;
+using System.Linq;
 
 namespace MessageCounterBackend
 {
@@ -10,29 +11,55 @@ namespace MessageCounterBackend
     /// </summary>
     public class StatsContainer
     {
-        public MessagesContainer WordsContainer { get; set; }
-        public DaysContainer DaysContainer { get; set; }
-        public PeopleContainer PeopleContainer { get; set; }
+        public MessagesContainer WordsContainer
+        {
+            get
+            {
+                if (this.wordsContainer == null)
+                    this.wordsContainer = new MessagesContainer(JsonObject);
+                return this.wordsContainer;
+            }
 
-        public int NumberOfMessages { get => (jsonObject.messages as List<Message>).Count; }
-        public int NumberOfParticipants { get => (jsonObject.participants as List<Participant>).Count; }
+            set => this.wordsContainer = value;
+        }
+        public DaysContainer DaysContainer
+        {
+            get
+            {
+                if (this.daysContainer == null)
+                    this.daysContainer = new DaysContainer(JsonObject); 
+                return this.daysContainer;
+            }
 
-        private readonly JsonStructureClass jsonObject;
+            set => this.daysContainer = value;
+        }
+        public PeopleContainer PeopleContainer
+        {
+            get
+            {
+                if (this.peopleContainer == null)
+                    this.peopleContainer = new PeopleContainer(JsonObject);
+                return this.peopleContainer;
+            }
 
-        public StatsContainer(string fileContent) 
-            => this.jsonObject = JsonConvert.DeserializeObject<JsonStructureClass>(fileContent);
+            set => this.peopleContainer = value;
+        }
 
-        public void MakeWordsContainer() => this.WordsContainer = new MessagesContainer(jsonObject);
-        public void MakeDaysContainer() => this.DaysContainer = new DaysContainer(jsonObject);
-        public void MakePeopleContainer() => this.PeopleContainer = new PeopleContainer(jsonObject);
+        public JsonStructureClass JsonObject { get; }
+
+
+        private MessagesContainer wordsContainer;
+        private DaysContainer daysContainer;
+        private PeopleContainer peopleContainer;
+
+        public StatsContainer(string fileContent)
+            => this.JsonObject = JsonConvert.DeserializeObject<JsonStructureClass>(fileContent);
+
         public void ReloadContainers()
         {
-            if (WordsContainer != null)
-                MakeWordsContainer();
-            if (DaysContainer != null)
-                MakeDaysContainer();
-            if (PeopleContainer != null)
-                MakePeopleContainer();
+            WordsContainer = null;
+            DaysContainer = null;
+            PeopleContainer = null;
         }
     }
 }

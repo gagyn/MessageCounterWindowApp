@@ -5,8 +5,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using MessageCounterBackend.Containers;
-using MessageCounterBackend.Containers.StatsClasses;
 using MessageCounterBackend.Containers.StatsClasses.DateNameSpace;
+using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
 using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 
 namespace MessageCounterFrontend.Pages.StatsPages
@@ -39,7 +39,6 @@ namespace MessageCounterFrontend.Pages.StatsPages
             var dayStrings = dataGrid.SelectedItem as DayStrings;
             var day = dayStrings.Day;
 
-            // TODO: 
             //NavigationService.Navigate(new DayPage(day));
         }
 

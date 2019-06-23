@@ -9,69 +9,35 @@ namespace MessageCounterFrontend.Pages
     /// <summary>
     /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class MainPage : ChoicePage
     {
-        private StatsContainer StatsContainer { get; set; }
-
         public MainPage(StatsContainer container)
         {
             this.StatsContainer = container;
             InitializeComponent();
         }
 
-        public Page Reload(Page currentContentOfPage)
+        protected override void Buttons_Clicks(object sender, RoutedEventArgs e)
         {
-            this.StatsContainer.ReloadContainers();
+            Page page = null;
 
-            switch (currentContentOfPage)
-            {
-                case PeoplePage _:
-                    return new PeoplePage(StatsContainer.PeopleContainer);
-                case DaysPage _:
-                    return new DaysPage(StatsContainer.DaysContainer);
-                case WordsPage _:
-                    return new WordsPage(StatsContainer.WordsContainer.SortedWords);
-            }
-            return null;
-        }
-
-        private void Buttons_Clicks(object sender, RoutedEventArgs e)
-        {
-            switch ((e.Source as Button).Name)
+            switch (( e.Source as Button ).Name)
             {
                 case nameof(peopleB):
-                    MakePeopleContainerIfNeeded();
-                    NavigationService.Navigate(new PeoplePage(StatsContainer.PeopleContainer));
+                    page = new PeoplePage(StatsContainer.PeopleContainer);
                     break;
 
                 case nameof(daysB):
-                    MakeDaysContainerIfNeeded();
-                    NavigationService.Navigate(new DaysPage(StatsContainer.DaysContainer));
+                    page = new DaysPage(StatsContainer.DaysContainer);
                     break;
 
-                case nameof(WordsB):
-                    MakeWordsContainerIfNeeded();
-                    NavigationService.Navigate(new WordsPage(StatsContainer.WordsContainer.SortedWords));
+                case nameof(wordsB):
+                    page = new WordsPage(StatsContainer.WordsContainer.SortedWords);
                     break;
             }
-        }
 
-        private void MakePeopleContainerIfNeeded()
-        {
-            if (null == StatsContainer.PeopleContainer)
-                StatsContainer.MakePeopleContainer();
-        }
-
-        private void MakeDaysContainerIfNeeded()
-        {
-            if (null == StatsContainer.DaysContainer)
-                StatsContainer.MakeDaysContainer();
-        }
-
-        private void MakeWordsContainerIfNeeded()
-        {
-            if (null == StatsContainer.WordsContainer)
-                StatsContainer.MakeWordsContainer();
+            if (page != null)
+                NavigationService.Navigate(page);
         }
     }
 }
