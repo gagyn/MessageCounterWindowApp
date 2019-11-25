@@ -17,6 +17,7 @@ namespace MessageCounterFrontend.Windows
         private MainPage statsPage;
 
         private bool IsAnyFileOpened { get => this.statsPage != null; }
+        private bool startedDirectlyWithPage = false;
 
         public MainWindow()
         {
@@ -34,6 +35,12 @@ namespace MessageCounterFrontend.Windows
             {
                 throw;
             }
+        }
+
+        public MainWindow(Page page) : this()
+        {
+            this.startedDirectlyWithPage = true;
+            mainFrame.Navigate(page);
         }
 
         private void OpenFile_Click(object sender, RoutedEventArgs e)
@@ -78,7 +85,13 @@ namespace MessageCounterFrontend.Windows
             Close();
         }
 
-        private void HomeButton_Click(object sender, RoutedEventArgs e) => mainFrame.Navigate(statsPage);
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (startedDirectlyWithPage)
+                Close();
+
+            mainFrame.Navigate(statsPage);
+        }
 
         private void LinkToDataDownloadingPage_Click(object sender, RoutedEventArgs e) 
             => System.Diagnostics.Process.Start(Instructions.LinkToDownloadSite);

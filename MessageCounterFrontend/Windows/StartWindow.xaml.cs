@@ -90,13 +90,10 @@ namespace MessageCounterFrontend.Windows
 
         private void openInstructions_Click(object sender, RoutedEventArgs e)
         {
-            var window = new NavigationWindow();
+            var window = new MainWindow(new Instructions());
 
             this.Visibility = Visibility.Collapsed;
-
-            window.NavigationService.Navigate(new Instructions());
             window.ShowDialog();
-
             this.Visibility = Visibility.Visible;
         }
     }
