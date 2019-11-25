@@ -18,10 +18,13 @@ namespace MessageCounterFrontend.Windows
 
         private bool IsAnyFileOpened { get => this.statsPage != null; }
 
-        public MainWindow(string pathToFile)
+        public MainWindow()
         {
             InitializeComponent();
+        }
 
+        public MainWindow(string pathToFile) : this()
+        {
             try
             {
                 var opener = new FileOpener(pathToFile);

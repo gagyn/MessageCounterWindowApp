@@ -32,6 +32,8 @@ namespace MessageCounterBackend.Containers.StatsClasses
                 container.NumberOfUniqueWords, container.NumberOfAllWords);
         }
 
+        public override string ToString() => this.FullName;
+
         private List<Message> FindPersonMessages(List<Message> allMessages)
         {
             if (this.FullName == null)

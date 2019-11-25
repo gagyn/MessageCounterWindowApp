@@ -107,6 +107,7 @@
       <DependentUpon>WordsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\StatsPages\StringsForPages\Comparers\DayStringsComparer.cs" />
+    <Compile Include="Pages\StatsPages\StringsForPages\MessageStrings.cs" />
     <Compile Include="Pages\StatsPages\StringsForPages\WordStrings.cs" />
     <Compile Include="Pages\StatsPages\WordsPage.xaml.cs">
       <DependentUpon>WordsPage.xaml</DependentUpon>

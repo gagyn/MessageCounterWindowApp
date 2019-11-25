@@ -1,5 +1,6 @@
 ﻿using MessageCounterFrontend.InterfaceBackend.FileOperators;
 using MessageCounterFrontend.MainWindowOperations;
+using MessageCounterFrontend.Windows.InfoWindows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MessageCounterFrontend.Windows
@@ -85,5 +87,17 @@ namespace MessageCounterFrontend.Windows
 
         private void OpenSettingsButton_Click(object sender, RoutedEventArgs e)
             => new SettingsOpener(this);
+
+        private void openInstructions_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new NavigationWindow();
+
+            this.Visibility = Visibility.Collapsed;
+
+            window.NavigationService.Navigate(new Instructions());
+            window.ShowDialog();
+
+            this.Visibility = Visibility.Visible;
+        }
     }
 }

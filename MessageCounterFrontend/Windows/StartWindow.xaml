@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="Start Window" Height="450" Width="800" ResizeMode="NoResize">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
-        <Button x:Name="openFileButton" Content="Open a file" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="80"
-                Click="OpenFileButton_Click"/>
+        <Button x:Name="openFileButton" Content="Open a file" VerticalAlignment="Center" Height="80"
+                Click="OpenFileButton_Click" Margin="-73,0,373,0"/>
         <Button x:Name="openSettingsButton" Content="Change the settings" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="80"
-            Click="OpenSettingsButton_Click"/>
+            Click="OpenSettingsButton_Click" Margin="0,0,147,0"/>
+        <Button x:Name="openInstructions" Content="Short tutorial" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="80"
+            Click="openInstructions_Click" Margin="380,0,-80,0"/>
 
     </Grid>
 </Window>

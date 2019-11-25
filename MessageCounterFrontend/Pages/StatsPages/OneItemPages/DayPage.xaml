@@ -7,7 +7,64 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DayPage">
 
-    <Grid>
-        
-    </Grid>
+    <DataGrid x:Name="dataGrid" Margin="0,0,0,10" AutoGenerateColumns="False"
+              IsReadOnly="True" CanUserAddRows="False"
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+
+        <DataGrid.Resources>
+            <Style TargetType="{x:Type DataGridCell}">
+                <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
+            </Style>
+        </DataGrid.Resources>
+
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="170">
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Right" />
+                        <Setter Property="TextBlock.Margin" Value="0,0,15,0" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+            
+            <DataGridTextColumn Header="Person" Binding="{Binding Person}" Width="180">
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Right" />
+                        <Setter Property="TextBlock.Margin" Value="0,0,15,0" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+
+            <DataGridTextColumn Header="Message" Binding="{Binding Message}" Width="300">
+
+                <DataGridTextColumn.HeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.HeaderStyle>
+
+                <DataGridTextColumn.ElementStyle>
+                    <Style>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+        </DataGrid.Columns>
+    </DataGrid>
 </Page>

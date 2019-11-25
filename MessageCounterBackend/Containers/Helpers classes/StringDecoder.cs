@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace MessageCounterBackend.Containers.Helpers_classes
 {
-    static class StringDecoder
+    public static class StringDecoder
     {
         public static string DecodeString(this string text)
         {

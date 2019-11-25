@@ -21,7 +21,9 @@ namespace MessageCounterFrontend.Windows.InfoWindows
         private void Hyperlink_Click(object sender, System.Windows.RoutedEventArgs e) 
             => System.Diagnostics.Process.Start(LinkToDownloadSite);
 
-        private void ImageButton_Click(object sender, System.Windows.RoutedEventArgs e) 
-            => NavigationService.Navigate(new InfoImagePage());
+        private void ImageButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new InfoImagePage());
+        }
     }
 }
