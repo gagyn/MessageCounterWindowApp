@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Closing="Window_Closing"
-        Title="Message Counter" Height="600" Width="1200" MinHeight="350" MinWidth="750">
+        Title="MessageJson Counter" Height="600" Width="1200" MinHeight="350" MinWidth="750">
     <Grid>
         <DockPanel HorizontalAlignment="Stretch" Height="20" LastChildFill="True" VerticalAlignment="Top" >
             <Menu DockPanel.Dock="Top">

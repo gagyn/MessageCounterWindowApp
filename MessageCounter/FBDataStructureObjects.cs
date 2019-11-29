@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MessageCounterBackend.JsonStructure
+namespace MessageCounter
 {
     public class ParticipantJson
     {

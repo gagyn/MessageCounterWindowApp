@@ -14,7 +14,7 @@ namespace MessageCounterBackend.Containers
 
         public DaysContainer(JsonStructureClass jsonObject) 
             : this(jsonObject.messages.ToList()) { }
-        public DaysContainer(List<Message> messages)
+        public DaysContainer(List<MessageJson> messages)
         {
             Days = MakeDaysList(messages);
             SortedDays = SortDaysList(Days);
@@ -23,7 +23,7 @@ namespace MessageCounterBackend.Containers
                 DayWithMaxNumberOfMessages = SortedDays.First();
         }
 
-        private List<Day> MakeDaysList(List<Message> messages)
+        private List<Day> MakeDaysList(List<MessageJson> messages)
         {
             // group into single days with their messages
             var grouped = messages.GroupBy(x => new Date(x.timestamp_ms));

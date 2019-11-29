@@ -11,8 +11,8 @@ namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 
         public void WriteSettings()
         {
-            base.WriteLine(SorterWordsGroupListMaker.MinLenghtOfWords.ToString());
-            base.WriteLine(SorterWordsGroupListMaker.MinAppearsTimesOfWord.ToString());
+            base.WriteLine(GroupWords.MinLengthOfWords.ToString());
+            base.WriteLine(GroupWords.MinAppearsTimesOfWord.ToString());
         }
     }
 }

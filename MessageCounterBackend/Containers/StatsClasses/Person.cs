@@ -34,7 +34,7 @@ namespace MessageCounterBackend.Containers.StatsClasses
 
         public override string ToString() => this.FullName;
 
-        private List<Message> FindPersonMessages(List<Message> allMessages)
+        private List<MessageJson> FindPersonMessages(List<MessageJson> allMessages)
         {
             if (this.FullName == null)
                 throw new ArgumentNullException(nameof(FullName));
@@ -42,7 +42,7 @@ namespace MessageCounterBackend.Containers.StatsClasses
             if (allMessages == null)
                 throw new ArgumentNullException(nameof(allMessages));
             
-            var messages = new List<Message>();
+            var messages = new List<MessageJson>();
 
             foreach (var m in allMessages)
                 if (this.FullName.Equals(m.sender_name.DecodeString()))

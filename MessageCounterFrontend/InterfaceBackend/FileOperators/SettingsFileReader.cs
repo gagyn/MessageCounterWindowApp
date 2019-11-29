@@ -11,8 +11,8 @@ namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 
         public void ReadSettings()
         {
-            SorterWordsGroupListMaker.MinLenghtOfWords = int.Parse(base.ReadLine());
-            SorterWordsGroupListMaker.MinAppearsTimesOfWord = int.Parse(base.ReadLine());
+            GroupWords.MinLengthOfWords = int.Parse(base.ReadLine());
+            GroupWords.MinAppearsTimesOfWord = int.Parse(base.ReadLine());
         }
     }
 }

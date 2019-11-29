@@ -8,7 +8,7 @@ namespace MessageCounterBackend.Containers
 {
     public class MessagesContainer : Container
     {
-        public List<Message> Messages { get; }
+        public List<MessageJson> Messages { get; }
         public int NumberOfMessages => Messages.Count;
         public int NumberOfUniqueWords => SortedWords.Count;
         public int NumberOfAllWords
@@ -27,7 +27,7 @@ namespace MessageCounterBackend.Containers
 
         public MessagesContainer(JsonStructureClass jsonObject) 
             : this(jsonObject.messages.ToList()) { }
-        public MessagesContainer(List<Message> messages)
+        public MessagesContainer(List<MessageJson> messages)
         {
             this.Messages = messages;
 
@@ -37,7 +37,7 @@ namespace MessageCounterBackend.Containers
                 return;
             }
 
-            var sorter = new SorterWordsGroupListMaker(this.Messages);
+            var sorter = new GroupWords(this.Messages);
             var groupedSortedWords = sorter.SortedWordsByFrequents;
 
             var words = groupedSortedWords.Select(x => new Word(x.Key, x.Count()));

@@ -29,7 +29,7 @@ namespace MessageCounterFrontend.MainWindowOperations
             catch { return; }
 
             if (null == newValues)
-                SorterWordsGroupListMaker.SetDefaultValues();
+                GroupWords.SetDefaultValues();
             else
                 SetValues(newValues.Value);
 
@@ -50,8 +50,8 @@ namespace MessageCounterFrontend.MainWindowOperations
         private WordsSettings CreateNewSettingsWindow()
         {
             var (minLenght, minAppears) =
-                (SorterWordsGroupListMaker.MinLenghtOfWords,
-                SorterWordsGroupListMaker.MinAppearsTimesOfWord);
+                (MinLenghtOfWords: GroupWords.MinLengthOfWords,
+                GroupWords.MinAppearsTimesOfWord);
 
             return new WordsSettings(minLenght, minAppears)
             {
@@ -61,8 +61,8 @@ namespace MessageCounterFrontend.MainWindowOperations
 
         private void SetValues((int, int) newValues)
         {
-            (SorterWordsGroupListMaker.MinLenghtOfWords,
-             SorterWordsGroupListMaker.MinAppearsTimesOfWord)
+            (GroupWords.MinLengthOfWords,
+             GroupWords.MinAppearsTimesOfWord)
                 = newValues;
         }
 

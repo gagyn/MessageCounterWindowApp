@@ -10,7 +10,7 @@ namespace MessageCounterBackend.Containers.StatsClasses
         public int NumberOfMessages => MessagesContainer.NumberOfMessages;
         public MessagesContainer MessagesContainer { get; }
 
-        public Day(List<Message> messages, Date date)
+        public Day(List<MessageJson> messages, Date date)
         {
             this.ThisDate = date;
             this.MessagesContainer = new MessagesContainer(messages);

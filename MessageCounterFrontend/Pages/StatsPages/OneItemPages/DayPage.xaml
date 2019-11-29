@@ -51,7 +51,7 @@
                 </DataGridTextColumn.ElementStyle>
             </DataGridTextColumn>
 
-            <DataGridTextColumn Header="Message" Binding="{Binding Message}" Width="300">
+            <DataGridTextColumn Header="MessageJson" Binding="{Binding Message}" Width="300">
 
                 <DataGridTextColumn.HeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
