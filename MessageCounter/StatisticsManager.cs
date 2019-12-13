@@ -9,15 +9,15 @@ namespace MessageCounter
 {
     class StatisticsManager
     {
-        public readonly IEnumerable<Day> Days;
-        public readonly IEnumerable<Person> People;
-        public readonly IEnumerable<IGrouping<string, string>> Words;
+        public IEnumerable<Day> Days { get; }
+        public IEnumerable<Person> People { get; }
+        public IEnumerable<Word> Words { get; }
 
-        public StatisticsManager(string fileContent)
+        public StatisticsManager(IEnumerable<Day> days, IEnumerable<Person> people, IEnumerable<Word> words)
         {
-            var jsonDataObject = JsonConvert.DeserializeObject<JsonStructureClass>(fileContent);
-            Days = new List<Day>();
-            jsonDataObject.messages.Select(x => x.timestamp_ms);
+            this.Days = days;
+            this.People = people;
+            this.Words = words;
         }
     }
 }
