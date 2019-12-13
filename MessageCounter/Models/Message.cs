@@ -19,7 +19,7 @@ namespace MessageCounter.Models
             Content = content.DecodeString();
             DateTime = dateTime;
             Author = author;
-            var wordsGrouper = new WordsGrouper(this);
+            var wordsGrouper = new WordsGrouperService(this);
             Words = wordsGrouper.GroupWords();
         }
     }

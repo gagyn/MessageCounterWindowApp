@@ -16,7 +16,7 @@ namespace MessageCounter.Models
         {
             DateTime = dateTime;
             Messages = messages;
-            var wordsGrouper = new WordsGrouper(messages);
+            var wordsGrouper = new WordsGrouperService(messages);
             Words = wordsGrouper.GroupWords();
         }
     }

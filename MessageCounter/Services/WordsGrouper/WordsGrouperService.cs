@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace MessageCounter.Services.WordsGrouper
 {
-    public class WordsGrouper
+    public class WordsGrouperService
     {
         private readonly IEnumerable<Message> _messages;
         private readonly WordsGrouperSettings _grouperSettings;
 
-        public WordsGrouper(Message message)
+        public WordsGrouperService(Message message)
         {
             _messages = new List<Message>()
             {
@@ -18,17 +18,17 @@ namespace MessageCounter.Services.WordsGrouper
             _grouperSettings = new WordsGrouperSettings();
         }
 
-        public WordsGrouper(IEnumerable<Message> messages)
+        public WordsGrouperService(IEnumerable<Message> messages)
         {
             _messages = messages;
         }
 
-        public WordsGrouper(Message message, WordsGrouperSettings grouperSettings) : this(message)
+        public WordsGrouperService(Message message, WordsGrouperSettings grouperSettings) : this(message)
         {
             _grouperSettings = grouperSettings;
         }
 
-        public WordsGrouper(IEnumerable<Message> messages, WordsGrouperSettings grouperSettings) : this(messages)
+        public WordsGrouperService(IEnumerable<Message> messages, WordsGrouperSettings grouperSettings) : this(messages)
         {
             _grouperSettings = grouperSettings;
         }
