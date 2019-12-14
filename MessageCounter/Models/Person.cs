@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using MessageCounter.Services.WordsGrouper;
 
 namespace MessageCounter.Models
 {
@@ -8,14 +6,13 @@ namespace MessageCounter.Models
     {
         public string Name { get; }
         public IEnumerable<Message> Messages { get; }
-        public IEnumerable<IGrouping<string, string>> Words { get; }
+        public IEnumerable<Word> Words { get; }
 
-        public Person(string name, IEnumerable<Message> messages)
+        public Person(string name, IEnumerable<Message> messages, IEnumerable<Word> words)
         {
             Name = name;
             Messages = messages;
-            var wordsGrouper = new WordsGrouperService(messages);
-            Words = wordsGrouper.GroupWords();
+            Words = words;
         }
     }
 }

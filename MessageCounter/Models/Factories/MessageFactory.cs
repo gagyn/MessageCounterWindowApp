@@ -2,11 +2,12 @@
 
 namespace MessageCounter.Models
 {
-    class MessageFactory
+    static class MessageFactory
     {
-        public MessageFactory(string content, DateTime sentAt, )
+        public static Message Create(string content, ulong timeStamp, string authorName)
         {
-
+            var sentAt = new DateTime().AddMilliseconds(timeStamp);
+            return new Message(content, sentAt, authorName);
         }
     }
 }
