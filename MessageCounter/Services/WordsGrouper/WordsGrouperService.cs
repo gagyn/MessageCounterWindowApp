@@ -33,7 +33,7 @@ namespace MessageCounter.Services.WordsGrouper
             _grouperSettings = grouperSettings;
         }
 
-        public IEnumerable<IGrouping<string, string>> GroupWords()
+        public IEnumerable<Word> GroupWords()
         {
             char[] charToRemove =
                 { '~', '`', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=',
@@ -48,10 +48,12 @@ namespace MessageCounter.Services.WordsGrouper
                 .Select(word => word.Trim())
                 .Where(word => word.Length >= _grouperSettings.MinLengthOfWords);
 
-            var groupedWords = words.GroupBy(x => x)
-                .OrderByDescending(x => x.Count());
+            var groupedWords = words
+                .GroupBy(x => x)
+                .OrderByDescending(x => x.Count())
+                .Where(x => x.Count() >= _grouperSettings.MinAppearsTimesOfWord);
 
-            return groupedWords.Where(x => x.Count() >= _grouperSettings.MinAppearsTimesOfWord);
+            return groupedWords.Select(x => new Word(x.Key, x.Count()));
         }
     }
 }

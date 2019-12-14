@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MessageCounter.Models
 {
-    class Word
+    public class Word
     {
         public string WordContent { get; }
         public int WordQuantity { get; }

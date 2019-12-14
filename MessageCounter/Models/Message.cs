@@ -12,7 +12,7 @@ namespace MessageCounter.Models
         public string Content { get; }
         public DateTime DateTime { get; }
         public Person Author { get; }
-        public IEnumerable<IGrouping<string, string>> Words { get; }
+        public IEnumerable<Word> Words { get; }
 
         public Message(string content, DateTime dateTime, Person author)
         {
