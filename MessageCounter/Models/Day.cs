@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MessageCounter.Models
 {
-    class Day
+    public class Day
     {
         public DateTime DateTime { get; }
         public IEnumerable<Message> Messages { get; }
