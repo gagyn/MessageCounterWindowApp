@@ -253,11 +253,5 @@
   <ItemGroup>
     <Resource Include="Pages\InfoPages\info.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MessageCounter\MessageCounter.csproj">
-      <Project>{32be594b-052d-4054-8c8f-fad52466492b}</Project>
-      <Name>MessageCounter</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

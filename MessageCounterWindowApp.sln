@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageCounter", "MessageCounter\MessageCounter.csproj", "{32BE594B-052D-4054-8C8F-FAD52466492B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp", "ClientApp\ClientApp.csproj", "{ABA3D9D0-1583-4964-8C11-42B9DBBBCD26}"
+	ProjectSection(ProjectDependencies) = postProject
+		{32BE594B-052D-4054-8C8F-FAD52466492B} = {32BE594B-052D-4054-8C8F-FAD52466492B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
