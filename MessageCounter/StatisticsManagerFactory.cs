@@ -3,6 +3,7 @@ using MessageCounter.Services.WordsGrouper;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
+using MessageCounter.Models.Factories;
 
 namespace MessageCounter
 {
@@ -19,12 +20,12 @@ namespace MessageCounter
         {
             var jsonDataObject = JsonConvert.DeserializeObject<JsonStructureClass>(this._fileContent);
 
-            var messages = jsonDataObject.messages.Select(x => MessageFactory.Create(x.content, x.timestamp_ms, x.sender_name));
+            var messages = jsonDataObject.messages.Select(x => MessageFactory.Create(x.content, x.timestamp_ms, x.sender_name)).ToList();
 
             var people = jsonDataObject.participants.Select(x => PersonFactory.Create(x.name, messages));
 
             var days = messages.GroupBy(x => x.DateTime.Date)
-                .Select(x => DayFactory.Create(x.Key, x.Select(x => x)));
+                .Select(grouping => DayFactory.Create(grouping.Key, grouping.Select(x => x)));
 
             var wordsGrouper = new WordsGrouperService(messages);
             var words = wordsGrouper.GroupWords();
