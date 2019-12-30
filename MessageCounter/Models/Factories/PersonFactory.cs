@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MessageCounter.Models
+namespace MessageCounter.Models.Factories
 {
     static class PersonFactory
     {
         public static Person Create(string name, IEnumerable<Message> messagesInConversation)
         {
             var personMessages = messagesInConversation.Where(x => x.AuthorName.Equals(name));
-            var wordsGrouper = new WordsGrouperService(personMessages);
-
-            return new Person(name, personMessages, wordsGrouper.GroupWords());
+            return new Person(name, personMessages);
         }
     }
 }

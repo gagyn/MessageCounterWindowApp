@@ -13,7 +13,7 @@ namespace MessageCounterBackend
 
         public MessagesContainer GetMessagesContainer()
         {
-
+            throw new NotImplementedException();
         }
     }
 }

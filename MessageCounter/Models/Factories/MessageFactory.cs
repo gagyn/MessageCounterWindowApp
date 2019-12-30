@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MessageCounter.Models
+namespace MessageCounter.Models.Factories
 {
     static class MessageFactory
     {

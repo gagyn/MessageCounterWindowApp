@@ -7,13 +7,11 @@ namespace MessageCounter.Models
     {
         public DateTime DateTime { get; }
         public IEnumerable<Message> Messages { get; }
-        public IEnumerable<Word> Words { get; }
 
-        public Day(DateTime dateTime, IEnumerable<Message> messages, IEnumerable<Word> words)
+        public Day(DateTime dateTime, IEnumerable<Message> messages)
         {
             DateTime = dateTime;
             Messages = messages;
-            Words = words;
         }
     }
 }

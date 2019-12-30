@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using MessageCounter.Services.StringDecoder;
 
 namespace MessageCounter.Models
@@ -9,14 +8,12 @@ namespace MessageCounter.Models
         public string Content { get; }
         public DateTime DateTime { get; }
         public string AuthorName { get; }
-        public IEnumerable<Word> Words { get; }
 
-        public Message(string content, DateTime dateTime, string authorName, IEnumerable<Word> words)
+        public Message(string content, DateTime dateTime, string authorName)
         {
             Content = content.DecodeString();
             DateTime = dateTime;
             AuthorName = authorName;
-            Words = words;
         }
     }
 }
