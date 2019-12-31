@@ -1,18 +1,14 @@
 ﻿using System.IO;
-using MessageCounterBackend.Containers.Helpers_classes;
+using MessageCounter.Services.WordsGrouper.Models;
+using Newtonsoft.Json;
 
 namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 {
-    class SettingsFileWriter : StreamWriter
+    class SettingsFileWriter : SettingsFile
     {
-        public static string SettingsFilePath { get; } = "settings.config";
-
-        public SettingsFileWriter(string path) : base(path) { }
-
-        public void WriteSettings()
+        public void WriteSettings(WordsGrouperSettings grouperSettings)
         {
-            base.WriteLine(GroupWords.MinLengthOfWords.ToString());
-            base.WriteLine(GroupWords.MinAppearsTimesOfWord.ToString());
+            File.WriteAllText(_settingsFilePath, JsonConvert.SerializeObject(grouperSettings));
         }
     }
 }

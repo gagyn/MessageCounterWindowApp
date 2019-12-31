@@ -1,13 +1,10 @@
 ﻿using System.IO;
-using MessageCounter.Services.WordsGrouper;
 using MessageCounter.Services.WordsGrouper.Models;
 
 namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 {
-    class SettingsFileReader
+    class SettingsFileReader : SettingsFile
     {
-        private const string _settingsFilePath = "settings.config";
-
         public WordsGrouperSettings ReadSettings()
         {
             var settingsFactory = new WordsGrouperSettingsFactory();
