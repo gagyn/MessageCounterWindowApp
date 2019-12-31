@@ -43,7 +43,10 @@ namespace MessageCounterFrontend.Windows
                 var opener = new FileOpener();
                 OpenStatsPage(opener);
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
 
         private void OpenStatsPage(FileOpener opener)
@@ -63,8 +66,9 @@ namespace MessageCounterFrontend.Windows
         private void OpenWordsSettings_Click(object sender, RoutedEventArgs e)
         {
             var settings = new SettingsOpener(this);
+            settings.OpenWordsGrouperSettings();
 
-            if (settings.ChangedValues && this.IsAnyFileOpened)
+            if (settings.IsValueChanged && this.IsAnyFileOpened)
             {
                 var page = this._statsPage.Reload((Page)mainFrame.Content);
                 if (page != null)
