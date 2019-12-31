@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MessageCounter.Services.StringDecoder;
+using MessageCounter.Services.WordsGrouper.Models;
 
 namespace MessageCounter.Services.WordsGrouper
 {

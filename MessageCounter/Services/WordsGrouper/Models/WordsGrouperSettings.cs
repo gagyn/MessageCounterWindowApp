@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MessageCounter.Services.WordsGrouper
+﻿namespace MessageCounter.Services.WordsGrouper.Models
 {
     public class WordsGrouperSettings
     {
-        private const uint defaultMinLength = 3;
-        private const uint defaultMinTimes = 5;
+        private const uint _defaultMinLength = 3;
+        private const uint _defaultMinTimes = 5;
 
         /// <summary>
         /// Words, which are SHORTER, will NOT be included in the list.
@@ -15,7 +11,7 @@ namespace MessageCounter.Services.WordsGrouper
         public uint MinLengthOfWords
         {
             get => _minLengthOfWords;
-            set => _minLengthOfWords = value > 0 ? value : defaultMinLength;
+            set => _minLengthOfWords = value > 0 ? value : _defaultMinLength;
         }
 
         /// <summary>
@@ -24,7 +20,7 @@ namespace MessageCounter.Services.WordsGrouper
         public uint MinAppearsTimesOfWord
         {
             get => _minAppearsTimesOfWord;
-            set => _minAppearsTimesOfWord = value > 0 ? value : defaultMinTimes;
+            set => _minAppearsTimesOfWord = value > 0 ? value : _defaultMinTimes;
         }
 
         private uint _minAppearsTimesOfWord;
@@ -32,8 +28,8 @@ namespace MessageCounter.Services.WordsGrouper
 
         public WordsGrouperSettings()
         {
-            this.MinLengthOfWords = defaultMinLength;
-            this.MinAppearsTimesOfWord = defaultMinTimes;
+            this.MinLengthOfWords = _defaultMinLength;
+            this.MinAppearsTimesOfWord = _defaultMinTimes;
         }
 
         public WordsGrouperSettings(uint minLengthOfWords, uint minAppearsTimesOfWord)
