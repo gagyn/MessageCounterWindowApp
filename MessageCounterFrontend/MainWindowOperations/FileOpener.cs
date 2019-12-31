@@ -1,60 +1,46 @@
-﻿using MessageCounterBackend;
-using MessageCounterFrontend.InterfaceBackend.FileOperators;
-using MessageCounterFrontend.Pages;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Windows;
+using Microsoft.Win32;
 
 namespace MessageCounterFrontend.MainWindowOperations
 {
-    class FileOpener
+    public class CanceledByUserException : Exception
     {
-        /// <summary>
-        /// StatsPage IS NULL if there was any exception (problem with file / canceled by user)
-        /// </summary>
-        public MainPage StatsPage { get; private set; }
-        
-        public FileOpener() // if from OpenFile_Click
+    }
+
+    public class FileOpener
+    {
+        private readonly string _path;
+
+        public FileOpener()
+        {
+            var fileDialog = new OpenFileDialog();
+
+            if (fileDialog.ShowDialog() == false) 
+                throw new CanceledByUserException();
+
+            this._path = fileDialog.FileName;
+        }
+
+        public FileOpener(string path)
+        {
+            this._path = path;
+        }
+
+        public string? ReadContent()
         {
             try
             {
-                string fileContent;
-
-                using (var reader = new FileReaderWithDialog())
-                    fileContent = reader.ReadToEnd();
-
-                AssignStatsPage(fileContent);
+                using var reader = new StreamReader(this._path);
+                return reader.ReadToEnd();
             }
             catch (Exception e)
             {
                 HandleExceptionsWhileLoading(e);
-                throw;
+                return null;
             }
-        }
-
-        public FileOpener(string path)  // if from command args
-        {
-            try
-            {
-                string fileContent;
-
-                using (var reader = new StreamReader(path))
-                    fileContent = reader.ReadToEnd();
-
-                AssignStatsPage(fileContent);
-            }
-            catch (Exception e)
-            {
-                HandleExceptionsWhileLoading(e);
-                throw;
-            }
-        }
-
-        private void AssignStatsPage(string fileContent)
-        {
-            var stats = new StatsContainer(fileContent); // constructor throws exception, when file is incorrect
-            StatsPage = new MainPage(stats);
         }
 
         private void HandleExceptionsWhileLoading(Exception e)
@@ -64,16 +50,12 @@ namespace MessageCounterFrontend.MainWindowOperations
                 case IOException _:
                     MessageBox.Show("Problem with opening the file.");
                     break;
-
                 case JsonSerializationException _:
-                    MessageBox.Show("Problem with parsing the file - the file is incorrect. Make sure the file is a correct message history file.");
+                    MessageBox.Show(
+                        "Problem with parsing the file - the file is incorrect. Make sure the file is a correct message history file.");
                     break;
-
-                case CanceledByUserException _:
-                    break;
-
                 default:
-                    MessageBox.Show("Uknown problem: " + e.Message);
+                    MessageBox.Show("Unknown problem: " + e.Message);
                     break;
             }
         }

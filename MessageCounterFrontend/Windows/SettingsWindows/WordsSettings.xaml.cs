@@ -11,11 +11,11 @@ namespace MessageCounterFrontend.Windows.SettingsWindows
     {
         public (int minLenght, int minAppearsTimes)? NewValues { get; private set; }
 
-        public WordsSettings(int minLenght, int minAppearsTimes)
+        public WordsSettings(int minLength, int minAppearsTimes)
         {
             InitializeComponent();
 
-            this.minLenght.Text = minLenght.ToString();
+            this.minLenght.Text = minLength.ToString();
             this.minAppearsTimes.Text = minAppearsTimes.ToString();
         }
 

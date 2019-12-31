@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MessageCounterBackend.Containers.StatsClasses;
+﻿using MessageCounter.Models;
 
 namespace MessageCounterFrontend.Pages.StatsPages.StringsForPages
 {
-    class WordStrings
+    internal class WordStrings
     {
-        public Word Word { get; set; }
+        public Word Word { get; }
 
-        public string Text => Word.Text;
-        public int NumberOfOccurrences => Word.NumberOfOccurrences;
+        public string Text => Word.WordContent;
+        public int NumberOfOccurrences => Word.WordQuantity;
 
         public WordStrings(Word word) => this.Word = word;
     }

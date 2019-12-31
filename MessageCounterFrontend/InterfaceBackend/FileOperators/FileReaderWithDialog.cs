@@ -4,10 +4,7 @@ using System.IO;
 
 namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 {
-    class CanceledByUserException : Exception
-    {
 
-    }
 
     internal class FileReaderWithDialog : IDisposable
     {

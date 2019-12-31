@@ -4,8 +4,7 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using MessageCounterBackend.Containers.StatsClasses;
-using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
+using MessageCounter.Models;
 using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 
 namespace MessageCounterFrontend.Pages.StatsPages
@@ -41,7 +40,7 @@ namespace MessageCounterFrontend.Pages.StatsPages
         {
             if (e.Column.SortDirection == null)
             {
-                if (e.Column.SortMemberPath == nameof(Word.Text))
+                if (e.Column.SortMemberPath == nameof(Word.WordContent))
                     e.Column.SortDirection = ListSortDirection.Descending;
                 else
                     e.Column.SortDirection = ListSortDirection.Ascending;

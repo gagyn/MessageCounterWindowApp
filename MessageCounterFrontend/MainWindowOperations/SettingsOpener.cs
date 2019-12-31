@@ -8,7 +8,7 @@ namespace MessageCounterFrontend.MainWindowOperations
 {
     class SettingsOpener
     {
-        public bool ChangedValues { get; private set; } = false;
+        public bool ChangedValues { get; private set; }
 
         private readonly Window window;
 
