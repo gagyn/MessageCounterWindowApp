@@ -1,18 +1,25 @@
 ﻿using System.IO;
-using MessageCounterBackend.Containers.Helpers_classes;
+using MessageCounter.Services.WordsGrouper;
+using MessageCounter.Services.WordsGrouper.Models;
 
 namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 {
-    class SettingsFileReader : StreamReader
+    class SettingsFileReader
     {
-        public static string SettingsFilePath => "settings.config";
+        private const string _settingsFilePath = "settings.config";
 
-        public SettingsFileReader(string path) : base(path) { }
-
-        public void ReadSettings()
+        public WordsGrouperSettings ReadSettings()
         {
-            GroupWords.MinLengthOfWords = int.Parse(base.ReadLine());
-            GroupWords.MinAppearsTimesOfWord = int.Parse(base.ReadLine());
+            var settingsFactory = new WordsGrouperSettingsFactory();
+
+            try
+            {
+                return settingsFactory.Create(File.ReadAllText(_settingsFilePath));
+            }
+            catch
+            {
+                return new WordsGrouperSettings();
+            }
         }
     }
 }
