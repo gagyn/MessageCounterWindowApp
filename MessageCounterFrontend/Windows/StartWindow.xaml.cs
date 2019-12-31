@@ -3,19 +3,7 @@ using MessageCounterFrontend.MainWindowOperations;
 using MessageCounterFrontend.Windows.InfoWindows;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MessageCounterFrontend.Windows
 {
@@ -27,73 +15,61 @@ namespace MessageCounterFrontend.Windows
         public StartWindow()
         {
             InitializeComponent();
-            TryToReadSettingsFile();
 
-            string path = ReadArgs();
+            var path = ReadArgs();
 
             if (path != null)
                 OpenMainWindow(path);
         }
-
-        private void TryToReadSettingsFile()
-        {
-            try  // Reading settings file
-            {
-                using (var reader = new SettingsFileReader(SettingsFileReader.SettingsFilePath))
-                    reader.ReadSettings();
-            }
-            catch { }
-        }
-
         private string ReadArgs()
         {
             var args = Environment.GetCommandLineArgs();
-
-            if (args.Length > 1)
-                return args[1];
-            else
-                return null;
+            return args.Length > 1 ? args[1] : null;
         }
 
         private void OpenFileButton_Click(object sender, RoutedEventArgs e)
         {
-            var openFileD = new OpenFileDialog();
+            var fileDialog = new OpenFileDialog();
 
-            if (openFileD.ShowDialog() == true) // get a file name and open mainWindow only if user selected a file (didn't cancel)
-                OpenMainWindow(openFileD.FileName);
+            if (fileDialog.ShowDialog() == true) // get a file name and open mainWindow only if user selected a file (didn't cancel)
+                OpenMainWindow(fileDialog.FileName);
         }
 
         private void OpenMainWindow(string path)
         {
-            MainWindow mainWindow;
             try
             {
-                mainWindow = new MainWindow(path);
+                var mainWindow = new MainWindow(path);
+
+                this.Visibility = Visibility.Collapsed;
+
+                mainWindow.ShowDialog();
+
+                this.Visibility = Visibility.Visible;
+
+                if (mainWindow.Exiting)
+                    Close();
             }
             catch
             {
-                return;
+                // ignored
             }
-
-            this.Visibility = Visibility.Collapsed;
-
-            mainWindow.ShowDialog();
-
-            this.Visibility = Visibility.Visible;
-
-            if (mainWindow.Exiting)
-                Close();
         }
 
         private void OpenSettingsButton_Click(object sender, RoutedEventArgs e)
-            => new SettingsOpener(this);
+        {
+            var settingsOpener = new SettingsOpener(this);
+            settingsOpener.OpenWordsGrouperSettings();
+        }
 
-        private void openInstructions_Click(object sender, RoutedEventArgs e)
+        private void OpenInstructions_Click(object sender, RoutedEventArgs e)
         {
             var window = new MainWindow(new Instructions());
 
             this.Visibility = Visibility.Collapsed;
+
             window.ShowDialog();
+
             this.Visibility = Visibility.Visible;
         }
     }

@@ -12,7 +12,7 @@
         <Button x:Name="openSettingsButton" Content="Change the settings" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="80"
             Click="OpenSettingsButton_Click" Margin="0,0,147,0"/>
         <Button x:Name="openInstructions" Content="Short tutorial" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="80"
-            Click="openInstructions_Click" Margin="380,0,-80,0"/>
+            Click="OpenInstructions_Click" Margin="380,0,-80,0"/>
 
     </Grid>
 </Window>

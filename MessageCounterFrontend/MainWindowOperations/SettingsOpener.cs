@@ -1,82 +1,36 @@
-﻿using MessageCounterBackend.Containers.Helpers_classes;
-using MessageCounterFrontend.InterfaceBackend.FileOperators;
+﻿using MessageCounterFrontend.InterfaceBackend.FileOperators;
 using MessageCounterFrontend.Windows.SettingsWindows;
 using System;
 using System.Windows;
+using MessageCounter.Services.WordsGrouper.Models;
 
 namespace MessageCounterFrontend.MainWindowOperations
 {
-    class SettingsOpener
+    public class SettingsOpener
     {
-        public bool ChangedValues { get; private set; }
-
-        private readonly Window window;
+        private readonly Window _window;
 
         public SettingsOpener(Window window)
         {
-            this.window = window;
-            OpenWordsSettings();
+            this._window = window;
         }
 
-        private void OpenWordsSettings()
+        public WordsGrouperSettings OpenWordsGrouperSettings()
         {
-            (int, int)? newValues;
+            var settingsReader = new SettingsFileReader();
+            var oldWordsSettings = settingsReader.ReadSettings();
+            var wordsSettingsWindow = new WordsSettingsWindow(oldWordsSettings) { Owner = _window };
 
-            try
-            {
-                newValues = GetValues();
-            }
-            catch { return; }
+            if (wordsSettingsWindow.ShowDialog() == false)
+                return oldWordsSettings;
 
-            if (null == newValues)
-                GroupWords.SetDefaultValues();
-            else
-                SetValues(newValues.Value);
-
-            TryToSaveToFile();
-            this.ChangedValues = true;
+            return wordsSettingsWindow.NewSettings;
         }
 
-        private (int, int)? GetValues()
+        private void SaveToFile(WordsGrouperSettings wordsSettings)
         {
-            var window = CreateNewSettingsWindow();
-
-            if (false == window.ShowDialog())
-                throw new Exception("CanceledSettingNewValues");
-
-            return window.NewValues;
-        }
-
-        private WordsSettings CreateNewSettingsWindow()
-        {
-            var (minLenght, minAppears) =
-                (MinLenghtOfWords: GroupWords.MinLengthOfWords,
-                GroupWords.MinAppearsTimesOfWord);
-
-            return new WordsSettings(minLenght, minAppears)
-            {
-                Owner = this.window
-            };
-        }
-
-        private void SetValues((int, int) newValues)
-        {
-            (GroupWords.MinLengthOfWords,
-             GroupWords.MinAppearsTimesOfWord)
-                = newValues;
-        }
-
-        private void TryToSaveToFile()
-        {
-            try
-            {
-                using (var writer = new SettingsFileWriter(SettingsFileWriter.SettingsFilePath))
-                    writer.WriteSettings();
-            }
-            catch
-            {
-                MessageBox.Show("Problem with file. Settings hasn't been saved.");
-            }
+            var settingsWriter = new SettingsFileWriter();
+            settingsWriter.WriteSettings(wordsSettings);
         }
     }
 }

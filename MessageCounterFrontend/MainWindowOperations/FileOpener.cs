@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
 using System.Windows;
 using Microsoft.Win32;
@@ -50,7 +49,7 @@ namespace MessageCounterFrontend.MainWindowOperations
                 case IOException _:
                     MessageBox.Show("Problem with opening the file.");
                     break;
-                case JsonSerializationException _:
+                case Newtonsoft.Json.JsonSerializationException _: //todo: move it somewhere else
                     MessageBox.Show(
                         "Problem with parsing the file - the file is incorrect. Make sure the file is a correct message history file.");
                     break;

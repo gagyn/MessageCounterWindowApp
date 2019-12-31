@@ -1,28 +1,29 @@
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
+using MessageCounter.Services.WordsGrouper.Models;
 
 namespace MessageCounterFrontend.Windows.SettingsWindows
 {
     /// <summary>
-    /// Interaction logic for WordsSettings.xaml
+    /// Interaction logic for WordsSettingsWindow.xaml
     /// </summary>
-    public partial class WordsSettings : SettingsWindow
+    public partial class WordsSettingsWindow : SettingsWindow
     {
-        public (int minLenght, int minAppearsTimes)? NewValues { get; private set; }
+        public WordsGrouperSettings? NewSettings { get; private set; }
 
-        public WordsSettings(int minLength, int minAppearsTimes)
+        public WordsSettingsWindow(WordsGrouperSettings wordsSettings)
         {
             InitializeComponent();
 
-            this.minLenght.Text = minLength.ToString();
-            this.minAppearsTimes.Text = minAppearsTimes.ToString();
+            this.minLenght.Text = wordsSettings.MinLengthOfWords.ToString();
+            this.minAppearsTimes.Text = wordsSettings.MinAppearsTimesOfWord.ToString();
         }
 
         protected override void SaveAndExitButton_Click(object sender, RoutedEventArgs e)
         {
             base.SaveAndExitButton_Click(sender, e);
-            NewValues = (int.Parse(minLenght.Text), int.Parse(minAppearsTimes.Text));
+            NewSettings = new WordsGrouperSettings(uint.Parse(minLenght.Text), uint.Parse(minAppearsTimes.Text));
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)

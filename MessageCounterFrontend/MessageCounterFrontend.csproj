@@ -103,6 +103,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InterfaceBackend\FileOperators\SettingsFile.cs" />
     <Compile Include="Pages\ChoicePage.cs" />
     <Compile Include="Pages\StatsPages\OneItemPages\WordPage.cs">
       <DependentUpon>WordsPage.xaml</DependentUpon>
@@ -125,8 +126,8 @@
     <Compile Include="MainWindowOperations\FileOpener.cs" />
     <Compile Include="MainWindowOperations\SettingsOpener.cs" />
     <Compile Include="Windows\SettingsWindows\SettingsWindow.cs" />
-    <Compile Include="Windows\SettingsWindows\WordsSettings.xaml.cs">
-      <DependentUpon>WordsSettings.xaml</DependentUpon>
+    <Compile Include="Windows\SettingsWindows\WordsSettingsWindow.xaml.cs">
+      <DependentUpon>WordsSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\StatsPages\DaysPage.xaml.cs">
       <DependentUpon>DaysPage.xaml</DependentUpon>
@@ -184,7 +185,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\SettingsWindows\WordsSettings.xaml">
+    <Page Include="Windows\SettingsWindows\WordsSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
