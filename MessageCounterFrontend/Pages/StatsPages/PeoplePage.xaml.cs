@@ -1,3 +1,4 @@
+using MessageCounter;
 using MessageCounterBackend.Containers;
 using MessageCounterFrontend.Pages.StatsPages.OneItemPages;
 using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
@@ -16,7 +17,7 @@ namespace MessageCounterFrontend.Pages.StatsPages
     {
         private readonly PeopleContainer container;
 
-        public PeoplePage(PeopleContainer container)
+        public PeoplePage(StatisticsManager statistics)
         {
             InitializeComponent();
 

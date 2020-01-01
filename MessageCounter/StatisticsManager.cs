@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MessageCounter.Models;
-using Newtonsoft.Json;
 
 namespace MessageCounter
 {
-    class StatisticsManager
+    public class StatisticsManager
     {
-        public IEnumerable<Day> Days { get; }
-        public IEnumerable<Person> People { get; }
-        public IEnumerable<Word> Words { get; }
+        public IEnumerable<Day> Days { get; set; }
+        public IEnumerable<Person> People { get; set; }
+        public IEnumerable<Word> Words { get; set; }
 
-        public StatisticsManager(IEnumerable<Day> days, IEnumerable<Person> people, IEnumerable<Word> words)
+        public Action<StatisticsManager> ReloadStatistics { get; }
+
+        public StatisticsManager(IEnumerable<Day> days, IEnumerable<Person> people, IEnumerable<Word> words, Action<StatisticsManager> reloadAction)
         {
             this.Days = days;
             this.People = people;
             this.Words = words;
+            this.ReloadStatistics = reloadAction;
         }
     }
 }

@@ -1,8 +1,7 @@
-using MessageCounterBackend;
+using MessageCounter;
 using MessageCounterFrontend.Pages.StatsPages;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace MessageCounterFrontend.Pages
 {
@@ -11,7 +10,7 @@ namespace MessageCounterFrontend.Pages
     /// </summary>
     public partial class MainPage : ChoicePage
     {
-        public MainPage(StatsContainer container)
+        public MainPage(StatisticsManager container)
         {
             this.StatsContainer = container;
             InitializeComponent();
@@ -19,22 +18,13 @@ namespace MessageCounterFrontend.Pages
 
         protected override void Buttons_Clicks(object sender, RoutedEventArgs e)
         {
-            Page page = null;
-
-            switch (( e.Source as Button ).Name)
+            var page = ((Button) e.Source).Name switch
             {
-                case nameof(peopleB):
-                    page = new PeoplePage(StatsContainer.PeopleContainer);
-                    break;
-
-                case nameof(daysB):
-                    page = new DaysPage(StatsContainer.DaysContainer);
-                    break;
-
-                case nameof(wordsB):
-                    page = new WordsPage(StatsContainer.WordsContainer.SortedWords);
-                    break;
-            }
+                nameof(peopleB) => (Page) new PeoplePage(StatsContainer),
+                nameof(daysB) => new DaysPage(StatsContainer),
+                nameof(wordsB) => new WordsPage(StatsContainer),
+                _ => null
+            };
 
             if (page != null)
                 NavigationService.Navigate(page);

@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using MessageCounter;
 using MessageCounterFrontend.MainWindowOperations;
 using MessageCounterFrontend.Pages;
 using MessageCounterFrontend.Windows.InfoWindows;
@@ -51,7 +52,12 @@ namespace MessageCounterFrontend.Windows
 
         private void OpenStatsPage(FileOpener opener)
         {
-            this._statsPage = opener.StatsPage;
+            var content = opener.ReadContent();
+            if (string.IsNullOrEmpty(content))
+                return;
+
+            var statisticsManager = new StatisticsManagerFactory(content).Create();
+            this._statsPage = 
             mainFrame.Navigate(_statsPage);
             closeTheFile.IsEnabled = true;
         }

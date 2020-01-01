@@ -27,7 +27,7 @@ namespace MessageCounter.Services.WordsGrouper
             GrouperSettings = new WordsGrouperSettings();
         }
 
-        public IEnumerable<Word> GroupWords()
+        public IOrderedEnumerable<Word> GroupWords()
         {
             char[] charToRemove =
                 { '~', '`', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=',
@@ -35,19 +35,23 @@ namespace MessageCounter.Services.WordsGrouper
             // I make it in this way, bcs I want to remove only special characters,
             // but not special letters in different langs (like: 'Ą','Ź')
 
-            var messages = this._messages.Where(x => x.Content != null)
+            var messages = this._messages
+                .Where(x => x.Content != null)
                 .Select(x => x.Content.ToLowerInvariant().DecodeString());
 
-            var words = messages.SelectMany(msg => msg.Split())
+            var splittedIntoWords = messages
+                .SelectMany(msg => msg.Split())
                 .Select(word => word.Trim(charToRemove))
                 .Where(word => word.Length >= GrouperSettings.MinLengthOfWords);
 
-            var groupedWords = words
+            var groupedWords = splittedIntoWords
                 .GroupBy(x => x)
-                .OrderByDescending(x => x.Count())
                 .Where(x => x.Count() >= GrouperSettings.MinAppearsTimesOfWord);
 
-            return groupedWords.Select(x => new Word(x.Key, x.Count()));
+            var words = groupedWords
+                .Select(x => new Word(x.Key, x.Count()));
+
+            return words.OrderByDescending(x => x.WordQuantity);
         }
     }
 }

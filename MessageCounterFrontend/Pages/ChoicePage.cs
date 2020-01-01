@@ -1,13 +1,13 @@
 using System.Windows;
 using System.Windows.Controls;
-using MessageCounterBackend;
+using MessageCounter;
 using MessageCounterFrontend.Pages.StatsPages;
 
 namespace MessageCounterFrontend.Pages
 {
     public abstract class ChoicePage : Page
     {
-        protected StatsContainer StatsContainer { get; set; }
+        protected StatisticsManager StatsContainer { get; set; }
 
         public Page Reload(Page currentContentOfPage)
         {
