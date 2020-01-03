@@ -21,8 +21,6 @@ namespace MessageCounter.Models
             Messages = messages;
             this._allMessageQuantity = allMessagesQuantity;
             _allWordsQuantity = allWordsQuantity;
-
-            
         }
     }
 }

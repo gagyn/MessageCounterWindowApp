@@ -6,10 +6,10 @@ namespace MessageCounter.Models.Factories
 {
     static class PersonFactory
     {
-        public static Person Create(string name, IEnumerable<Message> messagesInConversation)
+        public static Person Create(string name, List<Message> messagesInConversation)
         {
-            var personMessages = messagesInConversation.Where(x => x.AuthorName.Equals(name));
-            return new Person(name, personMessages);
+            var personMessages = messagesInConversation.Where(x => x.AuthorName.Equals(name)).ToList();
+            return new Person(name, personMessages, messagesInConversation.Count, );
         }
     }
 }
