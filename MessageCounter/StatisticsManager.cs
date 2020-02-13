@@ -10,14 +10,14 @@ namespace MessageCounter
         public IEnumerable<Person> People { get; set; }
         public IEnumerable<Word> Words { get; set; }
 
-        public Action<StatisticsManager> ReloadStatistics { get; }
+        public Action ReloadStatistics { get; }
 
         public StatisticsManager(IEnumerable<Day> days, IEnumerable<Person> people, IEnumerable<Word> words, Action<StatisticsManager> reloadAction)
         {
             this.Days = days;
             this.People = people;
             this.Words = words;
-            this.ReloadStatistics = reloadAction;
+            this.ReloadStatistics = () => reloadAction.Invoke(this);
         }
     }
 }

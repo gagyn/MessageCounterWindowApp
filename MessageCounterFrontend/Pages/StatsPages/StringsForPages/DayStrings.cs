@@ -1,5 +1,6 @@
-using MessageCounterBackend.Containers.StatsClasses;
-using MessageCounterBackend.Containers.StatsClasses.DateNameSpace;
+using System;
+using System.Linq;
+using MessageCounter.Models;
 
 namespace MessageCounterFrontend.Pages.StatsPages.StringsForPages
 {
@@ -7,8 +8,8 @@ namespace MessageCounterFrontend.Pages.StatsPages.StringsForPages
     {
         public Day Day { get; }
 
-        public Date Date => this.Day.ThisDate;
-        public int NumberOfMessages => this.Day.NumberOfMessages;
+        public DateTime Date => this.Day.DateTime;
+        public int NumberOfMessages => this.Day.Messages.Count();
 
         public DayStrings(Day day) => this.Day = day;
     }

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using MessageCounter;
@@ -11,16 +12,16 @@ namespace MessageCounterFrontend.Pages
 
         public Page Reload(Page currentContentOfPage)
         {
-            this.StatsContainer.ReloadContainers();
+            this.StatsContainer.ReloadStatistics.Invoke();
             
             switch (currentContentOfPage)
             {
                 case PeoplePage _:
-                    return new PeoplePage(StatsContainer.PeopleContainer);
+                    return new PeoplePage(StatsContainer.People.ToList());
                 case DaysPage _:
-                    return new DaysPage(StatsContainer.DaysContainer);
+                    return new DaysPage(StatsContainer.Days);
                 case WordsPage _:
-                    return new WordsPage(StatsContainer.WordsContainer.SortedWords);
+                    return new WordsPage(StatsContainer.Words.ToList());
             }
             return null;
         }

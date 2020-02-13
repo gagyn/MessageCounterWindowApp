@@ -10,11 +10,11 @@ namespace MessageCounterFrontend.Pages.StatsPages.StringsForPages
 
         public string FullName => Person.Name;
         public int NumberOfMess => Person.Messages.Count();
-        public string SentMessesRatio => string.Format("{0:00.00}%", Person.SentMessagesRatio);
-        public string SentWordsRatio => string.Format("{0:00.00}%", Person.SentAllWordsRatio);
-        public string SentUniqueWordsRatio => string.Format("{0:00.00}%", Person.SentUniqueWordsRatio);
-        public double AvgNumberOfMesses => Person.AvgNumberOfMessagesInDaysWhenUserWroteAny;
-        public double AvgNumberOfWords => Person.AvgNumberOfWordsInDaysWhenUserWroteAny;
+        public string SentMessesRatio => $"{Person.ConversationMessagesRatio:00.00}%";
+        public string SentWordsRatio => $"{Person.ConversationWordsRatio:00.00}%";
+       // public string SentUniqueWordsRatio => string.Format("{0:00.00}%", Person.SentUniqueWordsRatio); TODO
+        //public double AvgNumberOfMesses => Person.AvgNumberOfMessagesInDaysWhenUserWroteAny;
+        //public double AvgNumberOfWords => Person.AvgNumberOfWordsInDaysWhenUserWroteAny;
 
     }
 }

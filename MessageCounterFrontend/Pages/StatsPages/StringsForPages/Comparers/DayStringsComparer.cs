@@ -1,26 +1,25 @@
 ﻿using System.Collections;
 using System.ComponentModel;
-using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 
-namespace MessageCounterFrontend.Pages.StatsPages
+namespace MessageCounterFrontend.Pages.StatsPages.StringsForPages.Comparers
 {
     class DayStringsComparer : IComparer
     {
-        private readonly ListSortDirection direction;
+        private readonly ListSortDirection _direction;
 
-        public DayStringsComparer(ListSortDirection direction) => this.direction = direction;
+        public DayStringsComparer(ListSortDirection direction) => this._direction = direction;
 
         public int Compare(object x, object y)
         {
             var firDayStrings = x as DayStrings;
             var secDayStrings = y as DayStrings;
 
-            int compared = firDayStrings.Date.CompareTo(secDayStrings.Date);
+            var compared = firDayStrings.Date.CompareTo(secDayStrings.Date);
 
-            if (direction == ListSortDirection.Descending)
+            if (_direction == ListSortDirection.Descending)
                 return compared * -1;
-            else
-                return compared;
+
+            return compared;
         }
     }
 }

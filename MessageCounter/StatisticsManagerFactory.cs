@@ -34,7 +34,10 @@ namespace MessageCounter
         
         private IEnumerable<Person> CreatePeople(IReadOnlyCollection<Message> messages)
         {
-            return _jsonDataObject.participants.Select(x => PersonFactory.Create(x.name, messages));
+            var wordsGrouper = new WordsGrouperService(messages);
+            var wordsCount = wordsGrouper.GroupWords().Count();
+            var messagesList = messages.ToList();
+            return _jsonDataObject.participants.Select(x => PersonFactory.Create(x.name, messagesList, wordsCount));
         }
 
         private IEnumerable<Day> CreateDays(IEnumerable<Message> messages)
@@ -43,7 +46,7 @@ namespace MessageCounter
                 .Select(grouping => DayFactory.Create(grouping.Key, grouping.Select(x => x)));
         }
 
-        private IOrderedEnumerable<Word> CreateWords(IEnumerable<Message> messages)
+        private IEnumerable<Word> CreateWords(IEnumerable<Message> messages)
         {
             var wordsGrouper = new WordsGrouperService(messages);
             return wordsGrouper.GroupWords();

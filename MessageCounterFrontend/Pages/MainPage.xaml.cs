@@ -1,3 +1,4 @@
+using System.Linq;
 using MessageCounter;
 using MessageCounterFrontend.Pages.StatsPages;
 using System.Windows;
@@ -20,9 +21,9 @@ namespace MessageCounterFrontend.Pages
         {
             var page = ((Button) e.Source).Name switch
             {
-                nameof(peopleB) => (Page) new PeoplePage(StatsContainer),
-                nameof(daysB) => new DaysPage(StatsContainer),
-                nameof(wordsB) => new WordsPage(StatsContainer),
+                nameof(peopleB) => (Page) new PeoplePage(StatsContainer.People),
+                nameof(daysB) => new DaysPage(StatsContainer.Days),
+                nameof(wordsB) => new WordsPage(StatsContainer.Words.ToList()),
                 _ => null
             };
 

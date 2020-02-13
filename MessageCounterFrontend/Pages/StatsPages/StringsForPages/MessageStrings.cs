@@ -1,10 +1,5 @@
-﻿using MessageCounterBackend.Containers.Helpers_classes;
-using MessageCounterBackend.Containers.StatsClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using MessageCounter.Models;
 
 namespace MessageCounterFrontend.Pages.StatsPages.StringsForPages
 {
@@ -19,7 +14,7 @@ namespace MessageCounterFrontend.Pages.StatsPages.StringsForPages
         {
             this.Date = dateTime;
             this.Person = person;
-            this.Message = StringDecoder.DecodeString(message);
+            this.Message = message;
         }
     }
 }

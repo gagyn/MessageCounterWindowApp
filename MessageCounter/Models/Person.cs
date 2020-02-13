@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using MessageCounter.Models.Factories;
+using MessageCounter.Services.WordsGrouper;
 
 namespace MessageCounter.Models
 {
@@ -7,20 +10,24 @@ namespace MessageCounter.Models
         public string Name { get; }
         public List<Message> Messages { get; }
         public List<Word> Words { get; }
-
-        public double SentMessagesRatio => Messages.Count / (double)_allMessageQuantity;
-
-        private double SentAllWordsRatio => Words.Count / (double)_allWordsQuantity;
+        public List<Day> DaysWhenPersonWroteAny { get; }
+        public double ConversationMessagesRatio => Messages.Count / (double)_allMessageQuantity;
+        public double ConversationWordsRatio => Words.Count / (double)_allWordsQuantity;
 
         private readonly int _allMessageQuantity;
         private readonly int _allWordsQuantity;
 
         public Person(string name, List<Message> messages, int allMessagesQuantity, int allWordsQuantity)
         {
-            Name = name;
-            Messages = messages;
+            this.Name = name;
+            this.Messages = messages;
             this._allMessageQuantity = allMessagesQuantity;
-            _allWordsQuantity = allWordsQuantity;
+            this._allWordsQuantity = allWordsQuantity;
+
+            var grouper = new WordsGrouperService(messages);
+            this.Words = grouper.GroupWords().ToList();
+
+            
         }
     }
 }

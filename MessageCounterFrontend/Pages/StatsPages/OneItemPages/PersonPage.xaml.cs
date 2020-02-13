@@ -1,7 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
-using MessageCounterBackend.Containers.StatsClasses;
+using MessageCounter.Models;
 
 namespace MessageCounterFrontend.Pages.StatsPages.OneItemPages
 {
@@ -21,20 +20,17 @@ namespace MessageCounterFrontend.Pages.StatsPages.OneItemPages
 
         protected override void Buttons_Clicks(object sender, RoutedEventArgs e)
         {
-            Page page = null;
-
-            switch (( e.Source as Button ).Name)
+            var page = ((Button)e.Source).Name switch
             {
-                case nameof(daysB):
-                    page = new DaysPage(this.Person.DaysWhenUserWrittenSomething);
-                    break;
-                case nameof(wordsB):
-                    page = new WordsPage(this.Person.PersonMessages.SortedWords);
-                    break;
-            }
+                nameof(daysB) => (Page) new DaysPage(this.Person.DaysWhenPersonWroteAny),
+                nameof(wordsB) => new WordsPage(this.Person.Messages),
+                _ => null
+            };
 
             if (page != null)
+            {
                 NavigationService.Navigate(page);
+            }
         }
     }
 }

@@ -1,25 +1,24 @@
 using Microsoft.Win32;
 using System;
 using System.IO;
+using MessageCounterFrontend.MainWindowOperations;
 
 namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 {
-
-
     internal class FileReaderWithDialog : IDisposable
     {
-        private readonly StreamReader streamReader;
-        private bool disposed = false;
+        private readonly StreamReader _streamReader;
+        private bool _disposed = false;
         public FileReaderWithDialog()
         {
             var openFileD = new OpenFileDialog();
             if (openFileD.ShowDialog() == true)
-                streamReader = new StreamReader(openFileD.FileName);
+                _streamReader = new StreamReader(openFileD.FileName);
             else
                 throw new CanceledByUserException();
         }
 
-        public string ReadToEnd() => streamReader.ReadToEnd();
+        public string ReadToEnd() => _streamReader.ReadToEnd();
 
         public void Dispose()
         {
@@ -29,10 +28,10 @@ namespace MessageCounterFrontend.InterfaceBackend.FileOperators
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed && disposing)
-                this.streamReader?.Dispose();
+            if (!this._disposed && disposing)
+                this._streamReader?.Dispose();
 
-            this.disposed = true;
+            this._disposed = true;
         }
         ~FileReaderWithDialog() => this.Dispose();
     }

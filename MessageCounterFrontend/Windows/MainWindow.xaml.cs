@@ -57,8 +57,9 @@ namespace MessageCounterFrontend.Windows
                 return;
 
             var statisticsManager = new StatisticsManagerFactory(content).Create();
-            this._statsPage = 
+            this._statsPage = new MainPage(statisticsManager);
             mainFrame.Navigate(_statsPage);
+
             closeTheFile.IsEnabled = true;
         }
 

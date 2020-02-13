@@ -1,10 +1,8 @@
-using System;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
-using MessageCounterBackend.Containers;
-using MessageCounterBackend.Containers.StatsClasses;
-using MessageCounterBackend.Containers.StatsClasses.DateNameSpace;
+using MessageCounter.Models;
+using MessageCounter.Services.WordsGrouper;
 using MessageCounterFrontend.Pages.StatsPages.StringsForPages;
 
 namespace MessageCounterFrontend.Pages.StatsPages.OneItemPages
@@ -18,10 +16,14 @@ namespace MessageCounterFrontend.Pages.StatsPages.OneItemPages
         {
             InitializeComponent();
 
-            var messages = day.MessagesContainer.Messages.Select(x =>
+            var messagesList = day.Messages.ToList();
+            var messagesCount = messagesList.Count();
+            var wordsCount = new WordsGrouperService(messagesList).GroupWords().Count();
+
+            var messages = day.Messages.Select(x =>
             {
-                var p = new Person(x.sender_name, day.MessagesContainer);
-                return new MessageStrings(p, x.content, new Date(x.timestamp_ms).DateTime);
+                var p = new Person(x.AuthorName, messagesList, messagesCount, wordsCount);
+                return new MessageStrings(p, x.Content, x.DateTime);
             });
 
             var list = new ListCollectionView(messages.ToList());
